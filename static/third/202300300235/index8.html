@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改自己的余额数目</title>
+
+    <style>
+        .button81:hover{
+            background-color: aqua;
+            cursor:pointer;
+        }
+        
+        .button81:active{
+            background-color: hotpink;
+        }
+</style>
+</head>
+<body background="./跳蚤市场背景.png" style="background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">
+    <p style="color:red;font-size: 40px;text-align: center;">-----|··~··~··~··~··~··~··~··修改余额··~··~··~··~··~··~··~··|-----</p>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" placeholder="输入您的学号" id="input81" style="background-color: aquamarine;"><br></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" placeholder="要修改的余额数(两位小数)" id="input82" style="background-color: aquamarine;"><br></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><button class="button81" onclick="func81()" >确定</button></div>
+
+    <script>
+    function func81(){
+        let num =  parseInt(document.getElementById('input81').value)
+        let balance =  parseFloat(document.getElementById('input82').value)
+        var myHeaders = new Headers();
+        myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)");
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            num,
+            balance,
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://zyhcc.top:8088/balance/setBalance", requestOptions)
+        .then(response => response.json())
+        .then(result => alert(result.msg))
+        .catch(error => console.log('error', error));
+    }
+    </script>
+</body>
+</html>

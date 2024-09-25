@@ -1,0 +1,43 @@
+h1{
+text-align: center;
+
+}
+.list{
+height: auto;
+margin: auto;
+
+}
+.color{
+color: aqua;
+}
+.button {
+    height: 39px;
+    width: 450px;
+    margin-left: 0px;
+    background-color: azure;
+    margin: auto;
+}
+
+button:hover {
+    background-color: blueviolet;
+    
+}
+button2:hover {
+    background-color: rgb(174, 226, 43);
+}
+
+p{
+text-align: center;
+color: red;
+}
+.center{
+    text-align: center;
+    margin:auto;
+}
+.button2{
+    height: 39px;
+    width: 50px;
+    margin-left: 0px;
+    background-color: azure;
+    margin: auto;
+}

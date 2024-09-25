@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>为跳蚤市场的壮大贡献一份力量</title>
+    <style>
+        .addGoods {
+            margin-left: 300px;
+            margin-top: 50px;
+            height: 40px;
+        }
+
+        button {
+            margin-left: 300px;
+            margin-top: 20px;
+            width: 100px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .box1 {
+            background-color: bisque;
+            margin-right: 340px;
+            margin-left: 270px;
+        }
+    </style>
+</head>
+
+<body background="跃动.jpg">
+    <h1 align="center">开始上传商品吧</h1>
+
+    <div class="box1">
+        <input type="text" class="addGoods" placeholder="商品名称"><br>
+        <input type="text" class="addGoods" placeholder="简要描述"><br>
+        <input type="number" class="addGoods" placeholder="库存数量"><br>
+        <input type="number" class="addGoods" placeholder="购买金额"><br>
+
+
+        <button onclick="addList()">确认上传</button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function addList() {
+            axios.post('http://62.234.11.20:8088/goods/addGoods', {
+                "num": 202300300103,
+                "name": document.getElementsByClassName('addGoods')[0].value,
+                "description": document.getElementsByClassName('addGoods')[1].value,
+                "inventory": parseInt(document.getElementsByClassName('addGoods')[2].value),
+                "price": parseFloat(document.getElementsByClassName('addGoods')[3].value),
+            }).then(function (res) {
+                alert('success')
+                console.log(res)
+            }, function (reason) {
+                alert(reason)
+                console.warn(reason)
+            }
+            )
+
+        }
+
+    </script>
+</body>
+
+</html>

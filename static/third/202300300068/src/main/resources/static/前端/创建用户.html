@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建用户</title>
+    <style>
+        div{
+            margin: auto;
+            text-align: center;
+            background-color: skyblue;
+            width: 300px;
+            height: 250px;
+        }
+        a{
+            text-decoration: none;
+        }
+        h1{
+            background-color: orange;
+            color: aqua;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>创建用户</h1>
+    请输入你的学号:<input type="text" placeholder="请输入你的学号" class="box1">
+    <br>
+    <br>
+    请输入你的余额:<input type="text" placeholder="请输入你的余额" class="box2">
+    <br>
+    <br>
+    <button onclick="create()">创建用户</button>
+    <br>
+    <br>
+    <a href="http://localhost:8080/%E5%89%8D%E7%AB%AF/%E5%95%86%E5%93%81%E9%A1%B5%E9%9D%A2.html">进入商品页面</a>
+</div>
+<script>
+    function create(){
+        let a = document.getElementsByClassName('box1')[0].value//学号
+        let b = parseFloat(document.getElementsByClassName('box2')[0].value)//余额
+        fetch('http://localhost:8080/getaccount',{
+            method : 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                num: a
+            })
+        })
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (data) {
+                if(data.data === null){
+                    //没有该用户
+                    if(b > 0){
+                        fetch('http://localhost:8080/addaccount',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num: a,
+                                balance: b
+                            })
+                        })
+                        alert('创建用户成功')
+                    }else{
+                        alert('余额必须大于0')
+                    }
+                }else{
+                    alert('用户已存在')
+                }
+            })
+    }
+</script>
+</body>
+</html>

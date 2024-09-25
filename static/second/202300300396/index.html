@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <title>宝石争夺战！！！</title>
+    <style type="text/css">
+        body{
+            background-image: url(picture1.jpg);
+            background-size:cover;
+        }
+    </style>
+</head>
+<body>
+    <audio src="music.mflac" autoplay loop></audio>
+    <script>
+        alert(`According to legend, after the famous pirate Pengyu captured the rich and rival Jincheng,
+         he transported a large amount of treasure to the island by the sea in the base area, 
+         and a large number of gems were piled up on the hillside outside the cave on the island, 
+         which was breathtaking:One by one, stacked like a mountain, people called it the Jewel Mountain, 
+         but after only a few days, the treasure as high as the mountain was not heard from, and there was no trace.
+         Now that you and Pengyu are sitting in front of this pile of legendary treasures, you who have always been honest have to make a choice`)
+        while(true){
+            alert(`宝石游戏；启动！`)
+         let n
+         let r
+         let l 
+         let z
+         let x
+         while(true){
+             n = parseInt(prompt(`请输入n的值：`))
+             if(n < 10){
+                 alert(`输入的数字太小。`)
+             }else{
+                 break
+             }
+         }
+         while(true){
+             r = parseInt(prompt(`拿取宝石的最大值`))
+             if(r>n){
+                 alert(`请重新输入`)
+             }else if(r<n){
+                 break
+             }
+         }
+         while(true){
+             l = parseInt(prompt(`拿取宝石的最小值`))
+             if(l>r){
+                 alert(`请重新输入`)
+             }else  if(l<r){
+                 break
+             }
+         }
+         let name = +prompt(`
+         请选择拿取宝石的顺序：
+         1.先手
+         2.后手
+         `)
+         if(name == 1){
+             while(true){
+                 while(true){
+                     z = prompt(`请选择拿取宝石的数量：`)
+                     if(z<l||z>r){
+                         alert(`请输入合规的数字`)
+                     }else if(z>=l && z<=r){
+                         break
+                     }
+                 }
+                 n = n - z
+                 console.log(n)
+                 alert(n)
+                 if(n%10==0){
+                     n = n - 10
+                     alert(`剩余宝石的数量为：`)
+                     alert(n)
+                     if (n==0){
+                         alert(`游戏结束,你输了`)
+                         break
+                     }
+                 }else if(n%10>0){
+                     n = n - n%10
+                     alert(`剩余宝石的数量为：`)
+                     alert(n)
+                     if (n==0){
+                         alert(`游戏结束，你输了`)
+                         break
+                     }
+                 }
+             }
+ 
+         }else if(name==2){
+             if(n%10==0){
+                 n = n - 10
+             }else{n = n - n%10}
+             alert(`剩余宝石数量为：`)
+             alert(n)
+              while(true){
+                 while(true){
+                     x = prompt(`请选择拿取宝石的数量：`)
+                     if(x<l||x>r){
+                         alert(`请输入合规的数字`)
+                     }else if(x>=l && x<r){
+                         break
+                     }
+                 }
+                 n = n - x
+                 console.log(n)
+                 alert(`剩余的宝石数量为：`)
+                 alert(n)
+                 if(n%10==0){
+                     n = n - 10
+                     alert(`剩余宝石的数量为：`)
+                     alert(n)
+                     if (n==0){
+                         alert(`游戏结束，你输了`)
+                         break
+                     }
+                 }else if(n%10>0){
+                     n = n - n%10
+                     alert(`剩余宝石的数量为：`)
+                     alert(n)
+                     if (n==0){
+                         alert(`游戏结束，你输了`)
+                         break
+                     }
+                 }
+             }
+ 
+         }
+        }
+     </script>
+</body>

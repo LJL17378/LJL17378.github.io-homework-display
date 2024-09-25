@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <meta name="author" content="809127452@qq.com">
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="./js/script.js"></script>
+        <title>宝石之战</title>
+    <body>
+        
+        <div class="home">
+            <header>
+                <h1>宝石之战</h1>
+            </header>
+            <div class="home_box">
+                <input id="pve_button" type="submit" value="单人模式" onclick="model1()">
+            </div>
+            <div class="home_box">
+                <input id="pvp_button" type="submit" value="双人模式" onclick="model2()">
+            </div>
+            <div class="home_box">
+                <input id="intro_button" type="submit" value="游戏介绍" onclick="intro()">
+            </div>
+        </div>
+
+        <div class="settings">
+
+            <div class="setting_box" id="setting_head">
+                <h1 >游戏设置</h1>
+            </div>
+       
+            <div class="setting_box">
+                <input id="total_box" type="number" placeholder="输入总数...">
+            </div>
+
+            <div class="setting_box" >
+                <input id="mini_box" type="number" placeholder="输入最小数...">
+            </div>
+
+            <div class="setting_box" > 
+                <input id="max_box" type="number" placeholder="输入最大数...">
+            </div>
+
+            <div class="setting_box">
+                <select name="order" id="order_box">
+                    <option class="order_option" value="1">先手</option>
+                    <option class="order_option" value="0">后手</option>
+                </select>
+            </div>
+
+            <div class="setting_box" >
+                <input id="submit_button" type="submit" value="开始" onclick="submitSetting()">
+                <input id="exit_button" type="submit" value="退出" onclick="exit()">
+            </div>
+
+        </div>
+
+        <div class="gaming">
+
+            <div class="gaming_fight">
+                <nav class="gaming_box">
+                    <ul>
+                        <li><span>剩余总值:</span><span class="show_box"> </span></li>
+                        <li><span>最小取值:</span><span class="show_box"> </span></li>
+                        <li><span>最大取值:</span><span class="show_box"> </span></li>
+                    </ul>
+                </nav>
+
+                <div class="gaming_box">
+                    <select name="getValue" class="selectValue_box">
+
+                    </select>
+                </div>
+
+                <div class="gaming_box" >
+                    <input class="fight_button" type="submit" value="确认" onclick="fighting()">
+                </div>
+            </div>
+            
+            <div class="gaming_show">
+            </div>
+
+            <div class="gaming_fight" id="player2">
+                <nav class="gaming_box">
+                    <ul>
+                        <li><span>剩余总值:</span><span class="show_box"> </span></li>
+                        <li><span>最小取值:</span><span class="show_box"> </span></li>
+                        <li><span>最大取值:</span><span class="show_box"> </span></li>
+                    </ul>
+                </nav>
+
+                <div class="gaming_box">
+                    <select name="getValue" class="selectValue_box">
+                    </select>
+                </div>
+                <div class="gaming_box">
+                    <input class="fight_button" type="submit" value="确认" onclick="pvpFighting()">
+                </div>
+            </div>
+            <div class="gaming_exit">
+                <img src="./img/exit.png" alt="退出游戏"  onclick="closeIt()">
+            </div>
+        </div>
+
+        <div class="result">
+            <p id="result_box"></p>
+            <input id="result_button" type="submit" value="再来一局" onclick="closeIt()">
+        </div>
+
+        <div class="warn">
+            <div class="warn_box">
+                <p>输入数字有误，请重新输入！</p>
+            </div>
+            <div class="warn_box">
+                <p>电脑正在操作中...</p>
+            </div>
+        </div>
+
+        <div class="intro">
+            <img src="./img/close.png" alt="关闭页面" onclick="exitIntro()">
+            <h1>游戏背景</h1>
+            <p>在遥远的仙境之地，有一座神秘的古老城堡，被认为是智慧和策略的殿堂。传说中，这座城堡隐藏着一个神秘的宝藏，只有那些拥有足够智慧的人才能找到。为了证明他们的智慧，勇敢的年轻人们走进了这座城堡，挑战了里面的谜题和游戏。
+                城堡的中央是一间古老的房间,房间内摆放着一张神秘的棋盘。这个棋盘上摆放着n枚珍贵的宝石，它们闪烁着令人陶醉的光芒。两位年轻的冒险者，雅琪和岚馨，被传送到了这个房间里。他们发现，这里隐藏着一个神秘的游戏，叫做“宝石之战”。
+                </p>
+            <h1>玩法介绍</h1>
+            <p>在这个游戏中,棋盘上共有n枚宝石。两人轮流取宝石,每次至少取l枚,至多取r枚(n>r>l)，但不能 不取。谁取到最后一枚宝石，谁就能获得宝藏，成为传说中的智者。</p>
+            <h1>单人模式</h1>
+            <p>玩家将与电脑展开对战，玩家可以设置n,l,r的大小，并决定自己先选还是后选。</p>
+            <h1>双人模式</h1>
+            <p>两个玩家将展开对战，玩家一可以设置n,l,r的大小，但是将由玩家二决定谁先开始行动。</p>
+        </div>
+    </body>
+</html>

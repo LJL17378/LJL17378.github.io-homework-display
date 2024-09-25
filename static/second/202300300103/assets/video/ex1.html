@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            color: aquamarine;
+            background-color: crimson;
+        }
+    </style>
+    <script>
+
+
+
+
+        let m = prompt('请输入宝石总数')
+        let n = prompt('请输入宝石每次至少取')
+        let l = prompt('请输入宝石每次最多取')
+        function getNum(i = 1) {
+            let i = prompt('本次取')
+            return i
+        }
+        let g = Math.floor(Math.random() * l) + 1
+        l -= g
+        let x = getNum(i)
+        if ((l - x) >= 0) {
+            l -= x
+            document.write(l)
+
+        } else {
+
+
+        }
+
+
+
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1>a</h1>
+    </div>
+    <span id="myspan">jntm</span>
+    <p><button onclick='changetxt()'>dianjigiaibian </button></p>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle of the Gems</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="service.js"></script>
+</head>
+<body>
+    <div align="center" class="head"><img src="./image/use/header.png" alt=""></div>
+    <div class="box1-1" align="center">
+        <button class="box2-1" align="center" onclick="t3()">GOD</button><br>
+        <button class="box2-1" align="center" onclick="t2()">NORMAL</button><br>
+        <button class="box2-1" align="center" onclick="t1()">SETTINGS</button><br>
+    </div>
+    <div class="box1-2" align="center">
+        <input type="text" class="box3-1" placeholder="最少获取宝石数" align="center"><br>
+        <input type="text" class="box3-1" placeholder="最多获取宝石数" align="center"><br>
+        <input type="text" class="box3-1" placeholder="总宝石数" align="center"><br>
+        <button class="box3-1" onclick="apply()">应用</button><br>
+        <button class="box3-1" onclick="t4()">返回</button>
+    </div>
+    <div class="box1-g">
+        <img class="box2" src="./image/use/yaqi.png" alt="加载失败">
+        <div class="box3">
+            <img src="./image/use/frame.png" alt="加载失败" class="box4">
+            <button class="box8" onclick="godPlayFirst()">先手</button><br>
+            <button class="box9" onclick="godPlayLast()">后手</button>
+            <input type="text" class="box11" placeholder="获取宝石（默认min1max5）"><br>
+            <!-- box11记得改 -->
+            <button class="box10" onclick="godGet()">确定</button>
+            <button class="box12" onclick="godAgain()">again</button>
+            <button class="box13" onclick="t6()">返回</button>
+        </div>
+    </div>
+    <div class="box6-g">
+        <audio src="./audio/_- Pokémon Stadium.mp3" controls loop preload="auto" autoplay></audio>
+        <img src="./image/use/gem.png" alt="加载失败" class="box7">
+        <div class="gemnum">0</div>
+        <img src="./image/use/liekongzuo.png" alt="加载失败" class="box5">
+    </div>
+    <div class="box1">
+        <img class="box2" src="./image/use/yaqi.png" alt="加载失败">
+        <div class="box3">
+            <img src="./image/use/frame.png" alt="加载失败" class="box4">
+            <button class="box8" onclick="normalPlayFirst()">先手</button>
+            <button class="box9" onclick="normalPlayLast()">后手</button>
+            <input type="text" class="box11" placeholder="获取宝石（默认min1max5）"><br>
+            <!-- box11记得改 -->
+            <button class="box10" onclick="get()">确定</button>
+            <button class="box12" onclick="again()">again</button>
+            <button class="box13" onclick="t5()">返回</button>
+        </div>
+    </div>
+    <div class="box6">
+        <!-- <audio src="./audio/_- Pokémon Stadium.mp3" controls autoplay loop preload="auto"></audio> -->
+        <img src="./image/use/gem.png" alt="加载失败" class="box7">
+        <div class="gemnum">0</div>
+        <img src="./image/use/143 1.png" alt="加载失败" class="box5">
+    </div>
+</body>
+</html>

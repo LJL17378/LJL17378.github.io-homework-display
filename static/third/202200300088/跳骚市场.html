@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跳骚市场</title>
+    <script type="text/javascript">
+        function a(){
+            axios.post('http://zyhcc.top:8088/goods/getGoodsList',null).then(function(res){
+                console.log('res=',res)
+            },function(reason){
+                console.log('reason=',reason)
+            })
+        }
+        function b(){
+            var arr1=document.getElementsByName("huoqu");
+            var num1 = arr1[0].value;
+            axios.post('http://zyhcc.top:8088/goods/getMyGoods',{
+                num:num1
+            }).then(function(res){
+                console.log('res=',res)
+            },function(reason){
+                console.log('reason=',reason)
+            })
+        }
+        function c(){
+            var arr2=document.getElementsByName("tianjia");
+            var num1 = arr2[0].value;
+            var name1 = arr2[1].value;
+            var description1 = arr2[2].value;
+            var inventory1 = parseInt(arr2[3].value);
+            var price1 = parseInt(arr2[4].value);
+            axios.post('http://zyhcc.top:8088/goods/addGoods',{
+                num: num1,
+                name: name1,
+                description: 'description1',
+                inventory: inventory1,
+                price: price1
+            }).then(function(res){
+                console.log('res=',res)
+            },function(reason){
+                console.log('reason=',reason)
+            })
+        }
+        function d(){
+            var arr3=document.getElementsByName("shanchu");
+            var num1 = arr3[0].value;
+            var id1 = parseInt(arr3[1].value);
+            axios.post('http://zyhcc.top:8088/goods/deleteGoods',{
+                num: num1,
+                id : id1
+            }).then(function(res){
+                console.log('res=',res)
+            },function(reason){
+                console.log('reason=',reason)
+            })
+        }
+        function e(){
+            var arr4=document.getElementsByName("xiugai");
+            var num1 = arr4[0].value;
+            var id1 = parseInt(arr4[1].value);
+            var inventory1 = parseInt(arr4[2].value);
+            var description1 = arr4[3].value;
+            axios.post('http://zyhcc.top:8088/goods/updateInventory',{
+                num : num1,
+                id : id1,
+                inventory : inventory1,
+                description : description1
+            }).then(function(res){
+                console.log('res=',res)
+            },function(reason){
+                console.log('reason=',reason)
+            })
+        }
+        function f(){
+            var arr5=document.getElementsByName("goumai");
+            var num1 = arr5[0].value;
+            var id1 = parseInt(arr5[1]);
+            var count1 = parseInt(arr5[2]);
+            axios.post('http://zyhcc.top:8088/goods/buy',{
+                num : num1,
+                id : id1,
+                count : count1
+            }).then(function(res){
+                console.log('res=',res)
+            },function(reason){
+                console.log('reason=',reason)
+            })
+        }
+        function g(){
+            var arr6=document.getElementsByName("chaxun1");
+            var num1 = arr6[0].value;
+            axios.post('http://zyhcc.top:8088/balance/getBalance',{
+                num:num1
+            }).then(function(res){
+                console.log('res=',res)
+            },function(reason){
+                console.log('reason=',reason)
+            })
+        }
+        function h(){
+            var arr7=document.getElementsByName("chaxun2");
+            var num1 = arr7[0].value;
+            var balance1 = parseInt(arr7[1].value) ;
+            axios.post('http://zyhcc.top:8088/balance/setBalance',{
+                num:num1,
+                balance : balance1
+            }).then(function(res){
+                console.log('res=',res)
+            },function(reason){
+                console.log('reason=',reason)
+            })
+        }
+    </script>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <h1>获取商品</h1>
+    获取所有商品列表：<input type="button" value="查询" onclick="a()">
+    <h3>获取自己上传的商品列表：</h3>
+    学号：<input type="text" name="huoqu">
+    <br>
+    <input type="button" value="查询" onclick="b()">
+
+    <h1>添加商品</h1>
+    学号：<input type="text" name="tianjia">
+    <br>
+    商品名称:<input type="text" name="tianjia">
+    <br>
+    商品描述：<input type="text" name="tianjia">
+    <br>
+    商品库存：<input type="text" name="tianjia">
+    <br>
+    商品价格：<input type="text" name="tianjia">
+    <br>
+    添加：<input type="button" value="添加" onclick="c()">
+
+    <h1>删除商品</h1>
+    学号：<input type="text" name="shanchu">
+    <br>
+    商品id:<input type="text" name="shanchu">
+    <br>
+    删除：<input type="button" value="删除" onclick="d()">
+
+    <h1>修改商品库存或描述</h1>
+    学号：<input type="text" name="xiugai">
+    <br>
+    商品id:<input type="text" name="xiugai">
+    <br>
+    商品库存：<input type="text" name="xiugai">
+    <br>
+    商品描述：<input type="text" name="xiugai">
+    <br>
+    修改：<input type="button" value="修改" onclick="e()">
+
+    <h1>购买商品</h1>
+    学号：<input type="text" name="goumai">
+    <br>
+    商品id:<input type="text" name="goumai">
+    <br>
+    商品购买个数：<input type="text" name="goumai">
+    <br>
+    购买：<input type="button" value="购买" onclick="f()">
+
+    <h1>获取自己的余额</h1>
+    学号：<input type="text" name="chaxun1">
+    获取：<input type="button" value="获取" onclick="g()">
+
+    <h1>修改余额</h1>
+    学号：<input type="text" name="chaxun2">
+    <br>
+    余额：<input type="text" name="chaxun2">
+    <br>
+    修改：<input type="button" value="修改" onclick="h()">
+</body>
+</html>

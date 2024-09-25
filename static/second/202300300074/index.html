@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="koish" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Mycss.css">
+    <script src="MyJavaScript.js"></script>
+    <style>body{background-color:rgb(44, 172, 236)}</style>
+    <title>宝石游戏</title>
+    <script>
+        function buttonchange(Button) {
+            console.log(document.getElementsByName(Button)[0].innerHTML)
+            if (document.getElementsByName(Button)[0].innerHTML === "NPC") {
+                document.getElementsByName(Button)[0].innerHTML = "玩家";
+            }
+            else if (document.getElementsByName(Button)[0].innerHTML === "玩家") {
+                document.getElementsByName(Button)[0].innerHTML = "NPC";
+            }
+        }
+        function maxmin() {
+            if (Number(document.getElementById('slider2').value) <= Number(document.getElementById('slider3').value)) {
+                document.getElementById('slider3').value = String(Number(document.getElementById('slider2').value) - 1);
+                slidingnum('slider2','text2')
+                slidingnum('slider3','text3')
+            }
+        }
+        function minmax() {
+            if (Number(document.getElementById('slider2').value) <= Number(document.getElementById('slider3').value)) {
+                document.getElementById('slider2').value = String(Number(document.getElementById('slider3').value)+1);
+                slidingnum('slider2','text2')
+                slidingnum('slider3','text3')
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <header style="display:flex; justify-content:center">
+        <b class="ModuleTitle" style="font-size:100px">宝石游戏</b>
+    </header>
+
+    <div class="rowcenter">
+        <button class="Betterbutton" style="text-align:center;" onclick='location.href=("game.html")'>开始</button><br/>
+        <button class="Betterbutton" style="text-align:center;" onclick='openpopbox("setting")'>设置</button><br/>
+        <button class="Betterbutton" style="text-align:center;" onclick='location.href=("about:blank")'>退出</button>
+    </div>
+
+    <div class="setting" style="display:none;" id="setting">
+        <b class="Mousechange" style="position:relative; left:950px; top:15px; font-size:40px" onclick="closepopbox('setting')">X</b><br>
+        <span class="wordsInSetting" style="font-size:70px; position:relative; left:0px; right:0px; top:-250px; margin:auto;">setting</span>
+        <div style="position:absolute; top:130px; left:50px; white-space:nowrap;">
+            <div style="display:flex; flex-direction:row;">
+                <span class="wordsInSetting" >宝石总数：</span>&nbsp;
+                <span>随机</span><input type="radio" name="ifrandom1" onchange="hideoption('totalnum')" checked>&nbsp;&nbsp;
+                <span>固定</span><input type="radio" name="ifrandom1" onchange="showoption('totalnum')">&nbsp;&nbsp;&nbsp;
+                <form id="totalnum" style="visibility:hidden">
+                    <br/>
+                    <input id="slider1" type="range"  min="50" max="500" step="1" value="100" style="width:400px;" oninput="slidingnum('slider1','text1')">
+                    <input id="text1" type="text" value="100" style="width:30px;" oninput="slidingnum('text1','slider1')" onchange="noout('text1',50,500)">
+                </form>
+            </div><br/><br/>
+
+            <div style="display:flex; flex-direction:row;">
+                <span class="wordsInSetting" >取数上限：</span>&nbsp;
+                <span>随机</span><input type="radio" name="ifrandom2" onchange="hideoption('maxnum')" checked>&nbsp;&nbsp;
+                <span>固定</span><input type="radio" name="ifrandom2" onchange="showoption('maxnum')">&nbsp;&nbsp;&nbsp;
+                <form id="maxnum" style="visibility:hidden">
+                    <br/>
+                    <input id="slider2" type="range"  min="3" max="30" step="1" value="10" style="width:280px;" oninput="slidingnum('slider2','text2');maxmin()">
+                    <input id="text2" type="text" value="10" style="width:30px;" oninput="slidingnum('text2','slider2');maxmin()" onchange="noout('text2',3,30)">
+                </form>
+            </div><br/><br/>
+
+            <div style="display:flex; flex-direction:row;">
+                <span class="wordsInSetting" >取数下限：</span>&nbsp;
+                <span>随机</span><input type="radio" name="ifrandom3" onchange="hideoption('minnum')" checked>&nbsp;&nbsp;
+                <span>固定</span><input type="radio" name="ifrandom3" onchange="showoption('minnum')">&nbsp;&nbsp;&nbsp;
+                <form id="minnum" style="visibility:hidden">
+                    <br/>
+                    <input id="slider3" type="range"  min="1" max="10" step="1" value="1" style="width:100px;" oninput="slidingnum('slider3','text3');minmax()">
+                    <input id="text3" type="text" value="1" style="width:30px;" oninput="slidingnum('text3','slider3');minmax()" onchange="noout('text3',1,10)">
+                </form>
+            </div><br/><br/>
+
+            <form>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="wordsInSetting" >玩家数：</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>2人</span><input type="radio" name="playernum"  onchange="hideoption('P34');hideoption('P4')" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>3人</span><input type="radio" name="playernum"  onchange="showoption('P34');hideoption('P4')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>4人</span><input type="radio" name="playernum"  onchange="showoption('P34');showoption('P4')">
+            </form><br/><br/>
+
+            <form style="display:flex; justify-content:center">
+                <div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>玩家名字&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NPC/普通玩家</span>
+                    <br/><br/><span>玩家1</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="p1" value="P1" style="width:42px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" name="B1" onclick="buttonchange('B1')">NPC</button>
+
+                    <br/><br/><span>玩家2</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="p2" value="P2" style="width:42px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" name="B2" onclick="buttonchange('B2')">NPC</button>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div id="P34" style="visibility:hidden;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>玩家名字&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NPC/普通玩家</span>
+                    <br/><br/><span>玩家3</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" name="p3" value="P3" style="width:42px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" name="B3" onclick="buttonchange('B3')">NPC</button>
+
+                    <div id="P4" style="visibility:hidden;">
+                        <br/><span>玩家4</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="p4" value="P4" style="width:42px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" name="B4" onclick="buttonchange('B4')">NPC</button>
+                    </div>
+                </div>
+            </form><br/><br/>
+
+            <p>注：以上功能均未实现（</p>
+        </div>
+    </div>
+    
+    <div class="popbox" id="popbox" style="display:block;">
+        <button class="Mousechange"style="position:relative; left:316px; color:red;" onclick="closepopbox('popbox')">x</button><br>
+        <strong><a class="BetterLink" href="https://space.bilibili.com/1265680561?spm_id_from=333.337.0.0" target="_blank" style="font-size:25px;color:red">>>>关注永雏塔菲谢谢喵<<<</a></strong><br>
+        <strong><a class="BetterLink" href="https://space.bilibili.com/1265680561?spm_id_from=333.337.0.0" target="_blank" style="font-size:25px;color:orange">>>>关注永雏塔菲谢谢喵<<<</a></strong><br>
+        <strong><a class="BetterLink" href="https://space.bilibili.com/1265680561?spm_id_from=333.337.0.0" target="_blank" style="font-size:25px;color:yellow">>>>关注永雏塔菲谢谢喵<<<</a></strong><br>
+        <strong><a class="BetterLink" href="https://space.bilibili.com/1265680561?spm_id_from=333.337.0.0" target="_blank" style="font-size:25px;color:green">>>>关注永雏塔菲谢谢喵<<<</a></strong><br>
+        <strong><a class="BetterLink" href="https://space.bilibili.com/1265680561?spm_id_from=333.337.0.0" target="_blank" style="font-size:25px;color:cyan">>>>关注永雏塔菲谢谢喵<<<</a></strong><br>
+        <strong><a class="BetterLink" href="https://space.bilibili.com/1265680561?spm_id_from=333.337.0.0" target="_blank" style="font-size:25px;color:blue">>>>关注永雏塔菲谢谢喵<<<</a></strong><br>
+        <strong><a class="BetterLink" href="https://space.bilibili.com/1265680561?spm_id_from=333.337.0.0" target="_blank" style="font-size:25px;color:purple">>>>关注永雏塔菲谢谢喵<<<</a></strong><br>
+    </div>
+
+</body>
+</html>
+
+<style>
+    .setting{
+        border-width:20px;
+        border-radius:50px;
+        border-color:black;
+        width:1000px; 
+        height:600px;
+        background-color:rgb(249, 218, 42); 
+        opacity:0.9;
+        position:fixed;
+        top:125px; 
+        left:0px;
+        right:0px;
+        margin:auto;
+        overflow-y:auto;
+        display:flex;
+    }
+
+    .popbox{
+        width:342px; 
+        height:210px; 
+        position:fixed; 
+        background-color:black; 
+        bottom:40px; 
+        right:70px;
+    }
+
+    .wordsInSetting{
+        font-size:50px;
+        font-family:"华文琥珀";
+        font-weight:200;
+    }
+</style>

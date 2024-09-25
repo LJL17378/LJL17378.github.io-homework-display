@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #biaoti{
+            display: flex;
+            justify-content: center;
+            margin-left: 35%;
+            margin-right: 35%;
+        }
+        #biaoti_text{
+            font-size: 30px;
+            margin-top: 0px;
+            padding: 10px 20px;
+            border: 3px solid blueviolet;
+            color: blueviolet;
+        }
+        #zhengwen{
+            margin: 10px 20%;
+            padding: 10px;
+            border: 3px solid blueviolet;
+        }
+        #caidan{
+            width: 100px;
+        }
+        #canshu_row{
+            margin: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: space-around;
+            width: auto;
+        }
+        #canshu_desp{
+            margin-right: 10px; 
+            font-size: 20px;
+            width: 100px;
+        }
+        a:link{
+        background-color:cornflowerblue;
+        color:black;
+        border: 2px solid white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        }
+        a:hover{
+            background-color: rgb(102, 211, 247);
+            color: white;
+        }
+        #box{
+            color: blueviolet;
+            font-size: 30px;
+        }
+    </style>
+
+
+</head>
+<body style="background-color: antiquewhite;" >
+    <div class="canshu_page" style="display: block;">
+        <div id="biaoti" >
+            <p id="biaoti_text">参数设置</p>
+        </div>
+        <div id="zhengwen">
+            <div id="canshu_row">
+                <label for="shuruk0" id="canshu_desp">l的大小:</label>
+                <input type="number" id="shuruk0" style="width: 200px; font-size: 20px;" min="0" max="100000000" value="5" placeholder="请输入l的值">
+            </div>
+            <div id="canshu_row">
+                <label for="shuruk1" id="canshu_desp" >r的大小:</label>
+                <input type="number" id="shuruk1" style="width: 200px; font-size: 20px;" min="0" max="100000000" value="10" placeholder="请输入r的值">
+            </div>
+            <div id="canshu_row">
+                <label for="shuruk2" id="canshu_desp" >n的大小:</label>
+                <input type="number" id="shuruk2" style="width: 200px; font-size: 20px;" min="0" max="100000000" value="40" placeholder="请输入n的值">
+            </div>
+            <div id="canshu_row">
+                <label for="xlcd0" id="canshu_desp">先后手:</label>
+                <select name="xlcd0" id="xlcd0" style="width: 200px; font-size: 20px;">
+                    <option value="01">先手</option>
+                    <option value="02">后手</option>
+                </select>
+            </div>
+            <div id="canshu_row">
+                <label for="xlcd1" id="canshu_desp">难度:</label>
+                <select name="xlcd1" id="xlcd1" style="width: 200px; font-size: 20px;">
+                    <option value="01">简单</option>
+                    <option value="02">困难(尚未实现)</option>
+                </select>
+            </div>
+        </div>
+        <div style="position: relative; margin-top: 100px; display: flex; justify-content: space-between;">
+            <a id="anniu" href="./beijing.html" target="_self">上一页</a>
+            <button id="anniu" onclick="change_page()">真正开始游戏！</button>
+        </div>
+    </div>
+    <div class="youxi_page" style="display: none; width: 100%;">
+        <div style="display: flex; justify-content: center; flex-wrap: wrap;" >
+            <p class="box1" id="box" style="width: 100%; text-align: center;" >当前剩余宝石：</p>
+            
+            <div style="display: none; width: 100%; justify-content: center;" class="Box2">
+                <p class="box2" id="box" style="width: 50%; display: block;">你要取走的宝石数：</p>
+                
+                <label for="shuruk3"></label>
+                <input type="number" id="shuruk3"  style="height: 30px; width: 200px; margin-top: 30px; margin-bottom: 30px;" value="">
+
+                <button id="tijiao" style="height: 30px; margin-top: 33px;" onclick="pc_cz()">确认</button>
+            </div>
+            <div style="display: none; width: 100%; justify-content: center;" class="Box3">
+                <p class="box3" id="box" style="width: 50%;text-align: center; display: block;"></p>
+                <button id="tijiao1" style="height: 30px;margin-top: 33px;margin-bottom: 30px;" onclick="yq_cz()">下一步</button>
+            </div>
+            
+            <p class="box4" id="box" style="width: 100%;text-align: center;display: none;"></p>
+            <button id="btn_canshu" style="position: absolute;margin-top: 500px;height: 50px; font-size: 30px;display: block;" onclick="change_page1()">调整参数</button>
+        </div>
+
+
+    </div>
+    <script>
+        let val_l;
+        let val_r;
+        let val_n;
+        let val_p1=0; // 玩家
+        let val_p2=0; // 电脑
+        let box1;
+        let box2;
+        let box3;
+        let box4;
+        let Box2;
+        let Box3;
+        let btn_canshu;
+        let if_end;
+        let pc_op;
+        function slep(dly){
+            let start = (new Date()).getTime();
+            while((new Date()).getTime - start < dly){
+                continue;
+            }
+        }
+        function pd_end(a){ 
+            if(Number(val_n)<Number(val_l)){
+                Box2.style.display = "none";
+                Box3.style.display = "none";
+                box4.style.display= "block";
+                box4.innerHTML = "恭喜" + a + "获得了胜利！";
+                btn_canshu.innerHTML = "参数界面";
+                return 1;
+            }
+
+        }
+        function yq_cz(){
+            box1.innerHTML = "当前剩余宝石：" + val_n;
+            if(pd_end("电脑")==1){
+                return;
+            }
+            
+            Box2.style.display="flex";
+            Box3.style.display="none";
+
+            shuruk3.placeholder = "请输入" + min(val_l,val_n) + "~" + min(val_r,val_n) + "之间的整数。";
+            shuruk3.min=val_l;
+            shuruk3.max=min(val_r,val_n);
+            
+        }
+        function pc_cz(){
+            val_p1=document.getElementById("shuruk3").value;
+            if(val_p1!="" &&(Number(val_p1)<Number(val_l)||Number(val_p1)>Number(val_r))){
+                baocuo();
+                return;
+            }
+            val_n=Number(val_n)-Number(val_p1);
+            box1.innerHTML = "当前剩余宝石：" + val_n;
+            if(pd_end("你")==1){
+                return;
+            }
+            
+            
+            Box2.style.display = "none";
+            Box3.style.display = "flex";
+            if(pc_op=="01"){
+                val_p2 = Math.floor(Math.random()*100)%Number(min(Number(val_r),Number(val_n))-val_l)+Number(val_l);
+                box3.innerHTML = "对方取走的宝石数：" + val_p2;
+            }
+            else {
+
+            }
+            val_n=Number(val_n)-Number(val_p2);
+        }
+        function work_1(){//yq 先手
+            yq_cz();
+        }
+        function work_2(){//yq 后手
+            pc_cz();
+        }
+        function baocuo(){
+            window.alert("输入不合法，请重新输入！");
+        }
+        function min(a,b){
+            a=Number(a);
+            b=Number(b);
+            if(a<=b)return a;
+            else return b;
+        }
+        function change_page1(){
+            document.getElementsByClassName("canshu_page")[0].style.display = "block";
+            document.getElementsByClassName("youxi_page")[0].style.display="none";
+        }
+        function change_page(){
+
+            box1=document.getElementsByClassName("box1")[0];
+            box2=document.getElementsByClassName("box2")[0];
+            box3=document.getElementsByClassName("box3")[0];
+            box4=document.getElementsByClassName("box4")[0];
+            Box2=document.getElementsByClassName("Box2")[0];
+            Box3=document.getElementsByClassName("Box3")[0];
+            btn_canshu=document.getElementById("btn_canshu");
+
+            val_l = document.getElementById("shuruk0").value;
+            val_r = document.getElementById("shuruk1").value;
+            val_n = document.getElementById("shuruk2").value;
+            pc_op = document.getElementById("xlcd1").value;
+
+            box4.style.display = "none";
+
+            if(Number(val_l)>Number(val_r) || Number(val_l)>Number(val_n) || Number(val_r)>Number(val_n) ){
+                baocuo();
+                return;
+            }
+
+            document.getElementsByClassName("canshu_page")[0].style.display = "none";
+            document.getElementsByClassName("youxi_page")[0].style.display="block";
+
+            if(document.getElementById("xlcd0").value=="01")work_1();
+            else work_2();
+            
+        }
+        
+    </script>
+
+</body>
+</html>

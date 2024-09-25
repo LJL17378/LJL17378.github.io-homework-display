@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .in{
+            margin: 20px;
+        }
+        .btn{
+            width: 100px;
+            height: 100px;
+            margin: 30px;           
+        }
+        .shengyu{
+            width: 102px;
+            height: 100px;
+            
+            text-align: center;
+            line-height: 50px;
+            border-style: solid;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="shuru">
+        宝石总数：<input type="text" class="in" placeholder="输入宝石总数：">
+        至少取得宝石数:<input type="text" class="in" placeholder="输入至少要取得宝石数：">
+        至多取得宝石数：<input type="text" class="in" placeholder="输入最多要取得的宝石数：">
+    </div>
+    <p class="shengyu">这里是剩余的宝石数</p>
+    <div class="button">
+    <button class="btn">开始</button>
+    </div>
+    <p class="ps">（ps：第一次输入数字后需要F5刷新网页，我也不知道为啥）</p>
+    <script>
+        var m=10,
+            l=1,
+            r=3,
+            n;
+        var m=parseInt(document.getElementsByClassName('in')[0].value);
+        var l=parseInt(document.getElementsByClassName('in')[1].value);
+        var r=parseInt(document.getElementsByClassName('in')[2].value);
+        var n,
+            s;//电脑取数
+        console.log(m,l,r,n);//m总数，l至少,r至多,n取数
+        var btn=document.querySelector('button');
+        btn.onclick=function(){
+            
+            n=parseInt(prompt('输入本次所取宝石数'));
+            
+            m=m-n;
+            if(m==0){
+                alert('恭喜，win！');
+            }
+            else{
+                if(m>r){
+                    s=getRandom(l,r);
+                }
+                else{
+                    s=getRandom(l,m);
+                }
+                m=m-s;
+                alert('电脑取了'+s);
+                if(m==0){
+                    alert('LOSE!');
+                }
+                else{
+                document.querySelector('p').style.display='block';
+                document.querySelector('p').innerHTML='目前剩余宝石'+m+'个';
+                alert('请点击开始进行下一轮游戏！');
+                }
+            }
+        
+        
+     
+
+        function getRandom(min,max){
+            return Math.floor(Math.random()*(max-min+1)+min);}
+        }   
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的商品</title>
+    <style>
+        .blue {
+            width: 500px;
+            height: 100px;
+            background-color: rgb(59, 195, 127);
+            font-size: large;
+            margin-left: 200px;
+            margin-right: 250px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            margin-top: 100px;
+        }
+
+        button {
+            font-weight: 800;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body background="跃动.jpg">
+    <h1 align="center">我的商品列表</h1>
+    <div class="list"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        axios.post('http://62.234.11.20:8088/goods/getMyGoods', {
+            "num": '202300300103',
+
+        }).then(function (res) {
+
+            goodsList = res.data.data
+            console.log(goodsList);
+
+            getMylist()
+        })
+
+        function getMylist() {
+            const box = document.querySelector('.list')
+            for (let i = 0; i < goodsList.length; i++) {
+                let el = document.createElement('div')
+                el.innerHTML = `
+                <div class="blue">
+                      商品名称:<button>${goodsList[i].name}</button>
+                    价格:<button> ${goodsList[i].price}</button>
+                    库存：<button>${goodsList[i].inventory}</button><br>
+                     商品描述：${goodsList[i].description}
+                    </div>
+                 
+                `
+                box.append(el)
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购买</title>
+    <style>
+        .input{
+            display: flex;
+            margin-left: 30px;
+            margin-bottom: 30px;
+        }
+        .text{
+            display: flex;
+            position: relative;
+            left: 100px;
+        }
+        .button{
+            display: flex;
+            position: relative;
+            left: 85px;
+            top: 10px;
+        }
+        #input1{
+            display: flex;
+            position: relative;
+            left: 40px;
+        }
+        #input2{
+            display: flex;
+            position: relative;
+            left: 40px;
+        }
+        #input3{
+            display: flex;
+            position: relative;
+            left: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="text">学号:</div>
+    <input type="text" placeholder="请输入你的学号" id="input1">
+    <div class="text">id:</div>
+    <input type="text" placeholder="请输入你要买的商品的id" id="input2">
+    <div class="text">个数:</div>
+    <input type="text" placeholder="请输入你要购买的个数" id="input3">
+    <button class="button">点击购买</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let i=0
+        let sum=0
+        let button = document.getElementsByClassName('button')[0]
+        button.addEventListener('click',function(){
+            axios.post('http://62.234.11.20:8088/goods/buy',{
+            'num':document.getElementById('input1').value,
+            'id':parseInt(document.getElementById('input2').value),
+            'count':parseInt(document.getElementById('input3').value)
+        }).then(function(res1){
+                buy = res1.data.data
+                code = res1.data.code
+                if(code == 200){
+                console.log(res1.data)
+                console.log('buy:'+ buy)
+                console.log(code)
+                let number = parseInt(document.getElementById('input3').value)
+                while(i < number){
+                    sum = sum + buy
+                i++
+            }
+                alert("购买成功,您已消费"+sum+",欢迎下次再来")
+            }if(code == 400){
+                alert('余额不足')
+            }
+        })
+    })
+    </script>
+
+
+</body>
+</html>

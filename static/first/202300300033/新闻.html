@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .color{
+          font-size: 30px;
+          color: #999;
+        }
+        /*div{
+          text-align: center;
+        }*/
+        .pic{
+           text-align: center;
+        }
+    </style>
+    <style type="text/css">
+        .hidden{
+          display: none;
+        }
+        .border_style{
+          width: 300px;
+          height: 350px;
+           border-style: solid;
+           border-width: 2px ;
+           border-color: #000;
+        }
+
+    </style>
+    <style>
+      .a{
+        width: 60px;
+        height: 30px;
+        background-color: deepskyblue;
+      }
+    </style>
+    <style>
+      #contain{
+         //position:fixed;
+         display:flex;
+         //挤不下换行
+         flex-wrap:wrap;
+         justify-content:space-between
+     }
+    </style>
+</head>
+<body>
+    <div class="color">新闻网</div>
+    <hr>
+    <div class="pic">
+        <img src="./开头.jpg" height="400" width="1500" >
+    </div>
+    <h2>最新新闻</h2>
+    <div id="contain">
+      <div class="border_style">
+      <img src="./亚运会.jpg"  height="200" width="300">
+      <h3>你好，“弄潮儿”</h3>
+      <h5>“亚运数字火炬人”正式命名</h5>
+      <h5 class="a"><a href="./亚运会.html">阅读更多</a></h5>
+      </div>
+      <div class="border_style">
+        <img src="./r.jpg"  height="200" width="300">
+        <h3>返程高峰</h3>
+        <h5>6日,全国交通发送旅客总量约5988.6万人次。</h5>
+        <h5 class="a"><a href="./交通出行.html">阅读更多</a></h5>
+        </div>
+      <div class="border_style">
+          <img src="./考古.jpg"  height="200" width="300">
+          <h3>古迹发现</h3>
+          <h5>目前金中都考古发现最大的“官式建筑组群”</h5>
+          <h5 class="a"><a href="./考古.html">阅读更多</a></h5>
+       </div>
+       <div class="border_style">
+          <img src="./天气预报.jpg"  height="200" width="300">
+          <h3>天气状况</h3>
+          <h5>中部地区迎来降雨</h5>
+          <h5 class="a"><a href="./天气预报.html">阅读更多</a></h5>
+      </div>
+  
+
+     </div>
+     
+        
+    
+</body>
+</html>

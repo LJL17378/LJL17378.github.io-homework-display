@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>  
+     body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 0;  
+            background-color: #f0f0f0;  
+        }  
+  
+        .container {  
+            max-width: 600px;  
+            margin: 0 auto;  
+            padding: 20px;  
+            background-color: #fff;  
+            border-radius: 5px;  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+        }  
+  
+        h2 {  
+            color: #333;  
+            text-align: center;  
+            margin-top: 0;  
+        }  
+  
+        p {  
+  font-size: 16px;  
+  margin: 10px 0;  
+}
+  
+        input {  
+            width: 100%;  
+            padding: 10px;  
+            font-size: 16px;  
+            border: 1px solid #ccc;  
+            border-radius: 4px;  
+            box-sizing: border-box;  
+        }  
+  
+        button.a {  
+            display: block;  
+            width: 100%;  
+            padding: 15px;  
+            font-size: 16px;  
+            background-color: #4CAF50;  
+            color: #fff;  
+            border: none;  
+            border-radius: 4px;  
+            cursor: pointer;  
+        }  
+        button.b {  
+            display: block;  
+            width: 100%;  
+            padding: 15px;  
+            font-size: 16px;  
+            background-color: #4CAF50;  
+            color: #fff;  
+            border: none;  
+            border-radius: 4px;  
+            cursor: pointer;  
+        }  
+
+  
+        button:hover {  
+            opacity: 0.8;  
+        }  
+</style>  
+  <title>Document</title>
+</head>
+
+<body>  
+  <div class="container">
+  
+<h2>宝石游戏</h2>  
+  
+<p>请输入宝石总数：<input id="numGems" ></p>  
+<p>请输入每次至少取宝石数：<input id="minGems"></p>  
+<p>请输入每次至多取宝石数：<input id="maxGems"></p>  
+<button class="a" onclick="startGame()">开始游戏</button>  
+<button  class="b" onclick="pvp()",id="pick">pvp模式</button>
+  
+<p id="result"></p> 
+</div> 
+  
+<script>  
+var gems = 0; 
+var minGems = 0; 
+var maxGems = 0; 
+var player = 1;  
+var left=0;
+  
+function startGame() {  
+  gems = parseInt(document.getElementById('numGems').value);  
+  minGems = parseInt(document.getElementById('minGems').value);  
+  maxGems = parseInt(document.getElementById('maxGems').value);  
+  document.getElementById('result').innerHTML = "游戏开始，剩余宝石数：" + gems;  
+  playMove();  
+}  
+  
+function playMove() {  
+  if (gems <= 0) {  
+    document.getElementById('result').innerHTML = "游戏结束，最后取宝石的是：" + player;  
+  } else {  
+    var move = Math.floor(Math.random() * (maxGems - minGems + 1)) + minGems; // 随机选择取宝石数  
+    gems -= move;  
+    document.getElementById('result').innerHTML = "玩家" + player + "取了" + move + "颗宝石，剩余宝石数：" + gems;  
+    player = (player === 1) ? 2 : 1; // 切换玩家  
+    setTimeout(playMove, 2000); // 延迟1秒，模拟玩家操作过程  
+  }  
+}  
+function pvp(){
+  gems = parseInt(document.getElementById('numGems').value);  
+  minGems = parseInt(document.getElementById('minGems').value);  
+  maxGems = parseInt(document.getElementById('maxGems').value); 
+  let result = document.getElementById('result');  
+  var dialog = document.createElement("div");  
+  dialog.setAttribute("style", "width: 300px; height: 200px; background-color: white; border: 1px solid black; padding: 10px; position:fixed;bottom: 0; left: 50%; box-sizing: border-box; transition: opacity 0.3s ease-in-out;");  
+  dialog.innerHTML = '<label>输入数据1：<input type="text" id="inputData1" ></input><br><button onclick="processData1()" style="background-color: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer";>提交</button><br></label>输入数据2：<input type="text" id="inputData2"></input><br><button onclick="processData2()"; style="background-color: #4CAF50; color: white; border: none; padding: 10px; cursor: pointer;">提交</button>'; 
+      document.body.appendChild(dialog);   
+}
+function processData1(){
+  var num1=parseInt(document.getElementById('inputData1').value);
+  
+  if (num1<minGems&&num1>maxGems) {
+    alert("请重新输入")
+    return;
+    
+  }
+  else
+   left=gems-num1;
+   gems=left;
+  if(left<=0)
+  document.getElementById("result").innerHTML = "1号获胜";
+  else
+  document.getElementById("result").innerHTML="1号选手取了"+num1+"还剩余"+left;
+
+
+}
+
+function processData2(){
+  var num2=parseInt(document.getElementById('inputData2').value);
+  if (num2<minGems&&num2>maxGems) {
+    alert("请重新输入")
+    return;
+    
+  }
+  else
+   left=gems-num2;
+  gems=left;
+  if(left<=0)
+  document.getElementById("result").innerHTML = "2号获胜";
+  else
+  document.getElementById("result").innerHTML="2号选手取了"+num2+"还剩余"+left;
+
+
+}
+</script>  
+  
+</body>  
+</html>

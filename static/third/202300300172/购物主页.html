@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物主页</title>
+    <style>
+        #el{
+            display: inline-block;
+            padding: 50px;
+        }
+        .number{
+            float: right;
+        }
+        .left{
+            position: absolute;
+            top: 60px;
+            right: 2%;
+        }
+        .add{
+            position: absolute;
+            top: 100px;
+            right: 2%;
+        }
+    </style>
+</head>
+<body>
+    <div class="number">购物车商品数量:
+        <div class="number1">0</div>
+    </div>
+    <div class="list"></div>
+    <a href="./余额.html" class="left"><input type="button" value="查看余额"></a>
+    <a href="./添加商品.html" class="add"><input type="button" value="添加商品"></a>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let goodsList = []
+        let el = []
+        axios.post('http://62.234.11.20:8088/helloWorld',null)
+            .then(function (test) {
+                console.log('test = ', test.data)
+            })
+        axios.post('http://62.234.11.20:8088/goods/getGoodsList',{num:'202300300172'})
+            .then(function(res1){
+                goodsList = res1.data.data
+                code = res1.data.code
+                console.log('goodsList:',goodsList)
+                console.log(code)
+                render()  
+            })   
+        function render(){
+            let box = document.querySelector('.list')
+            for(let i = 0; i < goodsList.length; i++){
+                el[i] = document.createElement('div')
+                el[i].innerHTML = `<div>商品代号:${goodsList[i].id}</div>
+                                <div>商品名称: ${goodsList[i].name}</div>
+                                <div>价格: ${goodsList[i].price}</div>
+                                <div>库存:${goodsList[i].inventory}</div>
+                                <div>简介:${goodsList[i].description}</div>
+                                <a href="./购买.html"><input type="button" value="点击购买"></a>
+                                <button class="button" onclick="func()">加入购物车</button>
+                                `
+                box.append(el[i])
+                el[i].id = 'el'
+                el[i].className = 'el'+i
+            }
+        }
+        let n=0
+        function func(){
+            n++
+            document.getElementsByClassName('number1')[0].innerHTML = n
+        }
+    </script>
+</body>
+</html>

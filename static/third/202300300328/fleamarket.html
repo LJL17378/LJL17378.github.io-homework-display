@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="动态卡.css">
+</head>
+<body style="background-color: #fbecd2;">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <h1><b>欢迎光临前端小铺</b></h1>
+ <!-- 商品提交和用户上传商品部分·-->
+    <div class="list">
+        <ul>
+            <li class="active"><b>所有商品</b></li>
+            <li><b>上传商品</b></li>
+        </ul>
+        <ol>
+            <li class="active">
+                <div style="height:570px;overflow-y:auto">
+                <table id="table" border="1"cellspacing="0" cellpadding="0" >
+                    <thead>
+                        <tr>                
+                            <th>商品名称</th>
+                            <th>商品价格</th>
+                            <th>商品描述</th>
+                            <th>商品库存</th>
+                            <th>商品id</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody1"></tbody>
+                </table>
+                </div>
+            </li>
+            <li>
+                <div style="height: 275px;overflow-y:auto">
+                    <table id="table2" border="1"cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>                
+                                <th>商品名称</th>
+                                <th>商品价格</th>
+                                <th>商品描述</th>
+                                <th>商品库存</th>
+                                <th>商品id</th>
+                                <th>删除商品</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody2"></tbody>
+                    </table>
+                </div>
+                <div id="submit" style="margin: 0px;">
+                    <h1 style="margin: 0px;">递交商品？</h1>
+                    <p style="margin: 0px;">商品名称:</p>
+                    <input type="text" id="s1"class="dijiao">
+                    <p style="margin: 0px;">商品价格:</p>
+                    <input type="number"  id="s2" class="dijiao">
+                    <p style="margin: 0px;">商品描述:</p>
+                    <input type="text" id="s3" class="dijiao">
+                    <p style="margin: 0px;">上传数量:</p>
+                    <input type="number" id="s4" class="dijiao">
+                    <input type="button" value="点我上传商品"  onclick="submit()">
+                </div>
+            
+                <div id="edit" style="margin: 0px;">
+                    <h1 style="margin: 0px;">修改商品？</h1>
+                    <p style="margin: 0px;">注：若不输入商品库存，则默认库存量不变。<br>若输入商品库存为小数，则默认只保留整数部分</p>
+                    <p style="margin: 0px;">商品id:</p>
+                    <input type="text" id="s5"class="dijiao">
+                    <p style="margin: 0px;">修改库存为:</p>
+                    <input type="number"  id="s6" class="dijiao">
+                    <p style="margin: 0px;">修改描述为:</p>
+                    <input type="text" id="s7" class="dijiao">
+                    <input type="button" value="点我修改商品"  onclick="edit()">
+                </div>
+
+
+
+
+
+                <script src="addgoods.js"></script>
+            
+            </li>
+        </ol>
+    </div>
+<!-- 余额显示 -->
+<div class="moneyy">
+    <div class="money" id="money"></div>
+    <p>设置你要充值的金额：</p>
+    <input type="number"  id="充钱">
+    <input type="button" value="确认充值" onclick="charge()">
+</div>
+
+<!-- 购买商品 -->
+<div style="background-color: rgb(165, 66, 66);position:fixed;bottom: 10%;right: 5%;width: 30%;text-align: center;">
+    <h1>购买商品</h1>                
+        <p style="margin: 0px;">商品id</p>
+        <input type="number" id="s8" style="margin: 0px;">
+        <p style="margin: 0px;">购买数量</p>
+        <input type="number" id="s9">
+        <input type="button" value="确认购买" onclick="buy()">
+        <p></p>
+</div>
+
+
+
+<!-- <div style="background-color: brown;display:flex;position:fixed;bottom: 10%;right: 5%;"></div> -->
+
+
+
+
+
+<script src="整活.js"></script>
+<script src="buy.js"></script>
+<script src="动态卡.js"></script>        
+<script src="checklist.js"></script>
+<script src="goodslist.js"></script>
+<script src="money.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="koish" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Mycss.css">
+    <script src="MyJavaScript.js"></script>
+    <style>body{background-color:rgb(44, 172, 236)}</style>
+    <title>宝石游戏</title>
+    <script>
+        function get() {
+            document.getElementsByName('getnum')[0].innerHTML = document.getElementById('slider4').value;
+            document.getElementById('action').style.visibility = 'visible';
+            document.getElementById('ifplayer').style.visibility = 'hidden';
+            subtract();
+            if (document.getElementById('end').style.display != 'flex') {
+                setTimeout(changetoP2,1500);
+            }
+        }
+        function changetoP2() {
+            document.getElementById('action').style.visibility = 'hidden';
+            document.getElementsByName('who1')[0].innerHTML = 'P2';
+            document.getElementsByName('who2')[0].innerHTML = 'P2';
+            document.getElementsByName('who3')[0].innerHTML = 'P2';
+            setTimeout(NPC,1000);
+        }
+        function NPC() {
+            document.getElementsByName('getnum')[0].innerHTML = String(Math.floor((Math.random()*5)+1));
+            document.getElementById('slider4').value = '1';
+            document.getElementById('text4').value = '1';
+            document.getElementById('action').style.visibility = 'visible';
+            subtract();
+            setTimeout(changetoP1,2500);
+        }
+        function changetoP1() {
+
+            document.getElementById('action').style.visibility = 'hidden';
+            document.getElementsByName('who1')[0].innerHTML = 'P1';
+            document.getElementsByName('who2')[0].innerHTML = 'P1';
+            document.getElementsByName('who3')[0].innerHTML = 'P1';
+            document.getElementById('ifplayer').style.visibility = 'visible';
+        }
+        function subtract() {
+            document.getElementsByName('rest')[0].innerHTML = String(Number(document.getElementsByName('rest')[0].innerHTML) - Number(document.getElementsByName('getnum')[0].innerHTML))
+            if (Number(document.getElementsByName('rest')[0].innerHTML) <= 0) {
+                document.getElementById('end').style.display = 'flex';
+                document.getElementById('exit').style.visibility = 'hidden';
+            }
+        }
+    </script>
+</head>
+
+<body id="body" style="visibility:hidden;" onload="start()">
+    <header style="display:flex; justify-content:center">
+        <b class="ModuleTitle" style="font-size:100px">游戏开始</b>
+    </header>
+
+    <div class="bar" id="bar">
+        <div class="progress" id="progress">Lodding...</div>
+    </div>
+
+    <div style="position:relative; left:50px; display:flex; flex-direction:column; width:1500px">
+        <div class="words">现在轮到<b name="who1">P1</b>拿取宝石！</div><br/><br/>
+
+        <form id="ifplayer" style="visibility:visible">
+            <input id="text4" type="text" name="getgem" value="1" style="width:150px; height:70px" class="words" oninput="slidingnum('text4','slider4')" onchange="noout('text4',1,5)">&nbsp;&nbsp;&nbsp;
+            <input id="slider4" type="range" name="getgem" min="1" max="5" step="1" value="1" id="getgem" style="width:400px;" oninput="slidingnum('slider4','text4')">
+            <br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" style="width:150px; height:70px; font-size:40px" onclick="get()">取好了</button>
+        </form><br/><br/>
+
+        <div class="words" id="action" style="visibility:hidden;">玩家<b name="who2">P1</b>拿取了<b name="getnum"></b>颗宝石！</div>
+    </div>
+
+    <div style="position:absolute; left:900px; top:200px;">
+        <b class="words">剩余宝石：</b>
+        <b class="words" name="rest" style="font-size:100px; background-color:yellow;">30</b>
+    </div>
+
+    <div class="end" id="end" style="display:none">
+
+        <div style="position: relative; top:20px; left:5px">
+            <span class="words">玩家<b name="who3">P1</b>取走了最后一颗宝石，获得了胜利！</span>
+        </div><br/>
+
+        <div class="rowcenter" style="top:-10px; left:0px; right:0px;">
+            <button class="Betterbutton" style="width:300px;" onclick='location.href=("game.html")'>再来一把</button>
+            <br/><br/><br/>
+            <button class="Betterbutton" style="width:300px;" onclick='location.href=("index.html")'>返回主页</button>
+        </div>
+    </div>
+
+    <div>
+        <button class="Betterbutton goaway goaway1" id="exit" style="visibility:visible;" onclick="openpopbox('goaway')">离开</button>
+    </div>
+
+    <div class="end" id="goaway" style="background-color:white; display:none;">
+
+        <div style="position: relative;display:flex; margin:auto; left:0px; right:0px;">
+            <span class="words" style="align-self:center; ">确定离开？</span>
+        </div><br/>
+
+        <div class="rowcenter" style="top:-150px; left:0px; right:0px; display:flex; flex-direction:row">
+            <button class="Betterbutton goaway" style="width:300px;" onclick='location.href=("index.html")'>继续退出</button>
+            &nbsp;&nbsp;&nbsp;
+            <button class="Betterbutton" style="width:300px;" onclick="closepopbox('goaway')">返回游戏</button>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
+
+<style>
+    .words{
+        position:relative;
+        font-size:50px;
+        font-family:"微软雅黑";
+        margin:20px 10px 5px 20px;
+    }
+
+    .end{
+        border-width:20px;
+        border-radius:50px;
+        border-color:black;
+        width:1000px; 
+        height:600px;
+        background-color:rgb(250, 255, 96); 
+        opacity:0.9;
+        position:fixed;
+        top:125px; 
+        left:0px;
+        right:0px;
+        margin:auto;
+        display:flex;
+        flex-direction:column;
+    }
+
+    .goaway{
+        background-color:red;
+    }
+    .goaway:hover{
+        background-color: rgb(254, 98, 0);
+        cursor: pointer;
+    }
+    .goaway:active{
+        background-color:rgb(255, 209, 111);
+    }
+
+    .goaway1{
+        width:80px; 
+        height:50px; 
+        font-size:30px; 
+        position:fixed; 
+        top:20px; 
+        right:30px;
+    }
+
+
+</style>
+

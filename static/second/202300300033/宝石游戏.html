@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>宝石游戏</title>
+    <style>
+        /* 添加一些基本的样式 */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>宝石游戏</h1>
+
+    <label for="n">宝石数量 (n):</label>
+    <input type="number" id="n" min="1" required><br>
+
+    <label for="l">最小取数 (l):</label>
+    <input type="number" id="l" min="1" required><br>
+
+    <label for="r">最大取数 (r):</label>
+    <input type="number" id="r" min="2" required><br>
+
+    <label for="turn">选择先手或后手：</label>
+    <select id="turn">
+        <option value="player">先手</option>
+        <option value="computer">后手</option>
+    </select><br>
+
+    <button onclick="startGame()">开始游戏</button>
+    <button onclick="nextMove()" id="nextMoveButton" style="display:none;">下一步</button>
+
+    <div id="gameLog"></div>
+
+    <script>
+        let n, l, r, turn;
+        const gameLog = document.getElementById("gameLog");
+        const nextMoveButton = document.getElementById("nextMoveButton");
+
+        function startGame() {
+            n = parseInt(document.getElementById("n").value);
+            l = parseInt(document.getElementById("l").value);
+            r = parseInt(document.getElementById("r").value);
+            turn = document.getElementById("turn").value;
+
+            // 检查输入的值是否合法
+            if (n < l || r <= l || r > n) {
+                gameLog.innerHTML = "输入值不符合规范，请重新输入。";
+                return;
+            }
+
+            gameLog.innerHTML = "游戏开始，宝石数量: " + n + ", 最小取数: " + l + ", 最大取数: " + r + "<br>";
+            nextMoveButton.style.display = "block";
+        }
+
+        function nextMove() {
+            if (n > 0) {
+                if (turn === "player") {
+                    const playerMove = prompt("你的回合，请输入你要取的宝石数量 (介于 " + l + " 和 " + r + " 之间):");
+                    const playerMoveCount = parseInt(playerMove);
+                    
+                        if (playerMoveCount < l || playerMoveCount > r || isNaN(playerMoveCount) || playerMoveCount > n) {gameLog.innerHTML += "你的输入不合法，请重新输入。";
+                        return;
+                    }
+                    n -= playerMoveCount;
+                    gameLog.innerHTML += "你取了 " + playerMoveCount + " 枚宝石，剩余 " + n + " 枚宝石。<br>";
+                } else {
+                    // 计算电脑的最优解
+                    const computerMoveCount = calculateComputerMove(n, l, r);
+                    n -= computerMoveCount;
+                    gameLog.innerHTML += "电脑取了 " + computerMoveCount + " 枚宝石，剩余 " + n + " 枚宝石。<br>";
+                }
+                // 切换轮次
+                turn = (turn === "player") ? "computer" : "player";
+            }
+
+            if (n <= 0) {
+                // 游戏结束
+                if (turn === "player") {
+                    gameLog.innerHTML += "你赢了！";
+                } else {
+                    gameLog.innerHTML += "电脑赢了！";
+                }
+                nextMoveButton.style.display = "none";
+            }
+        }
+
+        function calculateComputerMove(n, l, r) {
+            // 电脑的最优解是尽量留给玩家 l+1 枚宝石
+            const maxComputerMove = r - l;
+
+            if (n <= maxComputerMove) {
+                return n;
+            } else {
+                return n % (maxComputerMove + 1);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购买页面</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+    .div1{
+        background-color: skyblue;
+        margin: auto;
+        text-align: center;
+        width: 400px;
+    }
+    .div2{
+        background-color: red;
+        margin: auto;
+        text-align: center;
+        width: 400px;
+    }
+    </style>
+    
+</head>
+<body>
+    <div class="div1">
+        <h1>购买页面</h1>
+        请输入你的学号:<input type="text" placeholder="请输入你的学号" class="box1">
+        <button onclick="getInformation()">获取余额和此用户购物车信息</button>
+        <br>
+        <br>
+        请输入你想要购买的商品名称:<input type="text" placeholder="请输入你想要购买的商品名" class="box2">
+        <br>
+        请输入你想购买该商品的数量: <input type="text" placeholder="请输入你想购买该商品的数量" class="box3">
+        <button onclick="add()">添加商品</button>
+        <br>
+        请输入要修改的商品: <input type="text" placeholder="请输入要修改的商品" class="box4">
+        <br>
+        请输入修改后的数量: <input type="text" placeholder="请输入修改后的数量" class="box5">
+        <br>
+        <button onclick="update()">修改</button>
+        <br>
+        请输入你想要删除的商品名:<input type="text" placeholder="请输入你想要删除的商品名" class="box6">
+        <br>
+        <button onclick="del()">删除商品</button>
+    </div>
+    <div class="div2">
+        <h1>购物车</h1>
+        余额:<div id="balance" style="color: white;font-weight: bold"></div>
+        <img src="./充值.jpg" alt="图片加载失败" style="height: 150px;">
+        <br>
+        <button><a href="http://localhost:8080/%E5%89%8D%E7%AB%AF/%E5%85%85%E5%80%BC.html">充值</a></button>
+        <div class="list"></div>
+        <button onclick="getSum()">获得总金额</button>
+        <br>
+        总金额:<div id="sum" style="color: white;font-weight: bold"></div>
+        <button onclick="check()">检查库存</button>
+        <button onclick="updateInventory()" id="change">库存更新</button>
+        <button onclick="buy()" id="buy">购买</button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const balanceBox = document.getElementById("balance")
+        const sum = document.getElementById("sum")
+        let totalMoney = 0;
+        let record = 0;
+        let goodsList = []
+        //禁用按钮,后续逐一解禁
+        let buttonBuy = document.getElementById("buy")
+        let buttonChange = document.getElementById("change")
+        buttonBuy.disabled = true;
+        buttonChange.disabled = true;
+        //获取余额和对应的购物车信息
+        function getInformation(){
+            //获取余额
+            let a = document.getElementsByClassName("box1")[0].value
+            fetch('http://localhost:8080/getaccount',{
+                method : 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    num: a,
+                })
+            })
+                .then(function (response){
+                    return response.json()
+                })
+                .then(function (data){
+                    balanceBox.innerHTML = data.data.balance;
+                })
+            //打印用户购物车信息
+            fetch('http://localhost:8080/outputcart',{
+                method : 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    num : a//学号
+                })
+            })
+                .then(function (data) {
+                    return data.json()
+                })
+                .then(function(res){
+                    goodsList = res
+                    console.log(goodsList);
+                    render();
+                })
+            function render() {
+                const box = document.querySelector('.list')
+                for(let i = 0; i < goodsList.length; i++){
+                    let el = document.createElement('div')
+                    el.innerHTML = `
+                    商品名称: <b class="red">${goodsList[i].name}</b>
+                    价格: ${goodsList[i].price}
+                    数量: ${goodsList[i].count}
+                `
+                    box.append(el)
+                }
+            }
+        }
+
+        //用于添加购物车的信息
+        function add(){
+            let a = document.getElementsByClassName('box1')[0].value;//学号
+            let b = document.getElementsByClassName('box2')[0].value;//商品名
+            let c = parseInt(document.getElementsByClassName('box3')[0].value);//要买商品的量
+            //通过商品名获取对应的商品信息
+            fetch('http://localhost:8080/getgoods',{
+                method : 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: b
+                })
+            })
+            .then(function(response){
+                return response.json();
+            })
+            //将商品信息载入购物车中
+            .then(function(data){
+                //判断购买的商品是否存在
+                if(data.data === null){
+                    alert('你所要购买的商品不存在')
+                }else{
+                    fetch('http://localhost:8080/addcart',{
+                        method : 'POST',
+                        headers:{
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: b,
+                            price:data.data.price,
+                            count:c,
+                            num:a
+                        })
+                    })
+                    alert('添加成功')
+                }
+            })
+        }
+        //用于更新购物车要购买物品的数量
+        function update(){
+            let a = document.getElementsByClassName('box1')[0].value//学号
+            let b = document.getElementsByClassName('box4')[0].value//商品名
+            let c = parseInt(document.getElementsByClassName('box5')[0].value)//要修改的购买量
+            //根据商品名和学号获取对应的数据
+            fetch('http://localhost:8080/getcart',{
+                method : 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: b,//商品名
+                    num: a//学号
+                })
+            })
+                .then(function(response){
+                    return response.json();
+                })
+                //将商品信息载入购物车中
+                .then(function(data){
+                    if(data.data === null){
+                        alert('购物车中不存在该商品')
+                    }else{
+                        fetch('http://localhost:8080/updatecart',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num:a,
+                                name: b,
+                                count: c
+                            })
+                        })
+                        alert('修改成功')
+                    }
+                })
+
+        }
+        //用于删除购物车的信息
+        function del(){
+            let a = document.getElementsByClassName('box1')[0].value//学号
+            let b = document.getElementsByClassName('box6')[0].value//商品名
+            //不能删除不存在的商品
+            fetch('http://localhost:8080/getcart',{
+                method : 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    num:a,
+                    name: b
+                })
+            })
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                    if(data.data === null){
+                        alert('购物车中不存在此商品')
+                    }else{
+                        //通过学号和商品名去删除购物车中的商品
+                        fetch('http://localhost:8080/deletecart',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num : a,
+                                name : b
+                            })
+                        })
+                        alert('删除成功')
+                    }
+                })
+
+        }
+        //获取要付的总金
+        function getSum(){
+            if(record === totalMoney && totalMoney === 0) {
+                for (let i = 0; i < goodsList.length; i++) {
+                    totalMoney = totalMoney + goodsList[i].price * goodsList[i].count
+                }
+            }
+            console.log(totalMoney);
+            sum.innerHTML = totalMoney + "";
+        }
+        //检查库存
+        function check() {
+            buttonChange.disabled = false
+            for (let i = 0; i < goodsList.length; i++) {
+                //查找原商品的数据
+                fetch('http://localhost:8080/getgoods', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: goodsList[i].name
+                    })
+                })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (data) {
+                            //将原商品的库存和要求量进行比对
+                            if (data.data.inventory < goodsList[i].count) {
+                                buttonChange.disabled = true
+                                alert(goodsList[i].name + '的库存不够,请修改或删除')
+                            }
+                        }
+                    )
+            }
+        }
+            function updateInventory(){
+                buttonBuy.disabled = false
+                for (let i = 0; i < goodsList.length; i++) {
+                    //查找原商品的数据
+                    fetch('http://localhost:8080/getgoods', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: goodsList[i].name
+                        })
+                    })
+                        .then(function (response) {
+                            return response.json()
+                        })
+                        .then(function (data) {
+                            fetch('http://localhost:8080/updateinventory', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    name: goodsList[i].name,
+                                    inventory: data.data.inventory - goodsList[i].count
+                                })
+                            })
+                        })
+                }
+            }
+        
+        //购买
+        function buy() {
+            let a = parseInt(balanceBox.innerHTML)//余额
+            let b = parseInt(sum.innerHTML)//总金额
+            let c = document.getElementsByClassName('box1')[0].value//学号
+            if (a >= b) {
+                balanceBox.innerHTML = (a - b) + "";
+                fetch('http://localhost:8080/updateaccount', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        num: c,
+                        balance: (a - b)
+                    })
+                })
+            } else {
+                alert('余额不足')
+            }
+        }
+    </script>
+</body>
+</html>

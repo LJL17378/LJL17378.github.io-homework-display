@@ -1,0 +1,56 @@
+html {
+    background-color: rgb(235, 235, 245);
+}
+
+
+
+header,section{
+    margin: 0 auto;
+}
+
+td,
+tr {
+    /*border: 1px solid red; */
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+    font-size: 4px;
+    table-layout: fixed;
+    word-break: break-all;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    text-align: center;
+}
+.xinqi {
+    background-color: rgb(179, 238, 124);
+    color: white;
+}
+.shijian {
+    background-color: rgb(131, 233, 148);
+    color: white;
+}
+.purple {
+    background-color: rgb(171, 145, 255);
+    color: white;
+}
+
+.white {
+    background-color: rgb(225, 235, 248);
+    color: white;
+}
+
+.green {
+    background-color: rgb(175, 236, 53);
+    color: white;
+}
+
+.red {
+    background-color: rgb(252, 154, 154);
+    color: white;
+}
+
+.one {
+    width: 200px;
+    text-align: center;
+}

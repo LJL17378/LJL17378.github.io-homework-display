@@ -1,0 +1,206 @@
+body {
+    background: url("./image/use/cover1.jpg")  no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    display: block;
+}
+.head{
+    display: block;
+}
+.box1-1{
+    position: absolute;
+    bottom: 4px;
+    height: 600px;
+    width: 100%;
+    display: block;
+}
+.box1-2{
+    position: absolute;
+    bottom: 4px;
+    height: 600px;
+    width: 100%;
+    display: none;
+}
+button.box2-1{
+    width: 400px;
+    height: 150px;
+    margin-top: 50px;
+    background-color:#ffcc03;
+    font-size: 60px;
+    color: white;
+    border-radius: 15px;
+    border-color: #386abb;
+}
+button:hover{
+    background-color: #386abb;
+    cursor: pointer;
+}
+button.box3-1{
+    width: 400px;
+    height: 98px;
+    margin-top: 20px;
+    border-radius: 15px;
+    border: 4px solid #386abb;
+    background-color:#ffcc03;
+    font-size: 50px;
+    color: white;
+}
+input.box3-1{
+    width: 400px;
+    height: 98px;
+    margin-top: 20px;
+    border-radius: 15px;
+    border: 4px solid #386abb;
+    background-color:#ffcc03;
+    font-size: 50px;
+}
+button.box3-1:hover{
+    background-color: #386abb;
+    cursor: pointer;
+}
+.box1{
+    position: fixed;
+    height: 60%;
+    width: 100%;
+    left: 0%;
+    bottom: 0%;
+    display: none;
+}
+.box1-g{
+    position: fixed;
+    height: 60%;
+    width: 100%;
+    left: 0%;
+    bottom: 0%;
+    display: none;
+}
+.box2{
+    position: fixed;
+    height: 60%;
+    left: 0%;
+    bottom: 0%;
+}
+.box3{
+    position: fixed;
+    height: 27%;
+    width: 100%;
+    right: 0%;
+    bottom: 0%;
+    display: flex;
+}
+.box4{
+    position: fixed;
+    height: 27%;
+    right: 0%;
+    bottom: 0%;
+    z-index: 1;
+}
+.box5{
+    position: fixed;
+    right: 0%;
+    top: 0%;
+    width: 40%;
+}
+.box6{
+    width: 100%;
+    display: none;
+    top: 0%;
+}
+.box6-g{
+    width: 100%;
+    display: none;
+    top: 0%;
+}
+.box7{
+    width: 7%;
+    right: 63%;
+    left: 30%;
+    position: fixed;
+}
+button.box8{
+    height: 20%;
+    border-radius: 15px;
+    border: 4px solid #386abb;
+    background-color:#ffcc03;
+    color: white;
+    z-index: 2;
+    font-size: 80px;
+    position: fixed;
+    top:77%;
+    right: 5%;
+    display: inline-block;
+}
+button.box9{
+    height: 20%;
+    border-radius: 15px;
+    border: 4px solid #386abb;
+    background-color:#ffcc03;
+    color: white;
+    z-index: 2;
+    font-size: 80px;
+    position: fixed;
+    top:77%;
+    right: 45%;
+    display: inline-block;
+}
+button.box10{
+    display: none;
+    height: 8%;
+    border-radius: 15px;
+    border: 4px solid #386abb;
+    background-color:#ffcc03;
+    color: white;
+    z-index: 2;
+    font-size: 40px;
+    position: fixed;
+    top:88%;
+    right: 5%;
+}
+input.box11{
+    display: none;
+    height: 8%;
+    border-radius: 15px;
+    border: 4px solid #386abb;
+    background-color:#ffcc03;
+    color: white;
+    z-index: 2;
+    font-size: 40px;
+    position: fixed;
+    right: 5%;
+    top:78%;
+}
+button.box12{
+    height: 20%;
+    border-radius: 15px;
+    border: 4px solid #386abb;
+    background-color:#ffcc03;
+    color: white;
+    z-index: 2;
+    font-size: 80px;
+    position: fixed;
+    top:77%;
+    right: 5%;
+    display: none;
+}
+button.box13{
+    height: 20%;
+    border-radius: 15px;
+    border: 4px solid #386abb;
+    background-color:#ffcc03;
+    color: white;
+    z-index: 2;
+    font-size: 80px;
+    position: fixed;
+    top:77%;
+    right: 45%;
+    display: none;
+}
+.gemnum{
+    position: fixed;
+    left: 37%;
+    font-size: 70px;
+}
+button:hover{
+    background-color: #386abb;
+    cursor: pointer;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="styleSheet"  href="index.css">
+</head>
+<body background="1.jpg" style="font-family: STFangsong;font-size: larger;">
+    <script src="nin.js"></script>
+    <h1>游戏设置</h1>
+    <div id="div1"><strong>游戏规则如下：</strong><br>在这个游戏中，棋盘上共有n枚宝石。你将与电脑之神对战，分别轮流取走宝石。每次至少取l枚，至多取r枚，但不能不取（即
+        0 < l ≤ r ≤ n）。谁取到最后一枚宝石，谁就能获得宝藏，成为传说中的智者。作为玩家的你可以设置l、r、n的值并选择自己是先手还是后手。<p style="font-weight:700;">不过，据说聪明的电脑之神会根据最优解出手？!可要小心咯。</p>
+        特殊规定：当轮到一方时剩余宝石数小于单次最少可取宝石数l时，若此时正好轮到玩家取宝石，只需要输入一个符合要求的数即可获胜；若轮到电脑之神，则电脑之神将一次性取走剩余所有宝石并获胜。</div>
+    <form id="form1">
+        <div>
+            <p style="color: aliceblue;">请输入每次取宝石数的最小值：</p>
+            <input type="number" name="min" id="min">
+        </div>
+        <div>
+            <p>请输入每次取宝石数的最大值：</p>
+            <input type="number" name="max" id="max">
+        </div>
+        <div>
+            <p>请输入宝石的总数：</p>
+            <input type="number" name="amount" id="amount">
+        </div>
+        <div id="hope"></div>
+    </form>
+    <div class="link"></div> 
+    <form id="form2">
+        <h1>游戏开始......</h1>
+        <div>
+            <p>剩余宝石数为：</p>
+            <p id="left"> </p>
+        </div>
+        <div>
+            <p>那么，你该取几颗宝石呢......</p>
+            <input type="number"  id="player">
+        </div>
+        <div>
+            <p>对此，电脑之神的选择是：</p>
+            <p id="computer"></p>
+        </div>
+        <input type="button" value="开启下一回合" id="but3" onclick="func3()">
+    </form>
+    <input style="position: relative;margin-top: 2%;margin-right: 3%;margin-left: 2%;" type="button" value="我要当先手" class="but" onclick="func1()">
+    <input type="button" value="我要当后手" class="but" onclick="func2()">
+
+</body>
+</html>

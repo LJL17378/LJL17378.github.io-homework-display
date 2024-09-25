@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>index</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 20%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #game-log {
+      margin-top: 20px;
+    }
+
+    #game-log p {
+      margin: 5px 0;
+    }
+  </style>
+  <script>
+    function playGame() {
+      var n = parseInt(document.getElementById("n").value);
+      var l = parseInt(document.getElementById("l").value);
+      var r = parseInt(document.getElementById("r").value);
+      var isComputerFirst = document.getElementById("computer-first").checked;
+      var isComputerSmart = document.getElementById("computer-smart").checked;
+      var remainingStones = n;
+
+      var result = "<b>游戏开始！</b><br>";
+      if(isComputerSmart){
+        if(n%(l+r)==0){
+          isComputerFirst=false;
+        }
+        else{
+          isComputerFirst=true;
+        }
+        if (isComputerFirst) {
+        var computerStones = n%(l+r);
+        remainingStones -= computerStones;
+        result += "电脑取走了 " + computerStones + " 枚宝石，剩余 " + remainingStones + " 枚宝石。<br>";
+      }
+      while (remainingStones > 0) {
+        var playerStones = parseInt(Math.random()*(r-l+1)+l);
+        remainingStones -= playerStones;
+        result += "玩家取走了 " + playerStones + " 枚宝石，剩余 " + remainingStones + " 枚宝石。<br>";
+
+        if (remainingStones <= 0) {
+          result += "<b>玩家获胜！</b>";
+          break;
+        }
+
+        var computerStones = r+l-playerStones;
+        remainingStones -= computerStones;
+        result += "电脑取走了 " + computerStones + " 枚宝石，剩余 " + remainingStones + " 枚宝石。<br>";
+
+        if (remainingStones <= 0) {
+          result += "<b>电脑获胜！</b>";
+          break;
+        }
+      }
+      document.getElementById("result").innerHTML = result;
+      }
+else{
+      if (isComputerFirst) {
+        var computerStones = Math.floor(Math.random() * (r - l + 1)) + l;
+        remainingStones -= computerStones;
+        result += "电脑取走了 " + computerStones + " 枚宝石，剩余 " + remainingStones + " 枚宝石。<br>";
+      }
+
+      while (remainingStones > 0) {
+        var playerStones = parseInt(Math.random()*(r-l+1)+l);
+        remainingStones -= playerStones;
+        result += "玩家取走了 " + playerStones + " 枚宝石，剩余 " + remainingStones + " 枚宝石。<br>";
+
+        if (remainingStones <= 0) {
+          result += "<b>玩家获胜！</b>";
+          break;
+        }
+
+        var computerStones = Math.floor(Math.random() * (r - l + 1)) + l;
+        remainingStones -= computerStones;
+        result += "电脑取走了 " + computerStones + " 枚宝石，剩余 " + remainingStones + " 枚宝石。<br>";
+
+        if (remainingStones <= 0) {
+          result += "<b>电脑获胜！</b>";
+          break;
+        }
+      }
+
+      document.getElementById("result").innerHTML = result;
+    }
+  } 
+  </script>
+</head>
+<body>
+  <h1>宝石之战</h1>
+  城堡的中央是—间古老的房间，房间内摆放着—张神秘的棋盘。这个棋盘上摆放着n枚珍贵的宝石，它们闪烁着令人陶醉的光芒。两位年轻的冒险者，雅琪和岚髻，被传送到了这个房间里。他们发现，这里隐藏着—个神秘的游戏，叫做“宝石之战”。
+  在这个游戏中，棋盘上共有n枚宝石。两人轮流取宝石，每次至少取l枚，至多取r枚(1≤l≤r≤n),但不能不取。谁取到最后—枚宝石，谁就能获得宝藏，成为传说中的智者。
+  大度的岚磬表示随意让雅琪确定n,l,r ,但相对地，岚馨能选择自己先手取或后手取。经过了很多局游戏，雅琪无─例外地都输了，宝藏也拱手让给了岚磬。生气的雅琪找到了你，希望你能为她写一个网页，让她够输入任意的n,l,r,并和电脑练习这个游戏。<br>
+  <br>
+  <label for="n">宝石数量：</label>
+  <input type="number" id="n" min="1"><br>
+  <label for="l">每次取宝石数量的最小值：</label>
+  <input type="number" id="l" min="1"><br>
+  <label for="r">每次取宝石数量的最大值：</label>
+  <input type="number" id="r" min="1"><br>
+  <input type="checkbox" id="computer-first">
+  <label for="computer-first">电脑先手</label><br>
+  <input type="checkbox" id="computer-smart">
+  <label for="computer-smart">电脑无敌(由电脑选择是否先手)</label><br>
+  <button onclick="playGame()">开始游戏</button>
+  <div id="result"></div>
+</body>
+</html>

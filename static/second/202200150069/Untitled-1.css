@@ -1,0 +1,24 @@
+h1{
+color:aqua;
+text-align: center;
+text-size-adjust: 30px;
+}
+body{
+    background-image: url("https://th.bing.com/th/id/OIG.Ggh5SeoqbdIkMxshTmKZ?pid=ImgGn");
+    background-size: 100%; /* 让图片覆盖整个元素 */
+    background-position: center; /* 让图片居中显示 */
+    background-repeat: no-repeat; /* 不让图片重复显示 */
+  }
+
+  button{
+    text-align: center;
+  
+  }
+  .center{
+  height:200px;
+  margin:auto;
+  width: 100px;
+  }
+  p{ 
+  text-size-adjust:50px;
+  }

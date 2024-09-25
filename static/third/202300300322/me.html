@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <style>   
+        .hidden{
+            display: none;
+        }
+        #functiontext{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        body{
+            background-color: rgba(201, 187, 238, 0.15);
+        }
+        /* 顶部导航栏 */
+        .navbar {
+            background-color: #ff7676af;
+            color: #fff;
+            height: 80px;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            justify-items: center;
+            align-items: center;
+        }
+        /* 选择器 */
+        #gauge{
+            display: flex;
+            flex-direction: row;
+            height:40px;
+            width:200px;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        /* 正文部分 */
+        .content {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 1200px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background-color: white;
+        }
+
+        /* 上传的商品部分 */
+        #product-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 50px;
+        }
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding-top: 30px;
+            height: 200px;
+            text-indent: 3em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* 钱包部分 */
+        #wallet{
+            margin:0 auto;
+        }
+        #balance{
+            border: none;
+            background-color: transparent;
+        }
+
+        /* 按钮 */
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: space-around;
+            width:300px;
+            margin:0 auto;
+        }
+        .btn {
+            display: block;
+            width: 100px;
+            height: 30px;
+            margin: 20px auto;
+            border-radius: 5px;
+            background-color: #cb33339e;
+            color:white;
+            cursor: pointer;
+            border: none;
+            font-size: 80%;
+        }
+
+        /* 弹窗 */
+        #popup {
+            display: none; 
+            position: fixed; 
+            top:0;
+            left:0;
+            z-index: 1; 
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.2); 
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+        }
+        .close:hover {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #revise-popup {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div id="username"></div>
+        <div>
+        <h1>个人中心</h1>
+        </div>
+        <div id="gauge">
+            <img src="images/myStore.png" alt="我的小铺" onclick="showMyStore()">
+            <img src="images/wallet.png" alt="我的余额" onclick="showWallet()">
+            <img src="images/exit.png" alt="退出" onclick="exit()">
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="uploaded-products">
+            <h2>我的小铺</h2>
+            <div id="product-list">
+            </div>
+        </div>
+        <div id="wallet" class="hidden">
+            <div>余额：<input type="password" id="balance" value="" disabled><span onclick="view()" id="functiontext">显示余额</span></div>
+            <button id="recharge" class="btn" onclick="recharge()">修改余额</button>              
+        </div>
+    </div>
+
+   <div id="popup">
+        <div id="revise-popup">
+            <button class="close" onclick="hidePopup()">&times;</button>
+            <h3></h3>
+            <textarea id="description"></textarea>
+            <div id="lastdiv"></div>
+        </div>
+   </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        // 登录与初始渲染
+        var param = new URLSearchParams(window.location.search);
+        var num = param.get("param");
+        function renderlist(items){
+            const itemlist = document.getElementById('product-list');
+            for(var i=0;i<items.length;i++){
+                var item = document.createElement("div")
+                item.className="product-item";
+                item.innerHTML = `
+                    <div style="color:grey"><i>序列号：${items[i].id}</i></div>
+                    <div><b>名称：${items[i].name}</b></div>
+                    <div>描述：${items[i].description}</div>
+                    <div>当前剩余${items[i].inventory}件</div>
+                    <div>定价：${items[i].price}元</div>
+                    <div class="button-container">
+                        <button class="btn" onclick="revise(${items[i].id},'${items[i].name}')">修改信息</button>
+                        <button class="btn" onclick="redo(${items[i].id},'${items[i].name}')">取消发布</button>
+                    </div>
+                `;
+                itemlist.appendChild(item);
+            }
+        }
+        function render(){
+            document.getElementById("username").innerHTML=`当前登录：${num}`;
+            axios.post("http://zyhcc.top:8088/balance/getBalance",{"num":num}).then(function (response) {
+                document.getElementById("balance").value = response.data.data.toFixed(2);
+            }).catch(function (error) {
+                document.getElementById("wallet").innerText="余额获取失败";
+                console.log(error);
+            });
+            axios.post("http://zyhcc.top:8088/goods/getMyGoods",{"num":num}).then(function (response) {
+                renderlist(response.data.data);
+            }).catch(function (error) {
+                document.getElementById("product-list").innerText="获取上传列表失败";
+                console.log(error);
+            });
+        }
+        render();
+        function exit(){
+            window.close();
+        }
+
+        // 隐藏逻辑
+        const myStore = document.querySelector("#uploaded-products");
+        const wallet = document.querySelector("#wallet");
+
+        function showMyStore() {
+            wallet.classList.add("hidden");
+            myStore.classList.remove("hidden");
+        }
+        function showWallet() {
+            myStore.classList.add("hidden");
+            wallet.classList.remove("hidden");
+        }
+
+        // 修改余额
+        function recharge(){
+            var amt = parseFloat(prompt("请输入你想要的余额值："));
+            if(typeof amt != Number){
+                alert("请输入数字");
+            }else if(amt <= 0){
+                alert("别这么亏待自己");
+            }else{
+                amt = parseFloat(amt.toFixed(2));
+                res = confirm("你的余额将变为"+amt+"元，按'确认'键继续");
+                if(res){
+                    axios.post('http://zyhcc.top:8088/balance/setBalance',{"num": num,"balance": amt}).
+                    then(function (response) {
+                        location.reload();
+                    }).catch(function (error) {
+                        console.log(error);
+                        alert("修改失败，请重试");
+                    });
+                }
+            }
+        }
+
+        var text = document.getElementById("functiontext");
+        function view(){
+            document.getElementById("balance").type = "text";
+            text.innerText = "隐藏余额";
+            text.onclick = hide;
+        }
+        function hide(){
+            document.getElementById("balance").type = "password";
+            text.innerText = "显示余额";
+            text.onclick = view;
+        }
+
+        //修改信息
+        function revise(id,name){
+            document.getElementById("popup").style.display = "block";
+            document.getElementsByTagName("h3")[0].innerHTML = `你正在修改${name}的商品描述`;
+            document.getElementById("lastdiv").innerHTML=`<button id="lastbutton" class="btn" onclick="revisedescription('${id}')">确认</button>`;
+        }
+        function revisedescription(id){
+            axios.post('http://zyhcc.top:8088/goods/updateInventory',{
+                "num":num,
+                "id":id,
+                "description":document.getElementById("description").value
+            }).then(function (response) {
+                alert("修改成功！");
+                location.reload();
+            }).catch(function (error) {
+                console.log(error);
+                alert("修改失败");
+            });
+        }
+        function hidePopup(){
+            document.getElementById("popup").style.display = "none";
+        }
+
+        //删除商品
+        function redo(id,name){
+            if(confirm("你确定删除商品："+name+"吗?")){
+                axios.post('http://zyhcc.top:8088/goods/deleteGoods',{"num":num,"id":id}).then(function (response) {
+                    location.reload();
+                }).catch(function (error) {
+                    console.log(error);
+                    alert("删除失败，请重试");
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝石之战</title>
+    <script tupe="text/javascript">{
+    function set(){
+        var arr1 = document.getElementsByName('a');
+        n = parseInt(arr1[0].value);
+        l = parseInt(arr1[1].value);
+        r = parseInt(arr1[2].value);
+    }
+    function play(){
+        var arr2 = document.getElementsByName('b');
+        i = parseInt(arr2[0].value);
+        console.log(n,l,r,i,j);
+        if(i>l && i<=r){
+        n = n-i;
+        if(n==0){
+         window.alert("您赢了,载入史册");
+         return;
+        }
+        j = n%(r+1);
+        if(j==0 || j<l){
+         j=r;
+         n=n-j;
+         window.alert("电脑取走了"+j+"个宝石");
+        }else{
+         n=n-j;
+         if(n==0){
+             window.alert("电脑取走了"+j+"个宝石,您输了,真的是太逊了");
+             return;
+         }
+         window.alert("电脑取走了"+j+"个宝石");
+        }
+        var arr3 = document.getElementsByName('c');
+        arr3[0].value = n+"";
+     }else{
+         window.alert("输入数据不符合规范,请重新输入");
+     }
+ }
+}
+ </script>
+</head>
+<body>
+    <p>亲爱的玩家,游戏规则如下:在这个游戏中棋盘上共有n枚宝石。两人轮流取宝石,每次至少取l枚,至多取r枚(1<=l<=r<=n)，但不能不取。
+    谁取到最后一枚宝石，谁就能获得宝藏，成为传说中的智者.
+    </p>
+    <br>
+     请输入n的值:<input type="text" name="a">
+     请输入l的值:<input type="text" name="a">
+     请输入r的值:<input type="text" name="a">
+     <br>
+     <button  type="button" name="button1" onclick="set()">提交n.l.r的值并开始游戏</button>
+     <br>
+     请输入本次要取出的宝石数量:<input type="text" name='b'>
+     <br>
+     剩余的宝石数量:<input type="text" name='c'>
+     <br>
+    <button type="button" name="button2" onclick="play()">提交本次取出的宝石数量</button>
+    <br>
+    <script type="text/javascript">{
+        var n=0;
+        var l=0;
+        var r=0;
+        var i=0;
+        var j=0;
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function func1(){
+            let l = parseInt(document.getElementById('min2').value)
+            let r = parseInt(document.getElementById('max2').value)
+            let n = parseInt(document.getElementById('total2').value)
+            if(1<=l<=r<=n){
+            if((n%(l+r)) == 0){
+                alert('你是先手')
+                document.getElementsByClassName('shu')[0].innerHTML = '0';
+            }else{
+                alert('你是后手')
+            }
+            document.getElementById("min1").style.display = "none";
+            document.getElementById("min2").style.display = "none";
+            document.getElementById("max1").style.display = "none";
+            document.getElementById("max2").style.display = "none";
+            document.getElementById("total1").style.display = "none";
+            document.getElementById("total2").style.display = "none";
+            document.getElementById("start").style.display = "none";
+            document.getElementById("input1").style.display = "flex";
+            document.getElementById("input2").style.display = "flex";
+            document.getElementById("ai").style.display = "flex";
+            document.getElementById("text").style.display = "flex";
+            document.getElementById("left").style.display = "flex";
+            document.getElementsByClassName('leftmath')[0].innerHTML = n;
+            let d = n%(l + r)
+            if((n%(l+r)) != 0){
+            document.getElementsByClassName('shu')[0].innerHTML = d;}
+            let info={'a':l,'b':r,'c':n,'d':d}
+            let e = n - d
+            document.getElementsByClassName('leftmath')[0].innerHTML = e;
+            return info
+        }else{
+                alert('请令输入的1<=l<=r<=n')
+            }
+            }
+            var f = 1;
+        function func2(){
+            let a = parseInt(document.getElementById('input2').value)
+            let info = func1()
+            let b = (info['a'] + info['b']) - a;
+            let c = info['c'] - f*(info['a'] + info['b'])
+            alert('电脑取的宝石数为:' + b );
+            document.getElementsByClassName('shu')[0].innerHTML = b;
+            if((info['c']%(info['a'] + info['b'])) == 0){
+            if(c != 0){
+                document.getElementsByClassName('leftmath')[0].innerHTML = c;
+                f++
+            }else{
+                alert('你输了')
+            }
+        }else{
+            let e = info['c'] - info['d'] - f*(info['a'] + info['b'])
+            if(e != 0){
+                document.getElementsByClassName('leftmath')[0].innerHTML = e;
+            f++;
+        }else{
+            alert('你输了')
+        }
+        }
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align: center;">
+    <img src="./Y[$4UQTF$TITREHS`1RIFXX.png" alt="加载失败" style="width: 750px;">
+    </div>
+    <div id="min1">请输入取的宝石最小值l:</div>
+    <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="l" id="min2">
+    <div id="max1">请输入取的宝石最大值r:</div>
+    <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="r" id="max2">
+    <div id="total1">请输入宝石总数:</div>
+    <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="n" id="total2">
+    <div id="input1">请输入你要取的宝石数:</div>
+    <input type="text" oninput = "value=value.replace(/[^\d]/g,'')" placeholder="宝石数" id="input2">
+    <div id="text">电脑取的宝石数为:</div>
+    <div class="shu"></div>
+    <div id="left">剩余宝石数为:</div>
+    <div class="leftmath"></div>
+    <button id="start" onclick="func1()">开始游戏</button>
+    <button id="ai" onclick="func2()">查看电脑取的宝石数</button>
+    <style>
+        #min1{
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 35%;
+        }
+        #min2{
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 48%;
+        }
+        #max1{
+            display: flex;
+            position: absolute;
+            top: 55%;
+            left: 35%;
+        }
+        #max2{
+            display: flex;
+            position: absolute;
+            top: 55%;
+            left: 48%;
+        }
+        #total1{
+            display: flex;
+            position: absolute;
+            top: 60%;
+            left: 35%;
+        }
+        #total2{
+            display: flex;
+            position: absolute;
+            top: 60%;
+            left: 48%;
+        }
+        #start{
+            position: absolute;
+            left: 45%;
+            top: 70%;
+        }
+        #input1{
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 35%;
+        }
+        #input2{
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 48%;
+        }
+        #ai{
+            display: none;
+            position: absolute;
+            top: 65%;
+            left: 42%;
+        }
+        #text{
+            display: none;
+            position: absolute;
+            top: 55%;
+            left: 35%;
+        }
+        .shu{
+            display: flex;
+            position: absolute;
+            top: 55%;
+            left: 48%;
+        }
+        #left{
+            display: none;
+            position: absolute;
+            top: 60%;
+            left: 35%;
+        }
+        .leftmath{
+            display: flex;
+            position: absolute;
+            top: 60%;
+            left: 48%;
+        }
+    </style>
+</body>
+</html>

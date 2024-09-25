@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>余额</title>
+    <style>
+        .list {
+            margin-top: 150px;
+            margin-left: 450px;
+            margin-right: 550px;
+            background-color: aqua;
+            border-radius: 10px;
+        }
+
+        .balanceUpdating {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            margin-left: 20px;
+            width: 110px;
+            height: 60px;
+            font-size: larger;
+        }
+
+        .ji {
+            font-size: larger;
+            width: 100px;
+            height: 60px;
+        }
+
+        .hi {
+            font-size: large;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body background="跃动.jpg">
+    <h1 align="center">注意余额，理性消费！</h1>
+    <div class="list">
+        <input type="number" class="balanceUpdating">
+        <button onclick="balanceInquire()" class="ji">余额更新</button>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function balanceInquire() {
+            let balance = Number(document.getElementsByClassName('balanceUpdating')[0].value);
+            axios.post('http://62.234.11.20:8088/balance/setBalance', {
+                "num": 202300300103,
+                "balance": parseFloat(balance),
+            }).then(function (res) {
+                alert('success')
+                console.log(balance)
+            }, function (reason) {
+                alert(reason)
+                console.warn(reason)
+            }
+            )
+        }
+        axios.post('http://62.234.11.20:8088/balance/getBalance', {
+            "num": '202300300103',
+
+        }).then(function (res) {
+
+            balance = res.data.data
+            console.log(balance);
+
+            getMybalance()
+        })
+
+        function getMybalance() {
+            const box = document.querySelector('.list')
+
+            let el = document.createElement('div')
+            el.innerHTML = `
+                 <button class="hi">   余额: ${balance}</button>                  
+                      `
+            box.append(el)
+        }
+
+    </script>
+</body>
+
+</html>

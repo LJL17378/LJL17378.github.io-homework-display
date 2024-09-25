@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>删除商品</title>
+</head>
+<body>
+    <div class="text">学号:</div>
+    <input type="text" placeholder="请输入你的学号" id="input1" class="input">
+    <div class="text">商品名称:</div>
+    <input type="text" placeholder="请输入你要添加的商品" id="input2" class="input">
+    <div class="text">商品描述:</div>
+    <input type="text" placeholder="请输入你添加商品的描述" id="input3" class="input">
+    <div class="text">商品库存:</div>
+    <input type="text" placeholder="请输入整数" id="input4" class="input">
+    <div class="text">商品价格:</div>
+    <input type="text" placeholder="请输入两位小数" id="input5" class="input">
+    <button class="button">添加商品</button>
+    <a href="./删除商品.html" class="delete"><input type="button" value="删除商品"></a>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let button = document.getElementsByClassName('button')[0]
+        button.addEventListener('click',function(){
+            axios.post('http://62.234.11.20:8088/goods/addGoods',{
+            'num':document.getElementById('input1').value,
+            'name':document.getElementById('input2').value,
+            'description':document.getElementById('input3').value,
+            'inventory':document.getElementById('input4').value,
+            'price':document.getElementById('input5').value
+        }).then(function(res1){
+            let code = res1.data.code
+            if(code == 200){
+                alert('添加成功')
+            }if(code == 400){
+                alert('添加失败')
+            }
+            console.log(res1.data)
+            })})
+
+    </script>
+</body>
+</html>

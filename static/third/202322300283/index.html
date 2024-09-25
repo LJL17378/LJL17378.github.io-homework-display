@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;width: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+        .root {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .bigblock{
+            margin: 2px;
+            border: 3px solid lightblue;
+            background-color: rgb(60, 153, 234);
+            box-sizing: border-box;
+            border-radius: 10px ;
+        }
+/* head */
+
+        #header{
+            width: 95%;
+            height: 18%;
+            display: flex;
+            justify-content:space-around;
+            align-content: center;
+            flex-wrap: wrap;
+        }
+        .head_btn{
+            width: 200px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding: 14px 16px;
+            border: 3px solid lightsalmon;
+            background-color:lightsalmon;
+            text-align: center;
+            border-radius: 100px;
+            color: white;
+        }
+        .head_btn:hover{
+            background-color: white;
+            color: lightsalmon;
+        }
+
+/* side */
+
+        #side{
+            width: 15%;
+            height: 77%;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: white;
+            overflow-y: scroll;
+            overflow-wrap: break-word;
+
+
+            display: block;
+            /* display: none; */
+        }
+        .list_item{
+            background-color: rgb(84, 69, 222);
+            color: white;
+            padding: 5px;
+            border-radius: 10px;
+            border:2px solid rgb(84, 69, 222);
+        }
+        .list_item:hover{
+            background-color: white;
+            color: rgb(84, 69, 222);
+        }
+
+/* list_main */
+
+        #list_main{
+            width: 80%;
+            height: 77%;
+            padding:10px 10px;
+
+            display: flex;
+            /* display: none; */
+            
+            /* justify-content: center;
+            align-content: center; */
+        }
+        .list_main_block{
+            font-size: 50px;
+            flex-wrap: wrap;
+        }
+        #lmb0{
+            font-size: 100px;
+            color: white;
+            display: flex;
+            /* display: none; */
+        }
+        #lmb1{
+            display: flex;
+            display: none;
+        }
+        .good_lable,.add_lable,.p_lable{
+            padding: 10px 5px;
+            font-size: 30px;
+            display: inline;
+            color: white;
+            width: 20%;
+            margin: 10px 0px;
+            margin-right: 5px;
+            border: 2px solid white;
+            text-align: center;
+            align-self: center;
+            border-radius: 10px;
+            background-color: rgb(222, 132, 58);
+        }
+        .good_text,.add_text,.p_text,.good_upd{
+            padding: 10px 5px;
+            color: white;
+            font-size: 30px;
+            display: inline;
+            width: 70%;
+            margin: 10px 0px;
+            border: 2px solid white;
+            align-self: center;
+            overflow-wrap: break-word;
+            border-radius: 10px;
+            background-color: rgb(222, 132, 58);
+        }
+        .good_upd{
+            display: inline;
+            display: none;
+
+        }
+        #good_sub{
+            display: block;
+            display: none;
+        }
+        #good_sub_upd{
+            display: block;
+            display: none;
+        }
+        #good_sub_buy{
+            display: block;
+            display: none;
+        }
+/* add_good */
+        #add_good{
+            width: 95%;
+            height: 77%;
+            padding: 10px 10px;
+            overflow-y: scroll;
+
+            display: block;
+            display: none;
+        }
+        #lmb2{
+            display: flex;
+        }
+        #add_sub,#p_sub,#good_sub,#good_sub_upd,#good_sub_buy{
+            margin-top: 70px;
+            width: 90%;
+        }
+        #add_sub:hover ,#p_sub:hover ,#good_sub:hover,#good_sub_upd:hover,#good_sub_buy:hover{
+            color: rgb(222, 132, 58);
+            border-color: rgb(222, 132, 58);
+            background-color: white;
+        }
+        /* .add_lable{
+        }
+        .add_text{
+        } */
+
+/* person_data */
+        #person_data{
+            width: 95%;
+            height: 77%;
+            padding: 10px 10px;
+            overflow-y: scroll;
+
+            display: block;
+            display: none;
+        }
+        #lmb3{
+            display: flex;
+        }
+
+    </style>
+</head>
+<body >
+    <div class = "root">
+        <div class="bigblock" id="header">
+            <div class="head_btn">查看所有商品</div>
+            <div class="head_btn">查看我的商品</div>
+            <div class="head_btn">添加商品</div>
+            <div class="head_btn">个人信息</div>
+        </div>
+
+        <div class="bigblock" id="side">
+            <p id="side_first">商品列表：</p>
+            <!-- <p class="list_item">changhangchang</p>
+            <p class="list_item">12312312</p> -->
+            
+        </div>
+
+        <div class="bigblock" id="list_main">
+            <div class="list_main_block" id="lmb0">请选择商品</div>
+            <div class="list_main_block" id="lmb1" style="overflow-y: scroll;">
+                <p class="good_lable">商品id:</p>
+                <p class="good_text" id="good_id"></p>
+                <p class="good_lable">商品名称:</p>
+                <p class="good_text" id="good_name"></p>
+                <p class="good_lable">库存:</p>
+                <p class="good_text" id="good_num"></p>
+                <input type="text" class="good_upd" id="good_num_upd" value="" placeholder="留空即不修改">
+                <p class="good_lable">价格:</p>
+                <p class="good_text" id="good_price"></p>
+                <p class="good_lable">商品描述:</p>
+                <p class="good_text" id="good_des"></p>
+                <input type="text" class="good_upd" id="good_des_upd" value="" placeholder="留空即不修改">
+                <input type="submit" class="good_lable" id="good_sub" value="确认删除">
+                <input type="submit" class="good_lable" id="good_sub_upd" value="修改商品信息">
+                <input type="submit" class="good_lable" id="good_sub_buy" value="买1个">
+            </div>
+        </div>
+
+        <div class="bigblock" id="add_good">
+            <div class="list_main_block" id="lmb2">
+                <p class="add_lable">商品名称:</p>
+                <input type="text" class="add_text" id="add_name" placeholder="请输入商品名称" value="">
+                <p class="add_lable">库存:</p>
+                <input type="text" class="add_text" id="add_num" placeholder="请输入库存数量" value="">
+                <p class="add_lable">价格:</p>
+                <input type="text" class="add_text" id="add_price" placeholder="请输入商品价格" value="">
+                <p class="add_lable">商品描述:</p>
+                <input type="text" class="add_text" id="add_des" placeholder="请描述商品" value="">
+
+                <input type="submit" class="add_lable" id="add_sub" value="确认添加">
+            </div>
+        </div>
+
+        <div class="bigblock" id="person_data">
+            <div class="list_main_block" id="lmb3">
+                <p class="p_lable">学号:</p>
+                <p class="p_text" id="p_id">123</p>
+                <p class="p_lable">余额:</p>
+                <p class="p_text" id="p_money">12311233123123123123</p>
+                <p class="p_lable">要充值的金额:</p>
+                <input type="number" class="p_text" id="p_num" placeholder="请输入要充值的金额" value="">
+                <input type="submit" class="p_lable" id="p_sub" value="确认充值">
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        //全局变量与初始化
+        let xuehao = "202322300283";
+        const head_sub = document.getElementsByClassName("head_btn");
+        const bigblock = document.getElementsByClassName("bigblock");
+        const side_first = document.getElementById("side");
+        let good_list;
+        let good_list_num;
+        let your_money =0;
+        get_money();
+        let now_good;
+        let side_f = document.getElementById("side_first");
+        let good_sub = document.getElementById("good_sub");
+        let good_sub_upd = document.getElementById("good_sub_upd");
+        let good_sub_buy = document.getElementById("good_sub_buy");
+
+        good_sub_buy.addEventListener("click",Good_sub_buy)
+        good_sub.addEventListener("click",Good_del);
+        good_sub_upd.addEventListener("click",Good_des_upd);
+
+        //test
+        function test(){
+            axios({
+                method: 'post',
+                url: 'http://zyhcc.top:8088/helloWorld',
+                data:null
+            }).then(function(res){
+                console.log(res);
+            }).catch(function(error){
+                console.log(error);
+            }); 
+        }
+
+        //隐藏所有bigblock
+        function hide_bigblock(){
+            for(let i=1;i<5;i++){
+                bigblock[i].style.display="none";
+            }    
+        }
+        let now_node;
+        //获取商品列表
+        head_sub[0].addEventListener("click",getAllgood);
+        function getAllgood(){
+            hide_bigblock();
+            bigblock[1].style.display = "block";
+            bigblock[2].style.display = "flex";
+            document.getElementById("lmb0").style.display = "flex";
+            document.getElementById("lmb1").style.display = "none";
+            axios({
+                method: 'post',
+                url: 'http://zyhcc.top:8088/goods/getGoodsList'
+            }).then(function(res){
+                // let now_node;
+                // console.log(res);
+                good_list = res.data.data;
+                good_list_num = good_list.length;
+                console.log(good_list);
+                //清掉以前的
+                now_node=side_f.nextElementSibling;
+                while(side_f.nextElementSibling!=null){
+                    side_f.nextElementSibling.remove();
+                }
+                now_node=side_f;
+                ////让该显示的东西显示出来
+                good_sub_buy.style.display = "block";
+                // //删除按钮隐藏
+                good_sub.style.display = "none";
+                // //修改按钮隐藏
+                good_sub_upd.style.display = "none";
+                //添加监听
+                for(let i=0;i<good_list_num;i++){
+                    // now_node = now_node.append(document.createElement("p"));
+                    now_node.after(document.createElement("p"));
+                    now_node = now_node.nextElementSibling;
+                    now_node.className = "list_item";
+                    now_node.innerHTML = good_list[i].name;
+                    now_node.addEventListener("click",function(){
+                        //让该显示的东西显示出来
+                        document.getElementById("lmb0").style.display = "none";
+                        document.getElementById("lmb1").style.display = "flex";
+                        now_good=good_list[i];
+                        //装填内容
+                        document.getElementById("good_id").innerHTML=good_list[i].id;
+                        document.getElementById("good_name").innerHTML=good_list[i].name;
+                        document.getElementById("good_num").innerHTML=good_list[i].inventory;
+                        document.getElementById("good_price").innerHTML=good_list[i].price;
+                        document.getElementById("good_des").innerHTML=(good_list[i].description===""?"无商品描述":good_list[i].description);
+
+                    });
+                }
+                
+            }).catch(function(error){
+                console.log(error);
+            });
+        }
+
+        //获取我的商品列表
+        head_sub[1].addEventListener("click",getMygood);
+        function getMygood(){
+            hide_bigblock();
+            bigblock[1].style.display = "block";
+            bigblock[2].style.display = "flex";
+            document.getElementById("lmb0").style.display = "flex";
+            document.getElementById("lmb1").style.display = "none";
+            axios({
+                method: 'post',
+                url: 'http://zyhcc.top:8088/goods/getMyGoods',
+                data:{
+                    num:xuehao
+                }
+            }).then(function(res){
+                // let now_node;
+                // console.log(res);
+                if(res.data.data.length===0){
+                    alert("当前无商品!");
+                    getAllgood();
+                    return;
+                }
+                good_list = res.data.data;
+                good_list_num = good_list.length;
+                
+                console.log(good_list);
+                //清掉以前的
+                now_node=side_f.nextElementSibling;
+                while(side_f.nextElementSibling!=null){
+                    side_f.nextElementSibling.remove();
+                }
+                now_node=side_f;
+                ////让该显示的东西显示出来
+                //删除按钮
+                good_sub.style.display = "block";
+                //修改按钮
+                good_sub_upd.style.display = "block";
+                //让购买按钮隐藏
+                good_sub_buy.style.display = "none";
+                //添加监听
+                for(let i=0;i<good_list_num;i++){
+                    // now_node = now_node.append(document.createElement("p"));
+                    now_node.after(document.createElement("p"));
+                    now_node = now_node.nextElementSibling;
+                    now_node.className = "list_item";
+                    now_node.innerHTML = good_list[i].name;
+                    now_node.addEventListener("click",function(){
+                        //让该显示的东西显示出来
+                        document.getElementById("lmb0").style.display = "none";
+                        document.getElementById("lmb1").style.display = "flex";
+                        now_good=good_list[i];
+                        //装填内容
+                        document.getElementById("good_id").innerHTML=good_list[i].id;
+                        document.getElementById("good_name").innerHTML=good_list[i].name;
+                        document.getElementById("good_num").innerHTML=good_list[i].inventory;
+                        document.getElementById("good_price").innerHTML=good_list[i].price;
+                        document.getElementById("good_des").innerHTML=(good_list[i].description===""?"无商品描述":good_list[i].description);
+                    });
+                }
+                
+            }).catch(function(error){
+                console.log(error);
+            });
+
+        }
+
+        //添加商品
+
+        //显示页面
+        head_sub[2].addEventListener("click",function(){
+            //显示与隐藏
+            hide_bigblock();
+            bigblock[3].style.display="block";
+        });
+        let add_name;
+        let add_num;
+        let add_price;
+        let add_des;
+        let add_sub = document.getElementById("add_sub");
+        add_sub.addEventListener("click",Add_sub);
+        function Add_sub(){
+            if(pd_des()){if(pd_kucun()){if(pd_name()){if(pd_price()){
+                axios({
+                    method: 'post',
+                    url: 'http://zyhcc.top:8088/goods/addGoods',
+                    data : {
+                        "num": xuehao,
+                        "name": add_name,
+                        "description": add_des,
+                        "inventory": add_num,
+                        "price": add_price
+                    }
+                }).then(function (res) {
+                    console.log(JSON.stringify(res.data));
+                    alert("添加成功！");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }}}}
+        }
+        //判断输入合法
+        function pd_name(){
+            console.log(1);
+            add_name=document.getElementById("add_name").value;
+            if(add_name === ""){
+                alert("请输入商品名称")
+                return false;
+            }
+            return true;
+        }
+        function pd_kucun(){
+            add_num=document.getElementById("add_num").value;
+            if(add_num === ""){
+                alert("请输入库存数量");
+                return false;
+            }
+            else if(!pd_zhengshu(add_num)){
+                alert("请输入合法整数");
+                return false;
+            }
+            return true;
+        }
+        function pd_price(){
+            add_price=document.getElementById("add_price").value;
+            if(add_price === ""){
+                alert("请输入商品价格");
+                return false;
+            }
+            else if(!pd_xiaoshu(add_price)){
+                alert("请输入合法数字");
+                return false;
+            }
+            return true;
+        }
+        function pd_des(){
+            add_des = document.getElementById("add_des").value;
+            if(add_des===""){
+                alert("请输入商品描述");
+                return false;
+            }
+            return true;
+        }
+
+        function pd_xiaoshu(a){
+            let ls=0;
+            for(let i=0;i<a.length;i++){
+                if(a.charAt(i)>'9'||a.charAt(i)<'0'){
+                    if(a.charAt(i)=='.'){
+                        if(ls==1)return false;
+                        else ls++;
+                    }
+                    else return false;
+                }
+            }
+            return true;
+        }
+        function pd_zhengshu(a){
+            for(let i=0;i<a.length;i++){
+                if(a.charAt(i)>'9'||a.charAt(i)<'0'){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        //删除商品
+        function Good_del(){
+            axios({
+                method: 'post',
+                url: 'http://zyhcc.top:8088/goods/deleteGoods',
+                data :{
+                    num:xuehao,
+                    id:now_good.id
+                }
+            })
+            .then(function (res) {
+                getMygood();
+                console.log(JSON.stringify(res.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+        //购买商品
+        function Good_sub_buy(){
+            if(now_good.inventory===0){
+                alert("该商品已经卖光力！");
+                return;
+            }
+            axios({
+                method: 'post',
+                url: 'http://zyhcc.top:8088/goods/buy',
+                data :{
+                    num:xuehao,
+                    id:now_good.id,
+                    count:1
+                }
+            })
+            .then(function (res) {
+                alert("购买成功！");
+                get_money();
+                getAllgood();
+                console.log(JSON.stringify(res.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            
+        }
+        //修改商品信息
+        let good_num = document.getElementById("good_num");
+        let good_des = document.getElementById("good_des");
+        let good_num_upd = document.getElementById("good_num_upd");
+        let good_des_upd = document.getElementById("good_des_upd");
+        function Good_des_upd(){
+            good_num.style.display = "none";
+            good_des.style.display = "none";
+            good_num_upd.style.display = "block";
+            good_des_upd.style.display = "block";
+
+            good_sub_upd.value="确认修改";
+            good_sub.style.display="none";
+            good_sub_upd.removeEventListener("click",Good_des_upd);
+            good_sub_upd.addEventListener("click",Good_des_upd_confirm);
+        }
+        function Good_des_upd_confirm(){
+            if(good_num_upd.value != "" && good_des_upd.value != ""){
+                axios({
+                    method: 'post',
+                    url: 'http://zyhcc.top:8088/goods/updateInventory',
+                    data : {
+                        num:xuehao,
+                        id:now_good.id,
+                        inventory:good_num_upd.value,
+                        description:good_des_upd.value,
+                    }
+                })
+                .then(function (response) {
+                    alert("修改成功！");
+                    getMygood();
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            else if(good_num_upd.value != ""){
+                axios({
+                    method: 'post',
+                    url: 'http://zyhcc.top:8088/goods/updateInventory',
+                    data : {
+                        num:xuehao,
+                        id:now_good.id,
+                        inventory:good_num_upd.value,
+                    }
+                })
+                .then(function (response) {
+                    alert("修改成功！");
+                    getMygood();
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            else if(good_des_upd.value != ""){
+                axios({
+                    method: 'post',
+                    url: 'http://zyhcc.top:8088/goods/updateInventory',
+                    data : {
+                        num:xuehao,
+                        id:now_good.id,
+                        description:good_des_upd.value,
+                    }
+                })
+                .then(function (response) {
+                    alert("修改成功！");
+                    getMygood();
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            else{
+                axios({
+                    method: 'post',
+                    url: 'http://zyhcc.top:8088/goods/updateInventory',
+                    data : {
+                        num:xuehao,
+                        id:now_good.id,
+                    }
+                })
+                .then(function (response) {
+                    alert("修改了吗？如修");
+                    getMygood();
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            good_num.style.display = "block";
+            good_des.style.display = "block";
+            good_num_upd.style.display = "none";
+            good_des_upd.style.display = "none";
+            good_sub_upd.value="修改商品信息";
+            good_sub.style.display="block";
+            good_sub_upd.removeEventListener("click",Good_des_upd_confirm);
+            good_sub_upd.addEventListener("click",Good_des_upd);
+        }
+        //显示个人信息
+        head_sub[3].addEventListener("click",get_person_data);
+        function get_person_data(){
+            hide_bigblock();
+            bigblock[4].style.display="block";
+            document.getElementById("p_id").innerHTML=xuehao;
+            document.getElementById("p_money").innerHTML=your_money;
+        }
+        //获取余额
+        function get_money(){
+            axios({
+                method: 'post',
+                url: 'http://zyhcc.top:8088/balance/getBalance',
+                data : {
+                    num:xuehao
+                }
+            }).then(function (res) {
+                your_money=res.data.data;
+                document.getElementById("p_money").innerHTML=your_money;
+                console.log(JSON.stringify(res.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            
+        }
+        //充值余额
+        document.getElementById("p_sub").addEventListener("click",add_money);
+        function add_money(){
+            let p_num = document.getElementById("p_num").value;
+            if(p_num===""){
+                alert("请输入数字");
+                return;
+            }
+            else if(!pd_xiaoshu(p_num)){
+                alert("请输入合法数字");
+                return;
+            }
+            else {
+                axios({
+                    method: 'post',
+                    url: 'http://zyhcc.top:8088/balance/setBalance',
+                    data : {
+                        num:xuehao,
+                        balance:(your_money+Number(p_num)).toFixed(2)
+                    }
+                }).then(function (res) {
+                    if(res.data,code===400){
+                        alert("超出限额");
+                    }
+                    else {
+                        alert("充值成功！");
+                        get_money();
+                    }
+                    console.log(JSON.stringify(res.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

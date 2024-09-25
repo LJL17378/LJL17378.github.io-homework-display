@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后手模式</title>
+
+    <script>
+        let m = prompt('请输入宝石总数')
+        let n = prompt('请输入宝石每次至少取')
+        let l = prompt('请输入宝石每次最多取')
+        let i = 1
+        function getNum() {
+            i = prompt('本回合电脑已取完，我本次取')
+            return i
+        }
+
+        function jim() {
+            let g = Math.floor(Math.random() * l) + 1
+            m -= g
+            document.getElementsByClassName('di')[0].innerHTML = m
+            if (m <= 0) {
+                alert('电脑获胜，请再接再厉')
+
+            } else {
+                let x = getNum(i)
+                if ((m - x) > 0) {
+                    m -= x
+                    document.getElementsByClassName('di')[1].innerHTML = m
+                } else {
+                    alert('恭喜获胜！')
+
+                }
+            }
+
+        }
+        jim()
+        document.querySelector('.di').innerHTML = m
+
+
+    </script>
+
+    <style>
+        body {
+            background-size: cover;
+
+        }
+
+        .ti {
+            width: 250px;
+            height: 130px;
+            margin-right: 20px;
+            background-color: rgb(152, 155, 154);
+            border-radius: 10px;
+            font-size: 20px;
+            color: deeppink;
+
+
+
+
+        }
+
+        .di {
+            width: 350px;
+            height: 170px;
+            margin-left: 360px;
+
+            background-color: aquamarine;
+            border-radius: 10px;
+            font-size: 20px;
+            color: deeppink;
+            margin-top: 40px;
+            margin-bottom: 0px;
+        }
+    </style>
+
+
+
+</head>
+
+<body background="言5.jpg">
+
+
+    <p>
+        注：电脑玩家均取完后，一回合结束
+
+    <div class="di">
+        方框显示：上一回合玩家和电脑取完后剩余的宝石数
+    </div>
+    <div class="di">
+        方框显示：新一回合电脑取完后剩余的宝石数
+    </div>
+
+
+    <div>
+        <button onclick="jim()" class="di">点击开始下一回合</button>
+    </div>
+
+    </p>
+
+</body>
+
+</html>

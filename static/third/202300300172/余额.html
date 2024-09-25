@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>余额查询</title>
+    <style>
+        .text{
+            display: flex;
+            position: relative;
+            left: 100px;
+            padding: 30px;
+        }
+        .button{
+            display: flex;
+            position: relative;
+            left: 105px;
+            top: 30px;
+        }
+        #input{
+            display: flex;
+            position: relative;
+            left: 60px;
+        }
+        .left{
+            display: flex;
+            position: relative;
+            top: 70px;
+            left: 80px;
+        }
+        .money{
+            display: flex;
+            position: absolute;
+            left: 110px;
+            top: 300px;
+        }
+        </style>
+</head>
+<body>
+    <div class="text">学号:</div>
+    <input type="text" placeholder="请输入你的学号" id="input">
+    <button class="button">余额查询</button>
+    <div class="left">您剩余的余额为:
+        <div class="leftover"></div>
+    </div>
+    <a href="./余额充值.html" class="money"><input type="button" value="余额充值"></a>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let button = document.getElementsByClassName('button')[0]
+        button.addEventListener('click',function(){
+            axios.post('http://62.234.11.20:8088/balance/getBalance',{
+            'num':document.getElementById('input').value
+        }).then(function(res1){
+            let left = res1.data.data
+            let test = res1.data.code
+            console.log(res1.data)
+            console.log(left)
+            console.log(test)
+            document.getElementsByClassName('leftover')[0].innerHTML = left
+         })})
+    </script>
+</body>
+</html>

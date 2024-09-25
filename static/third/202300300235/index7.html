@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取自己的余额</title>
+    <style>
+        .button71:hover{
+            background-color: aqua;
+            cursor:pointer;
+        }
+        
+        .button71:active{
+            background-color: hotpink;
+        }
+</style>
+</head>
+<body background="./跳蚤市场背景.png" style="background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">
+    <p style="color:red;font-size: 40px;text-align: center;">-----|··~··~··~··~··~··~··~··存折··~··~··~··~··~··~··~··|-----</p>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" placeholder="输入您的学号" id="input71" style="background-color: aquamarine;"><br></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><button class="button71" onclick="func71()">看存折</button></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        function func71(){
+            let num =  parseInt(document.getElementById('input71').value)
+        let goodsList = []
+
+        axios.post('http://zyhcc.top:8088/balance/getBalance',{
+            num
+        }).then(function(res){
+            goodsList = res.data.data
+            console.log(goodsList);
+            var info = "您的账户余额为：" + goodsList
+            alert(info)
+        })
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+body{
+    background-color: #072A40;
+}
+h2{
+    color:white;
+}
+.window{
+    display: none;
+    flex-flow:row wrap;
+    align-items:center;
+    height: 18cm;
+}
+.selector{
+    display: none;
+}
+.unit{
+    border: solid #178CA4 5px;
+    border-radius: 15px;
+    background-color: #18B7BE;
+    color: white;
+    font-size: 20px;
+    margin: 2px;
+    padding: 5px;
+    flex-grow: 1;
+}
+.unit1{
+    border: solid #178CA4 8px;
+    background-color: #18B7BE;
+    color: white;
+    font-size: 80px;
+    margin: 2px;
+    padding: 5px;
+    flex-grow: 1;
+}
+/* 这个酷炫的动画是我copy来的，但是确实很喜欢 */
+button {
+    border-radius: 15px;
+    margin: 3px;
+    z-index: 1;
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    border: solid #18B7BE 2px;
+    background-color: hsl(236, 32%, 26%);
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+  }
+  
+  button::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 100%;
+    right: 100%;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #18B7BE;
+    transform-origin: center;
+    transform: translate3d(50%, -50%, 0) scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
+  }
+  
+  button:hover {
+    cursor: pointer;
+    color: #161616;
+  }
+  
+  button:hover::before {
+    transform: translate3d(50%, -50%, 0) scale3d(15, 15, 15);
+  }
+input{
+    background-color: #18B7BE;
+    color: white;
+    border-radius: 15px;
+    font-size: 40px;
+    border: solid #178CA4 8px;
+    margin-top: 6px
+}
+.login{
+    display: block;
+}
+.myGoods{
+    display: none;
+    flex-flow:row wrap;
+}
+.myGoodsBtn{
+    display: none;
+}
+.add{
+    display: none;
+}
+.adjust{
+    display: none;
+}
+.del{
+    display: none;
+}
+.buy{
+    display: none;
+}
+.account{
+    display: none;
+}
+.car{
+    display: none;
+}

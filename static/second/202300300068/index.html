@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>棋子游戏</title>
+    <script>
+        let total
+        let min
+        let max
+        function fun1(){
+            total = parseInt(document.getElementsByClassName('box1')[0].value)
+            min = parseInt(document.getElementsByClassName('box2')[0].value)
+            max = parseInt(document.getElementsByClassName('box3')[0].value)
+        }
+        function fun2(){
+            total = parseInt(document.getElementsByClassName('box1')[0].value)
+            let perNum1 = parseInt(document.getElementsByClassName('box4')[0].value)
+            let perNum2 = parseInt(document.getElementsByClassName('box5')[0].value)
+            if(total<=0){
+                alert('程序运行结束')
+            }else{
+            if(perNum1 < min || perNum1 > max || perNum2 < min || perNum2 > max){
+                alert('输入数据错误,请重新输入')
+            }else{
+                //取出的棋子减去,再对box1进行赋值
+                let newTotal = total - perNum1 - perNum2
+                document.getElementsByClassName('box1')[0].value = newTotal
+                //页面提示
+                alert(newTotal)
+                alert('请输入要取棋子数继续操作')
+            }
+        }
+        }
+        
+    </script>
+    <style>
+        .chushihua{
+            background-color: blue;
+            margin: auto;
+            width: 400px;
+            height: 180px;
+            text-align: center;
+        }
+        .youxi{
+            background-color: blue;
+            margin: auto;
+            width: 800px;
+            height: 400px;
+            text-align: center;
+        }
+        .img{
+            flex-direction: row;
+            background-repeat: no-repeat;
+            width: 150px;
+            height: 200px;
+            justify-content: center;
+        }
+        .pvp1{
+            display: inline-block;
+            width: 350px;
+            height: 25px;
+            justify-content: space-between;
+        }
+        .pvp2{
+            display: inline-block;
+            width: 350px;
+            height: 25px;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <!-- 给出text让玩家输入棋子数,最多和最少取出的棋子数进行游戏的初始化 -->
+    <!-- 游戏初始化块 -->
+    <div class="chushihua">
+        <h1 style="text-align: center;">游戏初始化</h1>
+    请输入棋子的总数:<input type="text" class="box1" placeholder="请输入棋子的总数">
+    <br>
+    请输入最少可以取出的棋子数:<input type="text" class="box2" placeholder="请输入最少可以取出的棋子数">
+    <br>
+    请输入最多可以取出的棋子数:<input type="text" class="box3" placeholder="请输入最多可以取出的棋子数">
+    <br>
+        <!-- 请输入你要取出的棋子数:<input type="text" class="box4" placeholder="请输入你要取出的棋子数">
+        <br> -->
+        <button onclick="fun1()">游戏初始化</button>
+    </div>
+    <br>
+    <div class="youxi">
+        <h1>游戏界面</h1>
+        <img class="img" src="true.jpg" alt="图片加载错误">
+        <br>
+        <div class="pvp1" style="background-color: red;">
+            请输入你要取出的棋子数:<input type="text" class="box4" placeholder="请输入你要取出的棋子数"></input>
+        </div>
+        <div class="pvp2" style="background-color: skyblue;">
+            请输入你要取出的棋子数:<input type="text" class="box5" placeholder="请输入你要取出的棋子数"></input>
+        </div>
+        <br>
+        <br>
+        <button onclick="fun2()">进行游戏</button>
+    </div>
+</body>
+</html>

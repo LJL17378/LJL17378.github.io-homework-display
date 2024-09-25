@@ -1,0 +1,93 @@
+.ModuleTitle{
+    position:relative;
+    background-color:azure;
+    border-radius:20px;
+    font-family:'方正舒体';
+}
+
+.BetterLink{
+    position:absolute;
+    color:blue;
+    font-style:italic;
+    font-weight:bold;
+    font-size:20px;
+    text-decoration:none;
+}
+
+.TitleBorder{
+    position:absolute;
+    border-style:none none none solid;
+    border-color:rgba(49, 100, 255, 0.909);
+    background-color:aqua;
+    border-width:7px;
+    text-align:center;
+    padding: 16px 0;
+    font-family:'微软雅黑';
+}
+
+.ModuleBody{
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color:aliceblue;
+    text-align:left;
+    font-family:'微软雅黑';
+}
+
+.Betterbutton{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:180px;
+    height:100px;
+    font-size:50px;
+    font-family:'微软雅黑';
+    background-color:aliceblue;
+    border-radius:5px;
+}
+.Betterbutton:hover{
+    background-color: rgb(161, 231, 255);
+    cursor: pointer;
+}
+.Betterbutton:active{
+    background-color:rgb(111, 169, 255);
+}
+
+.rowcenter{
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    position:relative;
+    top:150px;
+}
+
+.bar{
+    visibility:visible;
+    width: 400px;
+    height: 25px;
+    border-radius: 25px;
+    background: #eee;
+    margin:auto;
+    position:fixed;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+}
+.progress{
+    visibility:visible;
+    color:aliceblue;
+    text-align:center;
+    width:10%;
+    height: inherit;
+    border-radius: 25px 0 0 25px;
+    background: #0d0101;
+    transition: width 2s 0s ease-in;
+}
+
+.Mousechange:hover{
+    cursor: pointer;
+}

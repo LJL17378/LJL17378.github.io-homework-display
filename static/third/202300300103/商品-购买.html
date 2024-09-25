@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购买</title>
+    <style>
+        .one {
+            background-color: rgb(255, 208, 0);
+            margin-top: 90px;
+            margin-left: 200px;
+            height: 30px;
+        }
+
+        .two {
+            background-color: bisque;
+            margin-top: 100px;
+            margin-left: 200px;
+            height: 30px;
+        }
+
+        button {
+            background-color: bisque;
+            margin-top: 80px;
+            margin-left: 200px;
+            height: 30px;
+            margin-bottom: 40px;
+        }
+
+        .ki {
+            background-color: blanchedalmond;
+            margin-left: 300px;
+            margin-right: 400px;
+            border-radius: 20px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body background="跃动.jpg">
+    <h1 align="center">合理消费</h1>
+    <div class="ki">
+        <input type="number" class="one" placeholder="序号"><br>
+        <input type="number" class="two" placeholder="数量"><br>
+
+        <button onclick="buy()">确认购买</button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let goodsList = []
+
+        axios.post('http://62.234.11.20:8088/goods/getGoodsList', null, {
+            headers: {
+                num: '202200300334'
+            }
+        }).then(function (res) {
+            goodsList = res.data.data
+
+        })
+
+        let i = document.getElementsByClassName('one').value
+        let b = parseInt(goodsList[i].inventory.value)
+        let count = document.getElementsByClassName('two').value
+        if (count >= b) {
+            alert('库存不足')
+        }
+
+
+        function buy() {
+            axios.post('http://62.234.11.20:8088/goods/buy', {
+                num: '202300300103',
+                id: document.getElementsByClassName('one'),
+                count: document.getElementsByClassName('two'),
+
+            }).then(function (res) {
+                alert('success')
+                console.log(res)
+            }, function (reason) {
+                alert(reason)
+                console.warn(reason)
+
+            })
+        }
+
+    </script>
+</body>
+
+</html>

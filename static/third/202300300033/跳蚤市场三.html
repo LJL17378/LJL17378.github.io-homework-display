@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>跳蚤市场</title>
+</head>
+<body>
+    <h1>跳蚤市场</h1>
+
+    <!-- 显示所有商品 -->
+    <div id="product-list">
+        <!-- 商品将在此处呈现 -->
+    </div>
+
+    <!-- 用户上传商品 -->
+    <h2>上传你的商品</h2>
+    <form id="upload-form">
+        <label for="product-name">商品名称:</label>
+        <input type="text" id="product-name" required>
+        <br>
+        <label for="product-description">商品描述:</label>
+        <textarea id="product-description" required></textarea>
+        <br>
+        <label for="product-price">商品价格:</label>
+        <input type="text" id="product-price" required>
+        <br>
+        <label for="product-quantity">商品库存:</label>
+        <input type="text" id="product-quantity" required>
+        <br>
+        <button type="submit">上传</button>
+    </form>
+
+    <!-- 购买商品 -->
+    <h2>购买商品</h2>
+    <label for="product-id">商品ID:</label>
+    <input type="text" id="product-id" required>
+    <br>
+    <button id="buy-button">购买</button>
+    <div id="buy-message"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

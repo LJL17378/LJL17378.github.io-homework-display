@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>桃宝网 桃！我喜欢！</title>
+		<style type="text/css">
+			table {width: 580px;height: 200px;
+				box-shadow: 0 0 15px 15px #F2F3F4;}
+			caption {margin: 15px auto;font-size: 22px;}
+			td {text-align: center;vertical-align: middle;}
+			.myBtn {margin: 20px;width: 120px;height: 45px;
+				border: 1px solid #44FFEE;border-radius: 25px;}
+            .myBtn:hover {background-color: #F1D2E3;}
+			html{background-color: #F1D2E3;}
+		</style>
+		<script type="text/javascript">
+			var result = "";		
+			var price = new Array(1111.00, 1111.00,1111.00, 1111.00, 1111.00, 1111.00, 1111.00, 1111.00, 1111.00);
+			var product = new Array("商品1", "商品2", "商品3", "商品4", "商品5", "商品6", "商品6", "商品7", "商品8", "商品9");
+			var isSelected = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0);
+			function clearAll() {
+				isSelected = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+				myForm.sp0.checked = false;
+				myForm.sp1.checked = false;
+				myForm.sp2.checked = false;
+				myForm.sp3.checked = false;
+				myForm.sp4.checked = false;
+				myForm.sp5.checked = false;
+				myForm.sp6.checked = false;
+				myForm.sp7.checked = false;
+				myForm.sp8.checked = false;
+			}
+			function checkOut() {
+				var total = 0; 
+				var count = 0; 
+				for (var i = 0; i < isSelected.length; i++) {
+					count += isSelected[i];
+				}
+				for (var i = 0; i < price.length; i++) {
+					total = total + price[i] * isSelected[i] 
+				}
+				alert("您所选购的" + count + "件,产品总价=" + total + "\n" + "请去支付！");
+			}
+			function shoppingCart() {			
+				var selectList = ""; 
+				for (var j = 0; j < product.length; j++) {
+					if (isSelected[j]) {
+						selectList += (j + 1) + "-" + product[j] + ",价值=" + price[j] + "\n";
+					}
+				}
+				var info = (selectList == "") ? "您的购物车为空，请选购！" : selectList;
+				alert(info); 				
+			}
+			function checkSelect(number) {
+				var temp; 
+				switch (number) {
+					case 0:
+						temp = myForm.sp0.checked;
+						break;
+					case 1:
+						temp = myForm.sp1.checked;
+						break;
+					case 2:
+						temp = myForm.sp2.checked;
+						break;
+					case 3:
+						temp = myForm.sp3.checked;
+						break;
+					case 4:
+						temp = myForm.sp4.checked;
+						break;
+					case 5:
+						temp = myForm.sp5.checked;
+						break;
+					case 6:
+						temp = myForm.sp6.checked;
+						break;
+					case 7:
+						temp = myForm.sp7.checked;
+						break;
+					default:
+						temp = myForm.sp8.checked;
+						break;
+				}
+				isSelected[number] = (temp) ? 1 : 0;
+			}
+		</script>
+	</head>
+	<body>
+		<form name="myForm" method="post" action="">
+			<table align="center" border="0">
+			<caption>商城</caption>
+			<tr>
+				<td><img src="" /><br />
+					<h4 name="h41">A</h4>
+					<input type="checkbox" name="sp0" value="1111"onclick="checkSelect(0);">¥ 1111.00
+					<br />
+				</td>
+				<td><img src="" /><br />
+					<h4 name="h421">B</h4>
+					<input type="checkbox" name="sp1" value="1111" onclick="checkSelect(1);">¥ 1111.00
+					<br />
+				</td>
+				<td><img src="" /><br />
+					<h4 name="h43">C</h4>
+					<input type="checkbox" name="sp2" value="1111" onclick="checkSelect(2);"> ¥ 1111.00
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td><img src="" /><br />
+					<h4 name="h44">D</h4>
+					<input type="checkbox" name="sp3" value="1111"onclick="checkSelect(3);"> ¥ 1111.00
+					<br />
+				</td>
+				<td><img src="" /><br />
+					<h4 name="h45">E</h4>
+					<input type="checkbox" name="sp4" value="1111" onclick="checkSelect(4);">¥ 1111.00
+					<br />
+				</td>
+				<td><img src="" /><br />
+					<h4 name="h46">F</h4>
+					<input type="checkbox" name="sp5" value="1111" onclick="checkSelect(5);">¥ 1111.00
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td><img src="" /><br />
+					<h4 name="h44">G</h4>
+					<input type="checkbox" name="sp3" value="1111"onclick="checkSelect(3);"> ¥ 1111.00
+					<br />
+				</td>
+				<td><img src="" /><br />
+					<h4 name="h45">H</h4>
+					<input type="checkbox" name="sp4" value="1111" onclick="checkSelect(4);">¥ 1111.00
+					<br />
+				</td>
+				<td><img src="" /><br />
+					<h4 name="h46">I</h4>
+					<input type="checkbox" name="sp5" value="1111" onclick="checkSelect(5);">¥ 1111.00
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input class="myBtn" type="button" value="购物车" onclick="shoppingCart();">
+					<input class="myBtn" type="button" value="收银台" onclick="checkOut();">
+					<input class="myBtn" type="button" value="重置参数" onclick="clearAll();">
+				</td>
+			</tr>
+			</table>
+		</form>
+        <script>
+            var myHeaders = new Headers();
+            myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)");
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            redirect: 'follow'
+            };
+            fetch("http://zyhcc.top:8088/goods/getGoodsList", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+        </script>
+	</body>
+</html>

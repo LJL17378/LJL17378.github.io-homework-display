@@ -1,0 +1,597 @@
+.login_boxes{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 40%;
+    top: 25%;
+    left: 30%;
+    background-color: #f77a82;
+    border-radius: 20px;
+}
+.login_boxes p{
+    color: #fafff0;
+    font-size: 18px;
+}
+.login_boxes input{
+    background-color: #fedee0;
+    border-radius: 25px;
+    border-width: 0px;
+    font-size: 15px;
+    height: 50px;
+    width: 200px;   
+    margin-left: 20px;
+}
+.login_boxes #login_button{
+    height:40px ;
+    border-radius: 25px;
+    width:100px ;
+    font-size: 18px;
+    color:#fafff0 ;
+    cursor: pointer;
+}
+.login_boxes #login_button:hover{
+    background-color: #b7aacb;
+}
+.login_boxes #noAccount_box{
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+} 
+.login_boxes #noAccount_box p{
+    cursor: pointer;
+    font-size: 15px;
+}
+.login_boxes #noAccount_box p:hover{
+    color: #b7aacb;
+}
+.login_boxes div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.register_boxes{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 40%;
+    top: 25%;
+    left: 30%;
+    background-color: #f77a82;
+    border-radius: 20px;
+}
+.register_boxes input{
+    background-color: #fedee0;
+    border-radius: 25px;
+    border-width: 0px;
+    font-size: 15px;
+    height: 50px;
+    width: 200px;
+    margin-left: 20px;
+}
+.register_boxes p{
+    color: #fafff0;
+    font-size: 18px;
+}
+.register_boxes div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.register_boxes .register_button{
+    height:40px ;
+    border-radius: 25px;
+    width:100px ;
+    font-size: 18px;
+    color:#fafff0 ;
+    cursor: pointer;
+}
+.register_boxes .register_button:hover{
+    background-color: #b7aacb;
+}
+
+
+
+body{
+    background-color: #fedee0;
+}
+header{
+    display: none;
+    flex-direction: row ;
+    align-items: center;
+    background-color: #f77a82;
+}
+header #logo_box{
+    margin-left: 25%;
+}
+header #logo_box h1{
+    font-size: 35px;
+    /* color: #077abd; */
+}
+header nav{
+    position: absolute;
+    right: 20%;
+}
+header nav ul{
+    display: flex;
+    flex-direction: row;
+}
+header nav li{
+    list-style: none;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 20px;
+   /*  color: #077abd; */
+    cursor: pointer;
+}
+header nav li:hover{
+    font-weight: bold;
+}
+
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.accountInformation_box{
+    display: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #89d0c2;
+    padding-right: 10%;
+}
+.accountInformation_box div{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.accountInformation_box div p{
+    font-size: 18px;
+    /* color: #077abd; */
+}
+.accountInformation_box input{
+    background-color: #fedee0;
+    font-size: 18px;
+    height: 40px;
+    width: 80px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+.accountInformation_box input:hover{
+    background-color: #f77a82;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.goodShelf_boxes{
+    display: none;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: start;
+}
+.goodShelf_boxes .goodShelf_box{
+    height:400px ;
+    width: 23%;
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid #000000;
+}
+.goodShelf_boxes .goodShelf_box p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 18px;
+}
+.goodShelf_boxes .goodShelf_box input{
+    height: 30px;
+    width: 100px;
+    background-color: #89d0c2;
+    font-size: 17px;
+    border-radius: 18px;
+    align-items: center;
+    cursor: pointer;
+}
+.goodShelf_boxes .goodShelf_box input:hover{
+    background-color: #077abd;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.myGood_boxes{
+    display: none;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: start;
+}
+.myGood_boxes .myGood_box{
+    height:400px ;
+    width: 23%;
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid #000000;
+}
+.myGood_boxes .myGood_box p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 18px;
+}
+.myGood_boxes .myGood_box input{
+    height: 30px;
+    width: 100px;
+    background-color: #89d0c2;
+    font-size: 17px;
+    border-radius: 18px;
+    align-items: center;
+    cursor: pointer;
+}
+.myGood_boxes .myGood_box input:hover{
+    background-color: #077abd;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.addMyGoodButton_box{
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+.addMyGoodButton_box input{
+    height: 40px;
+    width: 180px;
+    background-color: #89d0c2;
+    font-size: 18px;
+    border-radius: 18px;
+    align-items: center;
+    cursor: pointer;
+}
+.addMyGoodButton_box input:hover{
+    background-color: #077abd;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+
+
+.myCart_boxes{
+    position: fixed;
+    display: none;
+    height: 80%;
+    width: 80%;
+    left: 10%;
+    top: 10%;
+    background-color: #f77a82;
+    flex-direction: column;
+    border-radius: 20px;
+}
+.myCart_boxes img{
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.goodsInCart_box {
+    display: flex;
+    flex-direction: column;
+}
+.goodsInCart_box .myCart_box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ }   
+ .goodsInCart_box .myCart_box p{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 18px;
+ }  
+ .goodsInCart_box .myCart_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 160px;
+    align-items: center;
+    border-width: 0;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+ }
+ .goodsInCart_box .myCart_box input:hover{
+    background-color: #b7aacb;
+ }
+ .cartButton_box{
+    display: flex;
+    flex-direction: row;
+ }
+ .cartButton_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 80px;
+    align-items: center;
+    border-width: 0;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.cartButton_box input:hover{
+    background-color: #b7aacb;
+}
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.consult_boxes #balanceConsult_box{
+    display: none;
+    background-color:#f77a82;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    width: 40%;
+    top: 25%;
+    left: 30%;
+    border-radius: 20px;
+}
+.consult_boxes #balanceConsult_box div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.consult_boxes #balanceConsult_box p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 18px;
+}
+.consult_boxes #balanceConsult_box .handle_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 80px;
+    align-items: center;
+    border-width: 0;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.consult_boxes #balanceConsult_box .handle_box input:hover{
+    background-color: #b7aacb;
+}
+.consult_boxes #balanceConsult_box .setBalance_box{
+    background-color: #fedee0;
+    height: 40px;
+    width: 160px;
+    border-radius: 18px;
+    border-width: 0;
+    margin-left: 20px;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.consult_boxes #buyConsult_box{
+    display: none;
+    background-color:#f77a82;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 40%;
+    top: 15%;
+    left: 30%;
+    border-radius: 20px;
+}
+.consult_boxes #buyConsult_box div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.consult_boxes #buyConsult_box p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 18px;
+}
+.consult_boxes #buyConsult_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 100px;
+    align-items: center;
+    border-width: 0;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.consult_boxes #buyConsult_box input:hover{
+    background-color: #b7aacb;
+}
+.consult_boxes #buyConsult_box #buyCount_box{
+    background-color: #fedee0;
+    height: 40px;
+    width: 160px;
+    border-radius: 18px;
+    border-width: 0;
+    margin-left: 20px;
+}
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+.consult_boxes #addGoodConsult_box{
+    display: none;
+    background-color: #f77a82;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 40%;
+    top: 15%;
+    left: 30%;
+    border-radius: 20px;
+}
+.consult_boxes #addGoodConsult_box div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.consult_boxes #addGoodConsult_box p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 18px;
+}
+.consult_boxes #addGoodConsult_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 250px;
+    border-radius: 18px;
+    border-width: 0;
+    margin-left: 20px;
+    font-size: 18px;
+}
+.consult_boxes #addGoodConsult_box .handle_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 80px;
+    align-items: center;
+    border-width: 0;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;;
+}
+.consult_boxes #addGoodConsult_box .handle_box input:hover{
+    background-color: #b7aacb;
+}
+
+
+
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.consult_boxes #updateGoodConsult_box{
+    display: none;
+    background-color: #f77a82;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 40%;
+    top: 15%;
+    left: 30%;
+    border-radius: 20px;
+}
+.consult_boxes #updateGoodConsult_box div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.consult_boxes #updateGoodConsult_box p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 18px;
+}
+.consult_boxes #updateGoodConsult_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 200px;
+    border-radius: 18px;
+    border-width: 0;
+    margin-left: 20px;
+    font-size: 18px;
+}
+.consult_boxes #updateGoodConsult_box .handle_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 80px;
+    align-items: center;
+    border-width: 0;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.consult_boxes #updateGoodConsult_box .handle_box input:hover{
+    background-color: #b7aacb;
+}
+
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.consult_boxes #deleteGoodConsult_box{
+    display: none;
+    background-color:#f77a82;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 40%;
+    top: 15%;
+    left: 30%;
+    border-radius: 20px;
+}
+.consult_boxes #deleteGoodConsult_box div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.consult_boxes #deleteGoodConsult_box p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 18px;
+}
+.consult_boxes #deleteGoodConsult_box input{
+    background-color: #fedee0;
+    height: 40px;
+    width: 80px;
+    align-items: center;
+    border-width: 0;
+    border-radius: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.consult_boxes #deleteGoodConsult_box input:hover{
+    background-color: #b7aacb;
+}

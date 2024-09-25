@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <h1>欢迎来到跳蚤市场</h1>
+
+</head>
+
+<body>
+    <div class="center2">
+        <p>这里是登录界面</p>
+    </div>
+    <div class="center">
+        <table>
+            <tr>
+                <td>学号:</td>
+                <td>
+                    <input type="number" name="user" value="" id="user">
+                </td>
+                <td>密码:</td>
+                <td>
+                    <input type="password" name="pw" value="" id="pw">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="center2">
+        <button class="button" onclick="login()">login in</button>
+    </div>
+    <div class="center2">
+        <button class="button" onclick="sign()">sign in</button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function login() {
+            let a = document.getElementById("user")
+            let b = document.getElementById("pw")
+            console.log(b.value)
+            if (b.value == '1234')
+                window.location.href = './finaltask.html'
+            else
+                alert("密码错误,初始密码为1234")
+            // 通过本地储存将学号传递到下一个界面
+            localStorage.setItem("xuehao", a.value)
+        
+        }
+        function sign() {
+            alert("哈哈知识水平不允许注册,没有接口,初始密码1234")
+        }
+        
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品页面</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+        .div1{
+            text-align: center;
+            margin: auto;
+            position: relative;
+        }
+        .div1 button{
+            position: absolute;
+            border: none;
+            width: 50px;
+            height: 30px;
+            font-size: 15px;
+            right: 0;
+            bottom: 0;
+            background-color: orange;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <h1>商品页面</h1>
+        <div class="list"></div>
+        <a href="http://localhost:8080/%E5%89%8D%E7%AB%AF/%E4%BF%AE%E6%94%B9%E5%95%86%E5%93%81.html">进入添加商品页面</a>
+        <br>
+        <button><a href="http://localhost:8080/%E5%89%8D%E7%AB%AF/%E8%B4%AD%E4%B9%B0%E9%A1%B5%E9%9D%A2.html" target="_blank">购物</a></button>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let goodsList = [];
+        axios.post('http://localhost:8080/outputgoods')
+        .then(function(res){
+            goodsList = res.data
+            console.log(goodsList);
+            render();
+        })
+        function render() {
+            const box = document.querySelector('.list')
+            for(let i = 0; i < goodsList.length; i++){
+                let el = document.createElement('div')
+                el.innerHTML = `
+                    商品名称: <b class="red">${goodsList[i].name}</b>
+                    描述: ${goodsList[i].description}
+                    库存: ${goodsList[i].inventory}
+                    价格: ${goodsList[i].price}
+                `
+                box.append(el)
+            }            
+        }
+    </script>
+</body>
+</html>

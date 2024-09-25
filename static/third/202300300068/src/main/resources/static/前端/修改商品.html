@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改商品</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+        #div2{
+            margin: auto;
+            text-align: center;
+        }
+        .div1{
+            margin: auto;
+            text-align: center;
+            background-color: skyblue;
+            position: relative;
+            width: 1200px;
+            height: 350px;
+        }
+        .div1 div{
+            display: inline-block;
+            margin: auto;
+            width: 300px;
+            height: 250px;
+            background-color: grey;
+            text-align: center;
+            vertical-align: top;
+        }
+        .button1{
+            position: absolute;
+            border: none;
+            width: 125px;
+            height: 30px;
+            font-size: 15px;
+            right: 0;
+            bottom: 0;
+            background-color: orange;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <h1 style="color: orange;background-color: red;">功能</h1>
+<!--        输入学号来定位该用户的上传列表-->
+        请输入用户学号:<input type="text" placeholder="请输入用户学号" class="account">
+        <button onclick="print()">打印该用户上传的商品信息</button>
+        <br>
+        <button class="button1"><a href="http://localhost:8080/%E5%89%8D%E7%AB%AF/%E5%95%86%E5%93%81%E9%A1%B5%E9%9D%A2.html">返回商品页面</a></button>
+        <!-- 添加商品模块 -->
+        <div>
+        <h2>添加商品</h2>
+        请输入学号:<input type="text" placeholder="请输入学号" class="box1">
+        <br>
+        请输入商品名:<input type="text" placeholder="请输入商品名" class="box2">
+        <br>
+        请输入商品描述:<input type="text" placeholder="请输入商品描述" class="box3">
+        <br>
+        请输入商品库存:<input type="text" placeholder="请输入商品库存" class="box4">
+        <br>
+        请输入商品价格:<input type="text" placeholder="请输入商品价格" class="box5">
+        <br>
+        <br>
+        <button onclick="addgoods()">添加商品</button>
+        </div>
+        <!-- 删除商品模块 -->
+        <div>
+            <h2>删除商品</h2>
+            请输入学号:<input type="text" placeholder="请输入学号" class="box6">
+            <br>
+            请输入商品名:<input type="text" placeholder="请输入商品名" class="box7">
+            <br>
+            <br>
+            <button onclick="deletegoods()">删除商品</button>
+        </div>
+        <!-- 修改商品模块 -->
+        <div>
+            <h2>修改商品</h2>
+            请输入学号:<input type="text" placeholder="请输入学号" class="box8">
+            <br>
+            请输入商品名:<input type="text" placeholder="请输入商品名" class="box9">
+            <br>
+            请输入库存:<input type="text" placeholder="请输入商品库存" class="box10">
+            <br>
+            请输入商品描述:<input type="text" placeholder="请输入商品描述" class="box11">
+            <br>
+            <br>
+            <button onclick="updategoods()">修改商品</button>
+        </div>
+    </div>
+    <div class="list" id="div2"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let goodsList = [];
+        //打印上传商品的表单
+        function print(){
+            let a = document.getElementsByClassName("account")[0].value;
+            fetch('http://localhost:8080/outputuploadlist',{
+                method : 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    num: a
+                })
+            })
+                .then(function(res){
+                    return res.json();
+                })
+                .then(function (data){
+                    goodsList = data;
+                    console.log(goodsList)
+                    render()
+                })
+            function render() {
+                const box = document.querySelector('.list')
+                for(let i = 0; i < goodsList.length; i++){
+                    let el = document.createElement('div')
+                    el.innerHTML = `
+                    商品名称: <b class="red">${goodsList[i].name}</b>
+                    描述: ${goodsList[i].description}
+                    库存: ${goodsList[i].inventory}
+                    价格: ${goodsList[i].price}
+                `
+                    box.append(el)
+                }
+            }
+        }
+
+        // 更新商品的数据
+        function updategoods(){
+            let a = document.getElementsByClassName('box8')[0].value//学号
+            let b = document.getElementsByClassName('box9')[0].value//商品名
+            let c = parseInt(document.getElementsByClassName('box10')[0].value)//库存
+            let d = document.getElementsByClassName('box11')[0].value//商品描述
+            fetch('http://localhost:8080/getuploadlist',{
+                method : 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name:b
+                })
+            })
+                .then(function (response){
+                    return response.json()
+                })
+                .then(function (data){
+                    if(data.data === null){
+                        alert('你未曾添加此商品')
+                    }else{
+                        //更新商品总表
+                        fetch('http://localhost:8080/updategoods',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num: a,
+                                name:b,
+                                inventory: c,
+                                description: d
+                            })
+                        })
+                        //更新上传表
+                        fetch('http://localhost:8080/updateuploadlist',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num: a,
+                                name:b,
+                                inventory: c,
+                                description: d
+                            })
+                        })
+                        alert('商品修改成功')
+                    }
+                })
+
+        }
+        //添加商品
+        function addgoods(){
+            let a = document.getElementsByClassName('box1')[0].value//学号
+            let b = document.getElementsByClassName('box2')[0].value//商品名
+            let c = document.getElementsByClassName('box3')[0].value//描述
+            let d = parseInt(document.getElementsByClassName('box4')[0].value)//库存
+            let e = parseFloat(document.getElementsByClassName('box5')[0].value)//价格
+            fetch('http://localhost:8080/getgoods',{
+                method : 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name:b
+                })
+            })
+                .then(function (response){
+                    return response.json()
+                })
+                .then(function (data){
+                    if (data.data === null){
+                        fetch('http://localhost:8080/adduploadlist',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num: a,
+                                name:b,
+                                description:c,
+                                inventory:d,
+                                price:e
+                            })
+                        })
+                        fetch('http://localhost:8080/addgoods',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num: a,
+                                name:b,
+                                description:c,
+                                inventory:d,
+                                price:e
+                            })
+                        })
+                        alert('商品添加成功')
+                    }else {
+                        alert('该商品已存在')
+                    }
+                })
+
+        }
+        //删除商品
+        function deletegoods(){
+            let a = document.getElementsByClassName('box6')[0].value//学号
+            let b = document.getElementsByClassName('box7')[0].value//商品名
+            //查找该商户添加的商品
+            fetch('http://localhost:8080/getuploadlist',{
+            method : 'POST',
+                headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name:b
+            })
+            })
+                .then(function (response){
+                    return response.json()
+                })
+                .then(function (data){
+                    if(data.data !== null){
+                        fetch('http://localhost:8080/deletegoods',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num: a,
+                                name:b
+                            })
+                        })
+                        fetch('http://localhost:8080/deleteuploadlist',{
+                            method : 'POST',
+                            headers:{
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                num: a,
+                                name:b
+                            })
+                        })
+                        alert("商品删除成功")
+                    }else {
+                        alert('你未曾输入过此商品')
+                    }
+                })
+
+        }
+    </script>
+</body>
+</html>

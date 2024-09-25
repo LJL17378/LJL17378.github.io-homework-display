@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       alert(`游戏规则：棋盘上共有n枚宝石，轮流取宝石，每次至少取l枚至多取r枚但不能不取，谁取到最后一枚宝石谁获得胜利。`)
+       while(true){
+        let n
+        let r
+        let l 
+        let num
+        let num1
+        while(true){
+            n = parseInt(prompt(`请输入n的值：`))
+            if(n < 10){
+                alert(`输入的数字太小。`)
+            }else{
+                break
+            }
+        }
+        while(true){
+            r = parseInt(prompt(`拿取宝石的最大值`))
+            if(r>n){
+                alert(`请重新输入`)
+            }else if(r<n){
+                break
+            }
+        }
+        while(true){
+            l = parseInt(prompt(`拿取宝石的最小值`))
+            if(l>r){
+                alert(`请重新输入`)
+            }else  if(l<r){
+                break
+            }
+        }
+        let name = +prompt(`
+        请选择拿取宝石的顺序：
+        1.先手
+        2.后手
+        `)
+        if(name == 1){
+            while(true){
+                while(true){
+                    num = prompt(`请选择拿取宝石的数量：`)
+                    if(num<l||num>r){
+                        alert(`请输入合规的数字`)
+                    }else if(num>=l && num<=r){
+                        break
+                    }
+                }
+                n = n - num
+                console.log(n)
+                alert(n)
+                if(n%10==0){
+                    n = n - 10
+                    alert(`剩余宝石的数量为：`)
+                    alert(n)
+                    if (n==0){
+                        alert(`游戏结束,你输了`)
+                        break
+                    }
+                }else if(n%10>0){
+                    n = n - n%10
+                    alert(`剩余宝石的数量为：`)
+                    alert(n)
+                    if (n==0){
+                        alert(`游戏结束，你输了`)
+                        break
+                    }
+                }
+            }
+
+        }else if(name==2){
+            if(n%10==0){
+                n = n - 10
+            }else{n = n - n%10}
+            alert(`剩余宝石数量为：`)
+            alert(n)
+             while(true){
+                while(true){
+                    num1 = prompt(`请选择拿取宝石的数量：`)
+                    if(num1<l||num1>r){
+                        alert(`请输入合规的数字`)
+                    }else if(num1>=l && num1<r){
+                        break
+                    }
+                }
+                n = n - num1
+                console.log(n)
+                alert(`剩余的宝石数量为：`)
+                alert(n)
+                if(n%10==0){
+                    n = n - 10
+                    alert(`剩余宝石的数量为：`)
+                    alert(n)
+                    if (n==0){
+                        alert(`游戏结束，你输了`)
+                        break
+                    }
+                }else if(n%10>0){
+                    n = n - n%10
+                    alert(`剩余宝石的数量为：`)
+                    alert(n)
+                    if (n==0){
+                        alert(`游戏结束，你输了`)
+                        break
+                    }
+                }
+            }
+
+        }
+       }
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>第二天：HTML(2)</title>
+</head>
+
+<body>
+	<div style="margin:auto 3em">
+	<h3>Prelogue</h3>
+	<p>还是一样，今天我们要做一个经一定程度美化的文档。在这里教大家一些VScode的小妙招：<br>
+
+	</p>
+
+	<h3>body中的标签：分区是整齐的开始，属性是美化的开始</h3>
+	<pre style="white-space:pre-wrap">	
+	我们先来看一段代码：
+
+<div style="background-color:rgb(224, 224, 224)" >	&lt;html>
+	&lt;body>
+	&lt;div align="center">
+	&lt;h3>将进酒&lt;/h3>
+	&lt;p style="text-indent:5em;font-family:楷体">李白&lt;/p>
+	&lt;p style="line-height:2em">
+	君不见黄河之水天上来②，奔流到海不复回。&lt;br>君不见高堂明镜悲白发③，朝如青丝暮成雪④。&lt;br>人生得意须尽欢⑤，莫使金樽空对月⑥。&lt;br>天生我材必有用⑦，千金散尽还复来⑧。&lt;br>烹羊宰牛且为乐，会须一饮三百杯⑨。&lt;br>岑夫子⑩，丹丘生⑪，将进酒，杯莫停⑫。&lt;br>与君歌一曲⑬，请君为我倾耳听⑭。&lt;br>钟鼓馔玉不足贵⑮，但愿长醉不复醒⑯。&lt;br>古来圣贤皆寂寞⑰，惟有饮者留其名。&lt;br>陈王昔时宴平乐⑱，斗酒十千恣欢谑⑲。&lt;br>主人何为言少钱⑳，径须沽取对君酌㉑。&lt;br>五花马㉒、千金裘㉓，呼儿将出换美酒㉔，与尔同销万古愁㉕。
+	&lt;/p>
+	&lt;hr>
+	&lt;p style="text-indent:2em;line-height:1.5em;font-family:楷体;margin:0em 5em">
+	&lt;b>注释：&lt;/b>①将（qiāng）进酒：请饮酒。乐府古题，原是汉乐府短箫铙歌的曲调。《乐府诗集》卷十六引《古今乐录》曰：“汉鼓吹铙歌十八曲，九曰《将进酒》。”《敦煌诗集残卷》三个手抄本此诗均题作“惜罇空”。《文苑英华》卷三三六题作“惜空罇酒”。将，请。②君不见：乐府诗常用作提醒人语。天上来：黄河发源于青海，因那里地势极高，故称。③高堂：房屋的正室厅堂。一说指父母，不合诗意。一作“床头”。④青丝：形容柔软的黑发。一作“青云”。成雪：一作“如雪”。⑤得意：适意高兴的时候。⑥樽：酒杯。一作“罇”。⑦“天生”句：一作“天生我材必有开”，一作“天生我身必有财”，一作“天生吾徒有俊才”。⑧千金：一作“黄金”。⑨“会须”句：《世说新语·文学》注引《郑玄别传》载：袁绍为郑玄饯行，三百余人向玄敬酒，“自旦及暮，度玄饮三百余杯，而温克之容，终日无怠。”会须，应当，应该。⑩岑夫子：岑勋，南阳人，李白好友。⑪丹丘生：元丹丘，当时隐士，李白好友。⑫杯莫停：一作“君莫停”。⑬与君：给你们，为你们。君，指岑、元二人。⑭倾耳听：一作“侧耳听”。⑮钟鼓馔（zhuàn）玉：形容富贵豪华的生活。钟鼓，鸣钟击鼓作乐。馔玉，美好的饮食。馔，吃喝。玉，像玉一样美好。此句一作“钟鼓玉帛岂足贵”，一作“钟精玉席岂足贵”。⑯不复：一作“不用”，一作“不愿”。⑰寂寞：这里是被世人冷落的意思。一作“死尽”。⑱陈王：即曹植，因封于陈（今河南淮阳一带），死后谥“思”，世称陈王或陈思王。宴：举行宴会。平乐（lè）：观名，汉明帝所建，在洛阳西门外，为汉代富豪显贵的娱乐场所。曹植《名都篇》：“归来宴平乐，美酒斗十千。”李善注：“平乐，观名。”⑲斗酒十千：一斗酒价值十千钱，极言酒的名贵。恣欢谑（xuè）：尽情地娱乐欢饮。恣，放纵、无拘束。谑，玩笑。⑳何为：为什么。言少钱：一作“言钱少”。㉑径须沽取：那就应该买了来。径须，干脆、只管。径，即、就。须，应当。沽，通“酤”，买或卖，这里指买。取，语助词，表示动作的进行。此句一作“且须沽酒共君酌”。㉒五花马：谓马之毛色作五色花纹者，极言马的名贵。一说唐代开元、天宝年间，上层社会讲究马的装饰，常将马鬣剪成花瓣形，剪成五瓣的称五花马。见《图画见闻志》。㉓千金裘：珍贵的皮衣。《史记·孟尝君列传》：“此时孟尝君有一狐白裘，直（值）千金，天下无双。”㉔“呼儿”句：《西京杂记》载，司马相如初与卓文君还成都，家贫，曾用鹔鹴裘换酒。将，拿。㉕尔：你。
+	&lt;/p>
+	&lt;/div>
+	&lt;/body>
+	&lt;/html></div>
+	发没发现今天代码变样了？有的标签名后面跟着一些参数，称为属性（attribution），我们可以利用它们完成简单的外观改变（看看今天漂亮的排版（））。下表是关于文字、段落、表格的属性，大家不妨都试一试。此外，&lt;div>...&lt;/div>[division]标签可用于给元素分区（类似于代码块）。
+
+	<table border="1" align="center"> 
+	<caption>一、在段落标签中，你可以用style="attr1:num1..."的方式使用以下参数</caption> 
+
+	<thead> 
+		<tr>
+		<th>属性名</th> 
+		<th>说明</th> 
+		<th>取值示例</th> 
+		</tr> 
+	</thead> 
+
+	<tbody> 
+		<tr>
+		<td>font-size</td>
+		<td>字号</td> 
+		<td>24px</td> 
+		</tr> 
+		<tr>
+		<td>font-weight</td> 
+		<td>粗细</td> 
+		<td>normal(default)/bold</td> 
+		</tr> 
+		<tr>
+		<td>color</td> 
+		<td>字体颜色</td> 
+		<td>red/#006600</td> 
+		</tr> 
+		<tr>
+		<td>font-family</td> 
+		<td>字体</td> 
+		<td>宋体/Consolas</td> 
+		</tr> 
+		<tr>
+		<td>font-style</td> 
+		<td>字体样式</td> 
+		<td>normal(default)/italic/oblique</td> 
+		</tr> 
+		<tr>
+		<td>text-indent</td> 
+		<td>缩进</td> 
+		<td>12px/2em【1em为当前字体大小】</td> 
+		</tr> 
+		<tr>
+		<td>line-height</td> 
+		<td>行高</td> 
+		<td>12px/2em</td> 
+		</tr> 		
+		<tr>
+		<td>text-align</td> 
+		<td>对齐方式</td> 
+		<td>left(default)/right/center</td> 
+		</tr> 
+	</tbody> 
+	</table> 
+
+	<table border="1" align="center"> 
+	<caption>二、你可以用style="attr1:num1..."的方式调整元素显示方式</caption> 
+
+	<thead> 
+		<tr>
+		<th>属性名</th> 
+		<th>说明</th> 
+		<th>取值示例</th> 
+		</tr> 
+	</thead> 
+
+	<tbody>
+		<tr>
+		<td>width/height</td>
+		<td>内容宽/高</td>
+		<td>12px/1em</td>
+		</tr>
+		<tr>
+		<td>padding-top/bottom/left/right</td>
+		<td>上/下/左/右内边距</td>
+		<td>12px/1em</td>
+		</tr>
+		<tr>
+		<td>margin-top/bottom/left/right</td>
+		<td>上/下/左/右外边距</td>
+		<td>12px/1em</td>
+		</tr>
+		<tr>
+		<td>border-top/...</td>
+		<td>上/下/左/右外边框【距离/样式/颜色参数】</td>
+		<td>10px/solid/dashed/dotted/black</td>
+		</tr>
+	</tbody>
+	</table>
+
+	每个元素在页面上的占地可以划分为边款、外边距、内边距、内容部分，通常形象地称为盒子模型。如下图：
+	<image src="images/box.png" style="margin:0 auto" width="300"/>
+	常常也能简化使用。如：margin:0 auto表示上下宽为0，左右距离自动调节，即居中显示。
+
+	</pre>
+	
+	<h3>body中的标签：图像，音频，视频，超链接</h3>
+	<pre>
+	1.&lt;image src="..." alt="..." ...>
+	图片标签。scr【source】属性中填图片的路径；alt属性中填图片的的代替文本，即图片无法正常显示时会出现的文字。还有width等属性可以自己设置。
+	2.&lt;audio src="..." controls【显示控件】 loop【循环播放】 autoplay【自动播放】 muted【默认静音】>
+	音频标签。后面的属性默认关闭（即值为false）。需要直接填上就好。
+	3.&lt;video src="...">
+	视频标签。属性与图片和音频相同。
+	4.&lt;a href="...">...</a>
+	超链接标签。href【hype-reference】中为html文件的链接。嵌套的内容一般为文本或图片。
+	</pre>
+
+	<h3>body中的标签：表单</h3>
+	<pre>
+	表单是采集用户信息的区域，是能实现交互的地方。例如：
+
+	&lt;form>
+	账号：&lt;input type="text">&lt;input type="submit" value="提交">
+	1+2=?&lt;input type="radio" name="quiz">1&lt;input type="radio" name="quiz">2&lt;input type="radio" name="quiz">3
+	&lt;/form>
+
+	用form标签作框架，input标签用来作文字框（text/password）、提交与重置符号（submit/reset）、选项（radio/checkbox）；option标签可作下拉列表；textarea标签可作文本域（多行文本框）。具体不实例了，大家自己摸索。
+	</pre>
+
+	<h3>猜你想问</h3>
+	<pre>
+	Q：我喜欢英式英语的写法，像colour,centre，写成这样浏览器认吗？
+	A：可以的。
+
+	</pre>
+
+	<h3>p.s.</h3>
+	<p>目前来讲，我们的网页只停留在文档阶段。接下来我们要借助CSS完成进一步美化。</p>
+
+	<form>
+	<textarea placeholder="想说什么，写下来吧...唔，原来写下来真的只是写下来"></textarea>
+	</div>
+</body>
+</html>

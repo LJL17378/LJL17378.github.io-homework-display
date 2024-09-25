@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width,initial-scale=1.0">
+<title>index</title>
+<style>
+        .box1{
+            display: block;
+            height:20px;
+            font-size :20px;;
+        }
+</style>
+<script>
+function func1(){
+    let n =parseInt(document.getElementById('n').value);
+    let b =parseInt(document.getElementById('me').value);
+    let r =parseInt(document.getElementById('r').value);
+    console.log(n);
+    console.log(b);
+    n=n-b;
+    console.log(n);
+    let x = document.getElementById('n');
+    x.value = n;
+    alert(n);
+    if(n<=r){
+        alert("很遗憾你输了");
+    }
+}
+function func2(){
+    let n =parseInt(document.getElementById('n').value);
+    let l =parseInt(document.getElementById('l').value);
+    let r =parseInt(document.getElementById('r').value);
+    console.log(l);
+    console.log(r);
+    let num = Math.ceil(Math.random()*(r-l))+l;
+    console.log(num);
+    n=n-num;
+    console.log(n);
+    alert(n);
+    let x = document.getElementById('n');
+    x.value = n;
+    if(n<=r){
+        alert("恭喜你获胜了");
+    }
+
+ 
+}
+
+</script>
+</head>
+<body>
+    <h style="font-size:100px;background-color: rgb(15, 235, 140);text-align:center">取宝石游戏</h>
+    <br>
+    <img src=""C:\Users\L\Desktop\第二次作业\1697937665177.jpg"" alt="加载失败" width="100" height="150">
+    
+    <hr>
+<p class="box1">请输入总的宝石数目n</p><input id="n" type="text" placeholder="自定义n的值"><br>
+<p class="box1">请输入每次取宝石数目的最小值l</p><input id="l" type="text" placeholder="自定义l的值"><br>
+<p class="box1">请输入每次取宝石数目的最大值r</p><input id="r" type="text" placeholder="自定义r的值"><br>
+<p style="font-size: 20px;height:20px;display: block;">请输入你要取的宝石的个数</p><br><input id="me" type="text" placeholder="你要取的宝石的个数">
+<hr>
+<button onclick="func1()">显示剩余宝石的数目</button>
+<hr>
+<button id="c" onclick="func2()">电脑抽取宝石</button>
+
+</body>

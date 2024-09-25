@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝石游戏-后手模式</title>
+    <script>
+        alert("Hello,Welcome to my game!")    
+    </script>
+    <style>
+        .butto1:hover{
+            background-color: aqua;
+            cursor:pointer;
+        }
+        
+        .butto1:active{
+            background-color: hotpink;
+        }
+        .butto2:hover{
+            background-color: aqua;
+            cursor:pointer;
+        }
+        
+        .butto2:active{
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body background="./bj2.png"
+style="background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">
+<audio src="./Bgm.m4a" controls autoplay loop id="bgm"></audio>    
+    <p style="color: rgb(47, 89, 255);font-size: 40px;text-align: center;">后手模式</p>
+    <br>
+    <br>
+    <br>
+    <p style="color: red;text-align: center;font-size: 30px;">宝石总数：<span style="color: aliceblue;text-align: center;font-size: 30px;" class="tonum">?</span></p>
+    <p style="text-align: center;color: antiquewhite;">请您制定游戏规则,制定完后就不要修改了哦</p>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" id="inpu1" placeholder="输入宝石总数"></div>
+    <div style="text-align:center;vertical-align:middel;"><button class="butto1" onclick="func1()" title="请确定您输入的是数字哦" >提交</button></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" id="inpu3" placeholder="输入每次至少取多少宝石"></div>
+    <div style="text-align:center;vertical-align:middel;"><button class="butto1" onclick="func3()" title="请确定您输入的是数字哦" >提交</button></div>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" id="inpu4" placeholder="输入每次至多取多少宝石"></div>
+    <div style="text-align:center;vertical-align:middel;"><button class="butto1" onclick="func4()" title="请确定您输入的是数字哦" >提交</button></div>
+    <script>
+        function func1(){
+            var bgm = document.getElementById("bgm")
+            bgm.play()
+            let max = parseInt(document.getElementById('inpu1').value);
+            document.getElementsByClassName('tonum')[0].innerHTML = max;
+            return max
+        }
+    </script>
+    <script>
+        function func3(){
+            let shao = parseInt(document.getElementById('inpu3').value);
+            return shao
+        }
+    </script>
+    <script>
+        function func4(){
+            let shao = func3()
+            let duo = parseInt(document.getElementById('inpu4').value);
+            if(duo<shao){alert("请输入一个比“每次至少取走宝石数大的数字哦”")}
+            else {return duo}
+        }
+    </script>
+    <br>
+    <p style="text-align: center;color: antiquewhite;">↓正式游戏↓</p>
+    <div style="text-align:center;vertical-align:middel;"><span style="text-align: center;color: antiquewhite;">点击按钮→</span><button class="butto9" onclick="func9()" title="点击按钮，开始游戏">开始</button><span style="text-align: center;color: antiquewhite;">←开始游戏</span></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" id="inpu2" placeholder="输入你要取走的宝石数">
+    <button class="butto2" onclick="func2()" title="请确定您输入的是数字哦">提交</button></div>
+
+    <script>
+        function func9(){
+            let max = func1()
+            let shao = func3()
+            let duo = func4()
+            let duo2=duo - shao;
+            let compu;
+            compu =Math.floor(Math.random()*duo2+shao)
+            var info3="电脑取得宝石数为："+compu;
+            alert(info3)
+            max = max - compu;
+            document.getElementById("inpu1").value =max;
+            document.getElementsByClassName('tonum')[0].innerHTML = max;
+        }
+        function func2(){
+            let max = func1()
+            let shao = func3()
+            let duo = func4()
+            console.log(max)     
+           
+            let F1 = parseInt(document.getElementById('inpu2').value);
+            let L1=max-F1;
+            var info1="请输入小于等于"+duo+"的正整数"
+            var info2="请输入大于等于"+shao+"的正整数"  
+            if(F1<=0){alert("请输入正数")}
+            else if(F1>duo){alert(info1)}
+            else if(F1<shao){alert(info2)}
+            else{
+                document.getElementsByClassName('tonum')[0].innerHTML = L1;
+            let duo2=duo - shao;
+            let compu;
+        if(L1<=0){alert("你赢了")}
+        else{
+            if(duo>=L1){compu = L1}
+            else {compu =Math.floor(Math.random()*duo2+shao);}
+            var info3="电脑取得宝石数为："+compu;
+            alert(info3)
+            let L2= L1 - compu;
+            document.getElementsByClassName('tonum')[0].innerHTML = L2;
+            if(L2>0){
+                document.getElementsByClassName('tonum')[0].innerHTML = L2;
+                document.getElementById("inpu2").value="";
+            }
+            else{alert("电脑赢咯！")}
+            max = L2
+            console.log(max)
+            document.getElementById("inpu1").value = max;
+        }
+        }
+        }
+    </script>
+</body>
+</html>

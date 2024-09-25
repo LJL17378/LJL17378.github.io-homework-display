@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .a {
+            text-align: center;
+            margin: center
+        }
+
+        .begin {
+            width: 500px;
+            margin: 65px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .begin p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .begin input[type="text"],
+        .begin textarea {
+            width: 90%;
+            padding: 10px 10px 10px 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .begin input[type="text"]:focus,
+        .begin textarea:focus {
+            outline: none;
+        }
+
+        .begin button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 20px 10px;
+        }
+
+        .add {
+            width: 500px;
+            margin: 65px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add input[type="text"],
+        .add textarea {
+            width: 100%;
+            padding: 10px 10px 10px 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .add input[type="text"]:focus,
+        .add textarea:focus {
+            outline: none;
+        }
+
+        .add button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .delete {
+            width: 500px;
+            margin: 65px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .delete p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .delete input[type="text"],
+        .delete textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+
+        .delete input[type="text"]:focus,
+
+
+        .delete button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .purchase {
+            width: 500px;
+            margin: 65px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .purchase p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .purchase input[type="text"],
+        .purchase textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+
+        .purchase input[type="text"]:focus,
+
+
+        .purchase button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function getInput() {
+            var inputValue = document.getElementById("price").value;
+            var regex = /^-?\d+(\.\d+)?$/; // 正则表达式匹配数字（可选小数点）  
+            if (!regex.test(inputValue)) {
+                alert("请输入正数");
+                return false;
+            }
+
+            var id = document.getElementById("myInput").value;
+            var name = document.getElementById("name").value;
+            var price = document.getElementById("price").value;
+            var inventory = document.getElementById("inventory").value;
+            var description = document.getElementById("description").value;
+            console.log(id);
+            console.log(price);
+            console.log(name);
+            console.log(inventory);
+            console.log(description);
+            const xhr = new XMLHttpRequest()
+            xhr.open('POST', 'http://zyhcc.top:8088/goods/addGoods')
+            xhr.setRequestHeader('Content-Type', 'application/json') // 如果是发送JSON的话必须要
+
+            xhr.send(JSON.stringify({
+                name: name,
+                description: description,
+                price: price,
+                inventory: inventory,
+                num: "202200201081"
+
+            }))
+            xhr.addEventListener('readystatechange', function () {
+                if (xhr.readyState === 4 && (xhr.status === 200)) {
+                    console.log(xhr.response)
+                    alert("添加成功")
+                    document.getElementById("myInput").value = "";
+                    document.getElementById("name").value = "";
+                    document.getElementById("price").value = "";
+                    document.getElementById("inventory").value = "";
+                    document.getElementById("description").value = ""
+                }
+
+
+                else {
+                    console.warn('请求失败!', xhr.response)
+                    alert("重新尝试")
+                    document.getElementById("name").value = "";
+                    document.getElementById("price").value = "";
+                    document.getElementById("inventory").value = "";
+                    document.getElementById("description").value = ""
+                }
+
+            })
+
+        }
+        function Delete() {
+            var id2 = document.getElementById("id2").value;
+            var h = document.getElementById("numd").value
+            const xhr = new XMLHttpRequest()
+            xhr.open('POST', 'http://zyhcc.top:8088/goods/deleteGoods')
+            xhr.setRequestHeader('Content-Type', 'application/json') // 如果是发送JSON的话必须要
+
+            xhr.send(JSON.stringify({
+                id: id2,
+                num: h
+
+            }))
+            xhr.addEventListener('readystatechange', function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+
+                    console.log(xhr.response)
+                    alert("删除成功")
+                    document.getElementById("id2").value = ""
+                    document.getElementById("numd").value = ""
+
+
+                } else {
+                    console.warn('请求失败!', xhr.response)
+                    alert("重新尝试")
+                    document.getElementById("id2").value = ""
+                    document.getElementById("numd").value = ""
+                }
+
+            })
+
+
+
+
+        }
+        var num = document.getElementById("num").value;
+        function find() {
+            var num = document.getElementById("num").value;
+            const xhr = new XMLHttpRequest()
+            xhr.open('POST', 'http://zyhcc.top:8088/balance/getBalance')
+            xhr.setRequestHeader('Content-Type', 'application/json') // 如果是发送JSON的话必须要
+
+            xhr.send(JSON.stringify({
+
+                num: num
+
+            }))
+            xhr.addEventListener('readystatechange', function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.response)
+                    var moneyf = xhr.response
+                    var money = moneyf.data
+                    var display = document.getElementById("money")
+                    display.innerHTML = moneyf
+                  
+                    if (money < 10)
+                        alert("该充值喽")
+                    else
+                        alert("余额充足")
+                    document.getElementById("num").value=""
+                }
+                else {
+                    console.warn('请求失败!', xhr.response)
+                    alert("重新尝试")
+                }
+
+            })
+
+
+        }
+        function gold() {
+            var dialog = document.createElement("div");
+            dialog.id = "you"
+            dialog.setAttribute("style", "width: 300px; height: 200px; background-color: rgb(216, 249, 236); border: 1px solid black; padding: 10px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);");
+            dialog.innerHTML = '<label>输入数据1：<input type="text" id="inputData1"></input><br><br></label>输入数据2<input type="text" id="inputData"></input><br><button onclick="processData()">提交</button>';
+            document.body.appendChild(dialog);
+
+        }
+        function processData() {
+            var num1 = document.getElementById("inputData1").value
+            var monesy = document.getElementById("inputData").value
+            var you = document.getElementById("you")
+
+            const xhr = new XMLHttpRequest()
+            xhr.open('POST', 'http://zyhcc.top:8088/balance/setBalance')
+            xhr.setRequestHeader('Content-Type', 'application/json') // 如果是发送JSON的话必须要
+
+            xhr.send(JSON.stringify({
+
+                num: num1,
+                balance: monesy
+
+            }))
+            xhr.addEventListener('readystatechange', function () {
+                if (xhr.readyState === 4 && (xhr.status === 200)) {
+
+                    console.log(xhr.response)
+                    alert("okl")
+                    you.style.display = "none"
+
+                } else {
+                    console.warn('请求失败!', xhr.response)
+                    alert("重新尝试")
+                
+                }
+            }
+            )
+
+        }
+        function buy() {
+            var id3 = document.getElementById("buyid").value
+            var count = document.getElementById("count").value
+            const xhr = new XMLHttpRequest()
+            xhr.open('POST', 'http://zyhcc.top:8088/goods/buy')
+            xhr.setRequestHeader('Content-Type', 'application/json') // 如果是发送JSON的话必须要
+
+            xhr.send(JSON.stringify({
+
+                num: 202200201081,
+                id: id3,
+                count: count
+
+
+            }))
+            xhr.addEventListener('readystatechange', function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+
+                    console.log(xhr.response)
+                    alert("okl")
+                    document.getElementById("buyid").value = ""
+                    document.getElementById("count").value = ""
+
+
+                } else {
+                    console.warn('请求失败!', xhr.response)
+                    alert("重新尝试")
+                    document.getElementById("buyid").value = ""
+                    document.getElementById("count").value = ""
+
+                }
+
+            })
+
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="begin">
+        <p>输入学号：</p>
+        <input type="text" id="num" required>
+        <br>
+        <button class="button1" onclick="find()">点击查看余额</button><button onclick="gold()" class="button2">爆金币了</button>
+        <p id="money"></p>
+
+    </div>
+    <div class="add">
+        <p>添加商品</p>
+
+        <input type="text" id="name" placeholder="输入名称" required>
+        <br>
+        <input type="text" id="price" placeholder="输入价格" required>
+        <br>
+        <input type="text" id="inventory" placeholder="输入库存" required>
+        <br>
+        <textarea id="description" placeholder="输入描述"></textarea>
+
+        <button onclick="getInput()">获取输入</button>
+    </div>
+    <div class="add">
+        <p id="dis">已上架的物品</p>
+        <label for="n">输入学号查看</label><input type="text" id="n" placeholder="学号">
+        <button onclick="look()">查看</button>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            function look() {
+                var n = document.getElementById("n").value
+                axios.post('http://zyhcc.top:8088/goods/getMyGoods', { num: n }).then(function (res) {
+                    var container = document.getElementById('dis');
+
+                    let arr = [];
+
+                    arr = res.data.data
+                    console.log('res2 = ', arr)
+                    for (i = 0; i < arr.length; i++) {
+                        var x = document.createElement("b");
+
+                        var jsonString = JSON.stringify(arr[i].id + ",");
+                        x.innerHTML = jsonString
+
+
+                        container.appendChild(x);
+                    }
+                    document.getElementById("n").value = "";
+                },)
+            }
+
+        </script>
+        <p></p>
+    </div>
+
+    <div class="delete">
+        <p>删除商品</p>
+        <input type="text" id="numd" placeholder="学号">
+        <br>
+        <input type="text" id="id2" placeholder="删除商品序号">
+        <br>
+        <button onclick="Delete()">删除</button>
+    </div>
+    <div class="purchase">
+        <p>购买商品</p>
+
+        <input type="text" name="" id="buyid" placeholder="输入商品id"><br>
+        <input type="text" id="count" placeholder="输入购买的数量">
+        <br>
+        <button onclick="buy()"> 剁手了</button>
+
+    </div>
+    <div class="a">
+        <p><a href="http://127.0.0.1:3000/c:/Users/Lenovo/Desktop/demo web/test3.html" target="_blank">查看商品</a></p>
+
+    </div>
+
+
+
+
+</body>
+
+</html>

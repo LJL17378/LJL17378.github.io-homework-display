@@ -1,0 +1,139 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>第一天：HTML(1)</title>
+</head>
+
+<body>
+	<h3>Prelogue</h3>
+	<p>咱先从HTML学起。HTML是HyperText Markup Language（超文本标记语言)的缩写。超文本即内容可涵盖文字、图像、声音、视频，至于标记文本，暂时你可以认为就是一个用来制作文档的高级语言。所以嘛，今天我们要学的就是做一个浏览器能读取并显示的文档，也暂时不用了解原理。废话不多说，咱直接上语法。</p>
+
+	<h3>框架</h3>
+	<pre>
+	下面是一段实例代码。大家粘到记事本上，保存为.htm或.html文件，再用浏览器打开便能看见了。你可以再上面随意修改，不管怎么样都不会有报错，顶多显示出空白页而已。
+
+	&lt;html>
+
+		&lt;head>
+		&lt;/head>
+
+		&lt;body>
+			&lt;p>666!&lt;/p>
+		&lt;/body>
+
+	&lt;/html>
+
+	尖括号的部分（一般是成对的两个）叫“标签（tag）”，两个尖括号及期间部分叫“元素（element）”，期间部分可以是内容，也可以嵌套元素（称为“子元素（nested-tag）”）。敲的时候别忘了第二个标签的斜杠！
+	显然，最大的元素便是&lt;html>，它的子元素是&lt;head>和&lt;body>。文档的内容就在&lt;body>里，&lt;head>中的标签先忽略。大胆一点，我们这两天的代码里都可以不要head部分。今天我们只关注&lt;body>中的标签。
+	</pre>
+
+	<h3>body中的标签：基本段落标签</h3>
+	<pre>
+	1.&lt;h1>...&lt;/h1>
+	标题字号标签。按字号从大到小分h1,h2,...,h6六等，h4和段落文本一样大但是加粗。
+	2.&lt;p>...&lt;/p>
+	段落文本标签。文本自成一段。注意内部若是有多个空格或换行，之后保留一个空格。
+	3.&lt;br>
+	换行符。
+	4.&lt;pr>
+	水平分隔线符。
+	至于这四个效果如何，还请诸君自己动手试试。这些都是自带的文本格式，难用又难看。不要嫌弃，这至少省了你许多排版的工夫。
+	感觉对齐很麻烦？想打很多空格？试试这个：
+	5.&lt;pre>...&lt;/pre>
+	保留格式段落标签。期间输入的文本可以以原形式展现出来。（不过这样的字体和浏览器默认的样式与大小不同的话，会很难看。就像你现在看到的文章一样）
+	</pre>
+
+	<h3>body中的标签：表格标签</h3>
+	<pre>
+	直接上一段代码吧：
+
+<p>
+	&lt;table> 
+	&lt;caption>人员信息表&lt;/caption> 【表名】
+
+	&lt;thead> 【table-head，表头，默认加粗】
+		&lt;tr>【table-row，行】
+		&lt;th>姓名&lt;/th> 【table-header，表列标题】
+		&lt;th>年龄&lt;/th> 
+		&lt;th>性别&lt;/th> 
+		&lt;/tr> 
+	&lt;/thead> 
+
+	&lt;tbody> 【table-body，表格主体】
+		&lt;tr>
+		&lt;td>张三&lt;/td>【table-data，单元格】
+		&lt;td>18&lt;/td> 
+		&lt;td>男&lt;/td> 
+		&lt;/tr> 
+		&lt;tr>
+		&lt;td>李四&lt;/td> 
+		&lt;td>19&lt;/td> 
+		&lt;td>男&lt;/td> 
+		&lt;/tr> 
+	&lt;/tbody> 
+	&lt;/table> 
+<p>
+	这样做出来的表格是无线框的。先勉强凑合用吧。尾部其实还可以加tfoot标签，语法和表头一样，平常也没什么用处，这里就没写了。
+	</pre>
+
+
+	<h3>猜你想问</h3>
+	<pre>
+	Q：我就是不打斜杠，会怎么样？反正又不会有报错
+	A：浏览器是从前到后识别文件的。例如识别到完整的&lt;p>后就会向下检索对应的&lt;/p>，若少了一杠当然检索不到，后面的文字会一直显示此效果。就相当于根本没写后标签。不过单标签/可写可不写，通常还是写在标签名之后。
+
+	Q：你的那段演示代码不会被浏览器误读吗？
+	A：没错，所以&lt;与&gt;是关键字，所以我文章中的所有&lt;都得用转义字符&amp;lt;来表示（可麻烦了）。常用的转义字符见下表：
+<p>
+	<table> 
+	<caption>常用转义字符表</caption> 
+
+	<thead> 
+		<tr>
+		<th>HTML关键字符</th> 
+		<th>转义字符</th> 
+		</tr> 
+	</thead> 
+
+	<tbody> 
+		<tr>
+		<td>&lt;</td>
+		<td>&amp;lt;[less than]</td> 
+		</tr> 
+		<tr>
+		<td>&gt;</td> 
+		<td>&amp;gt;[greater than]</td> 
+		</tr> 
+		<tr>
+		<td>&quot;</td> 
+		<td>&amp;quot;[quotation]</td> 
+		</tr> 
+		<tr>
+		<td>&apos;</td> 
+		<td>&amp;apos;[apostrope]</td> 
+		</tr> 
+		<tr>
+		<td>blankspace</td> 
+		<td>&amp;nbsp;[non-breaking space]</td> 
+		</tr> 
+		<tr>
+		<td>&copy;</td> 
+		<td>&amp;copy;[copyright]</td> 
+		</tr> 
+		<tr>
+		<td>&reg;</td> 
+		<td>&amp;reg;[register]</td> 
+		</tr> 
+	</tbody> 
+	</table> 
+</p>
+	你也可以用空白符完成在p标签中完成空格操作哦。
+	QQ：明白了。所以你的&amp;lt;又是怎么打出来的？
+	AA：好问题。自个看我的代码就会明白
+	</pre>
+
+	<h3>p.s.</h3>
+	<p>这个网页全部是用今天学的知识完成的呢！是不是用了一天的笔记本已经累坏了？是不是根本没有学Java时手敲代码的耐心了？记得明天换上vscode！（手动狗头）</p>
+
+</body>
+</html>

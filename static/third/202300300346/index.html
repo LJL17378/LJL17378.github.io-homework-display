@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园跳蚤市场</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="window" style="overflow-y:scroll"></div>
+    <div align="center" class="selector">
+    <button id="btn2" onclick="buy()">购买商品</button>
+    <button id="btn3" onclick="myGoods()">我的商品</button>
+    <button id="btn4" onclick="account()">我的账户</button>
+    <button id="btn20" onclick="car()">我的购物车</button>
+    </div>
+    <div class="login" align="center" >
+        <input type="text" class="number" placeholder="输入学号"><br>
+        <button id="btn5" onclick="login();getList()" >登录</button>
+    </div>
+    <div class="myGoods"></div>
+    <div class="myGoodsBtn" align="center">
+        <button class="btn6" onclick="add()">添加商品</button><br>
+        <button class="btn7"onclick="del()">删除商品</button><br>
+        <button class="btn8" onclick="adjust()">修改商品</button><br>
+        <button class="btn9" onclick="myGoodsBack();getList()">返回</button>
+    </div>
+    <div class="add" align="center">
+        <input type="text" class="addSet" placeholder="商品名称"><br>
+        <input type="text" class="addSet" placeholder="商品描述"><br>
+        <input type="text" class="addSet" placeholder="商品库存"><br>
+        <input type="text" class="addSet" placeholder="商品价格"><br>
+        <button id="btn10" onclick="addApply()">添加</button>
+        <button id="btn11" onclick="addBack()">返回</button>
+    </div>
+    <div class="adjust" align="center">
+        <input type="text" class="adjustSet" placeholder="商品id"><br>
+        <input type="text" class="adjustSet" placeholder="商品库存"><br>
+        <input type="text" class="adjustSet" placeholder="商品描述"><br>
+        <button id="btn12" onclick="adjustApply()">修改</button>
+        <button id="btn13" onclick="adjustBack()">返回</button>
+    </div>
+    <div class="del" align="center">
+        <input type="text" class="delSet" placeholder="商品id"><br>
+        <button id="btn14" onclick="delApply()">删除</button>
+        <button id="btn15" onclick="delBack()">返回</button>
+    </div>
+    <div class="buy" align="center">
+        <input type="text" class="buySet" placeholder="商品id"><br>
+        <input type="text" class="buySet" placeholder="商品个数"><br>
+        <button id="btn16" onclick="buyApply()">购买</button>
+        <button id="btn17" onclick="buyBack()">返回</button>
+    </div>
+    <div class="account" align="center">
+        <div class="balance"></div>
+        <input type="text" class="accountSet" placeholder="余额充值"><br>
+        <button id="btn18" onclick="accountApply()">充值</button>
+        <button id="btn19" onclick="accountBack();getList()">返回</button><br>
+        <img src="./image/pay.png" alt="加载失败">
+    </div>
+    <div class="car" align="center">
+        <h2>我的购物车</h2>
+        <div class="myCar"></div>
+        <input type="text" class="carSet" placeholder="商品id"><br>
+        <input type="text" class="carSet" placeholder="商品数量"><br>
+        <button id="btn18" onclick="carApply()">加入购物车</button>
+        <button id="btn18" onclick="carBuy()">清空购物车</button>
+        <button id="btn19" onclick="carBack()">返回</button><br>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="service.js"></script>
+    <script src="shoppingCar.js"></script>
+</body>
+</html>

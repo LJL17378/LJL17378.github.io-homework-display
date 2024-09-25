@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>购物 App</title>
+
+<style>
+label {
+  display: inline-block;
+  background: linear-gradient(to right,orange, red);
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+label:hover {
+  background: linear-gradient(to right, #c0392b, #ff6b6b);
+  cursor: pointer;
+}
+body {
+	background-color:#d0e4fe;
+}
+</style>
+</head>
+<script>
+ 
+
+  //获取全部商品信息   
+ let xhr = new XMLHttpRequest();
+ xhr.open('POST',"http://zyhcc.top:8088/goods/getGoodsList")
+ xhr.setRequestHeader('Content-type',"application/json")
+ xhr.send()
+ xhr.addEventListener('readystatechange', function () {
+ if (xhr.readyState === 4) {
+   if (xhr.status === 200) {
+         console.log(xhr.response)
+      } else {
+     console.warn('请求失败!', xhr.response)
+      }
+    }
+ })
+ function getGoodsList(){
+   let instance =JSON.parse(xhr.response);
+   for (var i=0;i<instance.data.length;i++)
+ { 
+   document.write(instance.data[i].name +" "+instance.data[i].price+" "+instance.data[i].inventory+" "+instance.data[i].description+"<br>");
+ }  
+ }
+
+ //获取自己的商品信息
+ let data =JSON.stringify({"num":"202200300129"});
+ var xhl = new XMLHttpRequest();
+ xhl.open("POST", "http://zyhcc.top:8088/goods/getMyGoods");
+ xhl.setRequestHeader("Content-Type", "application/json");
+ xhl.send(data);
+ xhl.addEventListener('readystatechange', function () {
+ if (xhl.readyState === 4) {
+   if (xhl.status === 200) {
+    console.log(xhl.response)
+      } else {
+     console.warn('请求失败!', xhl.response)
+      }
+    }
+ })
+ function test2(){
+   let mygoods = JSON.parse(xhl.response);
+   for (let i=0;i<mygoods.data.length;i++){
+     document.write("id="+mygoods.data[i].id+"   "+mygoods.data[i].name+" "+mygoods.data[i].inventory+" "+mygoods.data[i].description+"<br>")
+   }
+ 
+ }
+ 
+ //提交自己的商品信息
+ function sub(){
+  let goodname =String(document.getElementById("goodname").value)
+  let num =String(document.getElementById("num").value)
+  let price = Number(document.getElementById("price").value)
+  let inventory =Number(document.getElementById("inventory").value)
+  let description =String(document.getElementById("description").value)
+ var data1 = JSON.stringify({
+    "num": num,
+    "name": goodname,
+    "description": description,
+    "inventory": inventory,
+    "price": price
+ });
+
+ let xhr3 = new XMLHttpRequest();
+ 
+ xhr3.open("POST", "http://zyhcc.top:8088/goods/addGoods");
+ 
+ xhr3.setRequestHeader("Content-Type", "application/json");
+ 
+ xhr3.send(data1);
+ 
+ xhr3.addEventListener("readystatechange", function() {
+   if (xhr3.readyState === 4) {
+   if (xhr3.status === 200) {
+         console.log(xhr3.response)
+         alert((JSON.parse(xhr3.response)).msg)
+      } else {
+     console.warn('请求失败!', xh3.response)
+      }
+    }
+ })
+ }
+
+
+ //删除商品
+ 
+
+ function delete1(){
+  let deletegoodid =Number(document.getElementById("deletegoodID").value)
+  let deldata=JSON.stringify({ "num": "202200300129",
+   "id":deletegoodid})
+ let del = new XMLHttpRequest();
+ del.open("POST","http://zyhcc.top:8088/goods/deleteGoods"); 
+ del.setRequestHeader("Content-Type", "application/json");
+ del.send(deldata)
+ del.addEventListener('readystatechange', function () {
+ if (del.readyState === 4) {
+   if (del.status === 200) {
+         console.log(del.response)
+         alert((JSON.parse(del.response)).msg)
+      } else {
+     console.warn('请求失败!', del.response)
+      }
+    }
+ })
+
+ }
+
+ //获取余额
+ let balance=JSON.stringify({"num":"202200300129"});
+
+  let rest = new XMLHttpRequest();
+  rest.open("POST","http://zyhcc.top:8088/balance/getBalance");
+  rest.setRequestHeader("Content-Type", "application/json");
+  rest.send(balance)
+  rest.addEventListener('readystatechange', function () {
+ if (rest.readyState === 4) {
+   if (rest.status === 200) {
+         console.log(rest.response)
+       
+      } else {
+     console.warn('请求失败!', rest.response)
+      }
+    }
+ })
+ function getBalance(){
+ let realrest = JSON.parse(rest.response);
+ document.getElementById('checkrest').innerHTML=realrest.data;
+ }
+ 
+ //修改余额
+ function setBalance(){
+ let newbalance =Number(document.getElementById("balance").value)
+ let rebalance = JSON.stringify({"num":"202200300129",
+ "balance":newbalance
+});
+
+  let balan = new XMLHttpRequest();
+  balan.open("POST","http://zyhcc.top:8088/balance/setBalance");
+  balan.setRequestHeader("Content-Type", "application/json");
+  balan.send(rebalance)
+  balan.addEventListener('readystatechange', function () {
+ if (balan.readyState === 4) {
+   if (balan.status === 200) {
+         console.log(balan.response)
+         
+         alert((JSON.parse(balan.response)).msg)
+      } else {
+     console.warn('请求失败!', balan.response)
+      }
+    }
+ })
+
+ }
+ //购买物品
+
+ 
+ function buy2(){
+ let buything = JSON.stringify({"num":(document.getElementById("num2").value),
+ "id":(document.getElementById("buythingID").value),
+ "count":(document.getElementById("cout").value)
+});
+
+ let buy = new XMLHttpRequest();
+  buy.open("POST","http://zyhcc.top:8088/goods/buy");
+  buy.setRequestHeader("Content-Type", "application/json");
+  buy.send(buything)
+  buy.addEventListener('readystatechange', function () {
+ if (buy.readyState === 4) {
+   if (buy.status === 200) {
+         console.log(buy.response)
+         let information = JSON.parse(buy.response)
+         alert(information.msg)
+      } else {
+     console.warn('请求失败!', buy.response)
+      }
+    }
+ })
+
+
+ }
+ 
+ 
+   </script>
+<body>
+  <!-- 页面头部 -->
+  <header>
+    
+    <h1>购物 App</h1>
+    <!-- 导航栏 -->
+
+    <nav>
+      <ul>
+  （请点击完后刷新）
+
+        <li><a href="#" onclick="getGoodsList()">商品目录</a></li>
+    
+        <li><a href="#" onclick="test2()">查看自己的商品</a></li>
+<!-- 提交自己的商品信息 -->
+<li><a href="#" onclick="sub()">提交自己的商品信息</a></li>
+        <label for="goodname">商品名称：</label>
+        <input type="text" id="goodname" ><br>
+
+        <label for="num">学号：</label>
+        <input type="text" id="num" ><br>
+
+        <label for="price">价格</label>
+        <input type="text" id="price" ><br>
+       
+        <label for="inventory">库存</label>
+        <input type="text" id="inventory"><br>
+
+        <label for="description">商品描述</label>
+        <input type="text" id="description" >
+       
+<!-- 删除商品信息 -->
+        <li><a href="#" onclick="delete1()">删除商品</a></li>
+        <label for="deletegoodID">删除商品id：</label>
+        <input type="number" id="deletegoodID" ><br>
+     
+<!-- 查看余额 -->
+       <li><a href="#" onclick="getBalance()">查看余额</a></li>
+       <label >余额如下：</label> 
+       <label style="background: linear-gradient(to right, #ffffff, #ffffff);color: #000000;" id="checkrest"></label>
+      
+        <!-- <input type="number" id="checkrest" ><br> -->
+       
+<!-- 修改余额 -->
+        <li><a href="#" onclick="setBalance()">修改余额</a></li>
+        <label for="balance">余额：</label>
+        <input type="number" id="balance" ><br>
+<!-- 买东西-->
+<li><a href="#" onclick="buy2()">确认购买</a></li>
+<label for="num2">学号：</label>
+<input type="text" id="num2" ><br>
+
+<label for="buythingID">货物id</label>
+<input type="number" id="buythingID" ><br>
+
+<label for="cout">购买件数</label>
+<input type="number" id="cout"><br>
+
+
+      </ul>
+    </nav>
+  </header>
+<!--  -->
+
+  <!-- 页面内容区域 -->
+  <main>
+
+ 
+    <!-- 商品列表 -->
+    <!-- <section class="product-list">
+      <div class="product">
+        <img src="product1.jpg" alt="商品1" width="100px">
+        <h2>商品1</h2>
+
+      </div>
+      <div class="product">
+        <img src="product2.jpg" alt="商品2" width="100px">
+        <h2>商品2</h2>
+
+    
+      </div>
+
+    </section> -->
+  </main>
+
+  <!-- 页面底部 -->
+  <footer>
+    <p>&copy; 2023 购物 App. All rights reserved.</p>
+  </footer>
+  <div id="result"></div>
+</body>
+
+
+</html>

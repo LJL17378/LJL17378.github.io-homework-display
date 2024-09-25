@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品列表</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .list{
+            line-height: 30px;
+        }
+        .list2{
+            color:blue;
+            width: 100px;
+            height: 400px;
+        }
+        .change{
+            /* display: none; */
+            width: 110px;
+            height: 40px;
+            background-color: red;
+            margin: 15px;
+            text-align: center;
+        }
+        #ps{
+            color: red;
+            width: 600px;
+        }
+        h3{
+            display:inline-block;
+        }
+        #h1{
+            display:inline-block;
+        }
+        .hrs{
+            color:aliceblue;
+        }
+       
+    </style>
+</head>
+<body>
+    <p id="head"><h1 class="red" id="h1">欢迎来到软院跳蚤市场！</h1><img src="./捕获3.PNG" alt=""></p>  
+    <h2>诚信经营，童叟无欺！</h2>
+    <hr>
+    <hr style="color: aliceblue;">
+    <!-- 商品列表 -->
+    <div class="list"></div>
+    <!-- 获取余额 -->
+    <div class="change">输入学号查询余额</div>
+    <hr>
+    <!-- 购买页面  -->
+    <p><h3>购买商品</h3><img src="./捕获.PNG" alt=""></p>
+    <div class="list2">
+        输入学号：<input type="text" class="num">
+        输入你想购买的东西: <input type=" text" class="id">
+        输入你想买的数量：<input type="text" class="count">
+        <p>充值（vivo50即可）：<button class="set">充充充</button></p>
+        <p>刷新余额：<button class="reload">刷新</button></p>
+        <p>点击购买：<button class="btn1" >剁手剁手！</button></p>
+        确认购买: <button class="btn2">动手动手！</button>
+        
+        
+    </div>
+    
+    
+    <hr>
+    <p id="ps">(ps:若出现获取不到商品id的情况，F5刷新即可(依旧不明所以但是可行))</p>
+    <button class="bug">出现bug点我就完了()</button>
+
+
+
+
+
+    <!-- 商品列表 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let goodsList = []
+
+        axios.post('http://zyhcc.top:8088/goods/getGoodsList', null, {
+            headers: {
+                num: '202300300345'
+            }
+        }).then(function(res){
+            goodsList = res.data.data
+            console.log(goodsList);
+
+            render()
+        })
+     
+        
+        
+        function render() {
+            const box = document.querySelector('.list')
+            for(let i = 0; i < goodsList.length; i++){
+                let el = document.createElement('div')
+                el.innerHTML = `
+                    商品名称: <b class="red">${goodsList[i].name}</b>
+                    <br>id(购买请输入id): ${goodsList[i].id}
+                    <br>价格: ${goodsList[i].price}
+                    <br>剩余:${goodsList[i].inventory}
+                    <br>描述:${goodsList[i].description}
+                    <hr class="hrs">`
+                    
+                box.append(el)
+            }            
+        }
+    // 余额查询
+    var change=document.querySelector('.change');
+    var num1=document.querySelector('.num').value;
+    var change1;
+    if(!num1){
+        change.innerHTML=`请输入学号获取余额`
+    }
+    else{
+        axios.post('http://zyhcc.top:8088/balance/getBalance',{           
+                num:num1
+            }
+        ).then(function(res){
+            console.log(res.data.data)
+            var change1=res.data.data;
+            
+            change.innerHTML=`
+                你的余额还剩: <b>${change1}元</b>`
+        },function(reason){
+            console.log(reason)
+        })
+    }
+        // 充值
+        var btn4=document.querySelector('.set');
+        
+        btn4.onclick=function(){
+            var setnum=prompt('输入你想要充值数目');
+            alert('记得vivo50！！');
+            var myHeaders = new Headers();
+            myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+            "num": num1,
+            "balance": parseFloat (setnum+change1)
+            });
+
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("http://zyhcc.top:8088/balance/setBalance", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+            }      
+
+        //购买商品
+        
+        var btn1=document.querySelector('.btn1');
+        var btn2=document.querySelector('.btn2');          
+        var num1=document.querySelector('.num').value;
+        var id1=document.querySelector('.id').value;
+        var count1=document.querySelector('.count').value;
+        btn1.onclick=function(){
+        console.log(num1,id1,count1);
+        let inventory1=goodsList.find(object=>object.id===parseInt(id1))
+        console.log(inventory1)
+        if(count1>inventory1.inventory){
+            alert('商品库存不够了捏（你可以再点击一次购买确认一下）');
+            window.location.reload();
+        }
+        else{
+       alert('你真的要买吗?（点击确认购买）');
+        btn2.onclick=function(){
+        axios.post('http://zyhcc.top:8088/goods/buy',{
+            
+                num:num1,
+                id:id1,
+                count:count1
+            }
+        ).then(function(buy){
+            console.log('res=',buy)
+            alert(buy.data.msg)
+            window.location.reload();
+        },function(reason){
+            console.log('reason=',reason)
+         })
+        
+        }
+    }
+   } 
+    
+        // 刷新页面
+        var btn3=document.querySelector('.reload');
+        btn3.onclick=function(){
+            window.location.reload();
+        }
+        var bug=document.querySelector('.bug');
+        bug.onclick=function(){
+            window.location.reload();
+        }
+    </script>
+    </body>
+</body>
+</html>

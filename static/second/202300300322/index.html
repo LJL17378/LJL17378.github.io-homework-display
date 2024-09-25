@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>宝石游戏</title>
+    <style>
+        .container {
+            width: 960px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            width: 150px;
+            padding-right: 10px;
+        }
+        .form-group input[type="number"] {
+            width: 80px;
+            height: 20px;
+        }
+        .form-group input[type="radio"] {
+            margin-right: 5px;
+        }
+        #start-btn {
+            display: block;
+            width: 150px;
+            height: 50px;
+            margin: 40px auto;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #screen {
+            height: 300px;
+            max-height: 300px;
+            overflow-y: scroll;
+            background-color: #f7f7f7;
+            padding: 30px 10px 10px;
+        }
+
+    </style>
+    <script>
+        function start() {
+            var total_num = parseFloat(document.getElementById("total_num").value);
+            var range_min = parseFloat(document.getElementById("range_min").value);
+            var range_max = parseFloat(document.getElementById("range_max").value);
+
+            function fetch() {
+                var num = parseFloat(prompt("轮到你了！现在剩余宝石" + total_num + "个，请输入你想取宝石的个数:"));
+                if (num <= range_max && num >= range_min && total_num - num >= 0 && Math.floor(num) === num) {
+                    total_num -= num;
+                    document.getElementById("screen").innerHTML += "<br>雅琪取了" + num + "个宝石，还剩余" + total_num + "个！";
+                } else {
+                    alert("输入的数字不合法，请重新输入！");
+                    return fetch();
+                }
+            }
+
+            function random() {
+                if (total_num < range_max)
+                    var num = total_num;
+                else
+                    var num = Math.floor(Math.random() * (range_max - range_min + 1)) + range_min;
+                total_num -= num;
+                alert("岚馨姐取了"+num+"个宝石并冲你微笑")
+                document.getElementById("screen").innerHTML += "<br>对方取了" + num + "个宝石，还剩余" + total_num + "个！";
+            }
+
+            if (total_num > 1 && range_min < range_max && total_num > range_max && range_min > 1 && Math.floor(total_num) === total_num && Math.floor(range_max) === range_max && Math.floor(range_min) === range_min) {
+                document.getElementById("screen").innerHTML = "刺激的宝石游戏就要开始了！";
+                for (count = 1; true; count++) {
+                    document.getElementById("screen").innerHTML += "<br>第" + count + "轮开始啦！";
+                    if (document.querySelector('input[name="firstplayer"]:checked').value == "0") {
+                        if(total_num < range_min){
+                            alert("平局！");
+                            document.getElementById("screen").innerHTML += "<br>双方平手！";
+                            break; 
+                        }else{
+                            fetch();
+                        }
+                        if (total_num === 0) {
+                            alert("你获胜了！");
+                            document.getElementById("screen").innerHTML += "<br>雅琪获胜！";
+                            break;
+                        } else {
+                            random();
+                            if (total_num === 0) {
+                                alert("你失败了！");
+                                document.getElementById("screen").innerHTML += "<br>岚馨获胜！";
+                                break;
+                            }
+                        }
+                    } else {
+                        random();
+                        if (total_num === 0) {
+                            alert("你失败了！");
+                            document.getElementById("screen").innerHTML += "<br>岚馨获胜！";
+                            break;
+                        } else {
+                            fetch();
+                            if(total_num < range_min){
+                                alert("平局！");
+                                document.getElementById("screen").innerHTML += "<br>双方平手！";
+                                break; 
+                            }else{
+                            if (total_num === 0) {
+                                alert("你获胜了！");
+                                document.getElementById("screen").innerHTML += "<br>雅琪获胜！";
+                                break;
+                            }
+                            }
+                        }
+                    }
+                }
+            } else {
+                alert("请检查你填的数据是否合法！");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>宝石游戏</h1>
+        <div class="form-group">
+            <label for="total_num">总宝石数：</label>
+            <input type="number" id="total_num">
+        </div>
+        <div class="form-group">
+            <label for="range_min">每轮拿取个数：</label>
+            <input type="number" id="range_min">
+            <span>至</span>
+            <input type="number" id="range_max">
+        </div>
+        <div class="form-group">
+            <label>先手：</label>
+            <input type="radio" name="firstplayer" value="0" checked>我
+            <input type="radio" name="firstplayer" value="1">岚馨
+        </div>
+        <button id="start-btn" onclick="start()">开始游戏</button>
+        <div id="screen">请完成设定，点击上方按钮开始游戏。</div>
+    </div>
+</body>
+</html>

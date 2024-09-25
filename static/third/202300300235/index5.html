@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改商品库存或描述</title>
+    <style>
+        .button51:hover{
+            background-color: aqua;
+            cursor:pointer;
+        }
+        
+        .button51:active{
+            background-color: hotpink;
+        }
+</style>
+</head>
+<body background="./跳蚤市场背景.png" style="background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">
+    <p style="color:red;font-size: 40px;text-align: center;">-----|··~··~··~··~··~··~··~··修改商品库存/描述··~··~··~··~··~··~··~··|-----</p>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" placeholder="输入您的学号" id="input51" style="background-color: aquamarine;"><br></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" placeholder="输入要修改信息的商品的id" id="input52" style="background-color: aquamarine;"><br></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" placeholder="输入库存数量" id="input53" style="background-color: aquamarine;"><br></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" placeholder="输入商品描述" id="input54" style="background-color: aquamarine;"><br></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><button class="button51" onclick="func51()">修改</button></div>
+    <script>
+    function func51(){
+        let num =  parseInt(document.getElementById('input51').value)
+        let id =  parseInt(document.getElementById('input52').value)
+        let inventory = document.getElementById('input53').value
+        let description = document.getElementById('input54').value
+        
+        var myHeaders = new Headers();
+        myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)");
+        myHeaders.append("Content-Type", "application/json");
+
+        if(inventory == ""){
+            var raw = JSON.stringify({
+                num,
+                id,
+                description,
+        });;}
+        else if (description == ""){
+            var raw = JSON.stringify({
+                num,
+                id,
+                inventory,
+        });;
+        }else{var raw = JSON.stringify({
+                num,
+                id,
+                inventory,
+                description,
+        });;}
+
+        var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+        };
+
+        fetch("http://zyhcc.top:8088/goods/updateInventory", requestOptions)
+        .then(response => response.json())
+        .then(result => alert(result.msg))
+        .catch(error => alert('error', error.msg));
+    }
+    </script>
+</body>
+</html>

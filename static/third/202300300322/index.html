@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <title>跳蚤市场</title>
+        <style>
+            /* 主要页面元素 */
+            body{
+                background-color: rgba(201, 187, 238, 0.15);
+            }
+            h1{
+                display: block;
+                font: 40px 华文中宋;
+                text-indent: 240px;
+                letter-spacing: 30px;
+                margin-top: 30px;
+                color: rgb(129, 32, 32);
+            }
+            #content{
+                display: grid;
+                grid-template-rows: 70px 630px; 
+                background-color: #FFF1F1;
+                margin:25px auto;
+                width: 1300px;
+                height: 700px;
+                border-radius: 10px 20px;
+                box-shadow: 0px 1px 0px 1px #cbb233ac;
+            }
+            .functiontext{
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            /* 登录栏 */
+            #area2{
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: flex-end;
+                height: 35px;
+                font-size: 14px;
+                right: 200px;
+                top: 45px;
+            }
+
+            /* 侧栏 */
+            #area3{
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                right: -10px;
+                bottom: 60px;
+            }
+            .sider {
+                width: 120px;
+                height: 50px;
+                border-radius: 20px 0 0 20px;
+                background-color: white;
+                box-shadow: 1px 1px 8px grey;
+                margin-bottom: 30px;
+                position: relative;
+                border: none;
+                cursor: pointer;
+            }
+
+            /* 按钮 */
+            .btn {
+                display: block;
+                width: 120px;
+                height: 30px;
+                margin: 20px auto;
+                border-radius: 5px;
+                background-color: #cb3333e9;
+                color:white;
+                font-size: 18px;
+                cursor: pointer;
+                border: none;
+                font-size: 80%;
+            }
+            #upload-popup input{
+                width: 90%;
+                margin: 10px;
+                height: 25px;
+                font-size: 16px;
+            }
+            #upload-popup textarea{
+                width: 90%;
+                margin: 10px;
+                height: 60px;
+                font-size: 16px;
+            }
+            /* 发现页内容框 */
+            #displayItem {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); 
+                grid-template-rows: repeat(4, 1fr); 
+                overflow-y: scroll;
+            }
+            #filter {
+                display: grid;
+                grid-template-columns:1fr 1fr 1fr 2fr 2fr;
+            }
+            .select {
+                grid-column: span 1; 
+                margin: 20px;
+            }
+            #searchbox {
+                display: flex;
+                justify-content: center; 
+                align-items: center;
+                grid-column: 5; 
+            }
+            #searchbox input[type="text"]{
+                height: 25px;
+                width: 200px;
+            }
+            #searchbtn{
+                height: 30px;
+                width: 30px;
+                background-color: transparent;
+                border: none;
+                background-image: url(images/search.png);
+                background-size: cover;
+                cursor: pointer;
+            }
+            .grid-item{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: stretch;
+                margin: 15px 60px;
+            }
+            .itempic{
+                height: 120px;
+                width: 120px;
+                background-color: white;
+                border: 1px solid black;
+                border-radius:10px;
+            }
+            .itemtext{
+                display: flex;
+                flex-direction: column;
+                width: 380px;
+            }
+            .itemname{
+                font-size: 20px;
+                font-weight: bold;
+                cursor: pointer;
+                max-height: 20px;
+            }
+            .itemdiscrip{
+                font-size: 16px;
+                color:#3e3e3e;
+                height: 50px;
+                line-height: 25px;
+                margin: 15px 0;
+            }
+            .itemname, .itemdiscrip {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: wrap;
+            }
+            .itembottom{
+                display: flex;
+                justify-content: space-between;
+                align-content: center;
+            }
+            #inventory{
+                color:black;
+                font-size: 16px;
+            }
+            #price{
+                color: black;
+                font-weight: 900;
+                font-size: 22px;
+                font-family: 'Times New Roman', Times, serif;
+            }
+            
+            /* 弹窗 */
+            .popup {
+                display: none; 
+                position: fixed; 
+                top:0;
+                left:0;
+                z-index: 1; 
+                width: 100%;
+                height: 100%;
+                overflow: auto; 
+                background-color: rgba(0,0,0,0.2); 
+            }
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                border: none;
+                background-color: transparent;
+            }
+            .close:hover {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            #login-popup {
+                background-color: #fefefe;
+                margin: 15% auto; 
+                width: 400px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                text-align: center;
+            }
+            #login input[type="text"],input[type="password"] {
+                width: 90%;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            #about-popup{
+                background-color: #fff;
+                margin: 15% auto; 
+                width: 600px;
+                padding: 20px;
+                border: 1px solid #ccc;
+            }
+
+            #upload-popup{
+                background-color: #fff;
+                margin: auto; 
+                width: 300px;
+                padding: 20px 40px;
+                border: 1px solid #ccc;
+            }
+
+            #detail-popup {
+                background-color: #fefefe;
+                margin: 15% auto; 
+                padding: 20px;
+                border: 1px solid #ccc;
+                width: 80%;
+                max-width: 700px; 
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>随时随地，发现宝藏</h1>
+        <div id="area2">
+            <div>您未登录</div>
+            <div onclick="openLoginPopup()" class="functiontext" id="statement">登录</div>
+        </div>
+        <div id="area3">
+            <button class="sider" onclick="openUploadPopup()" style="display: none;">上传商品</button>
+            <button class="sider" onclick="openAboutPopup()">关于</button>
+        </div>
+        <div id="itemdetail" class="popup">
+            <div id="detail-popup">
+                <button class="close" onclick="hidePopup()">&times;</button>
+                <p id="modal-id" style="font-size: 14px;color:#888;font-style: italic;"></p>
+                <p id="modal-inventory" style="font-size: 14px;color:#888;font-style: italic;"></p>
+                <h3 id="modal-title"></h3>
+                <p id="modal-description"></p>
+                <div id="modal-detail"></div>
+            </div>
+        </div>
+        <div id="login" class="popup">
+            <div id="login-popup">
+                <button class="close" onclick="hidePopup()">&times;</button>
+                <h3>统一认证登录</h3>
+                <input type="text" id="username" placeholder="学工号" required>
+                <br>
+                <button class="btn" onclick="login()">登录</button>
+            </div>
+        </div>
+        <div id="upload" class="popup">
+            <div id="upload-popup">
+                <button class="close" onclick="hidePopup()">&times;</button>
+                <h3>发布商品</h3>
+                <div>
+                    商品名称:<input type="text" id="1" required><br>
+                    商品描述：<textarea id="2" rows="4" required></textarea><br>
+                    商品数量：<input type="number" id="3" min="1" step="1" required><br>
+                    商品价格：<input type="number" id="4" min="0" step="0.01" required><br>
+                    <button class="btn" onclick="upload()">确认发布</button> 
+                </div>
+            </div>
+        </div>
+        <div id="about" class="popup">
+            <div id="about-popup">
+                <button class="close" onclick="hidePopup()">&times;</button>
+                <h3>关于</h3>
+                <p>做这个前端大作业还是花了不少力气呢（赶着ddl还是搞完了）。现在算是知道一个人做网站有多累了，最费心血的不是写逻辑，而是弄各种css效果让页面不那么离谱...众所周知，繁琐的工作更让人掉头发（</p>
+                <p>看到作业名，脑子里就想到了许多功能。看完接口文档后，...吐槽一句，没有后端支持真的让保存购物车很难弄，我也只好放弃购物车功能。还有我心心念念的搜索功能和筛选功能，由于时间限制就没去弄了TAT。</p>
+                <p>不过，写完前端大作业确实收获不少，也让我更对JavaScript那玩意儿增进了不少了解。唔，就写到这里吧，也该睡觉了...</p>
+                <button class="btn" onclick="love()">稀罕作者</button>
+            </div>
+        </div>
+        <div id="content">
+            <div id="filter">
+                <select class="select">
+                  <option value="0">全部类别</option>
+                </select>
+                <select class="select">
+                  <option value="0">按序列号</option>
+                </select>
+                <div id="searchbox">
+                  <input type="text" placeholder="搜索心动好物">
+                  <button id="searchbtn" onclick="alert('前面的区域以后再来探索吧')"></button>
+                </div>
+              </div>       
+            <div id="displayItem">
+            </div>
+        </div>
+        </body>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            //获取商品
+            axios.post('http://zyhcc.top:8088/goods/getGoodsList')
+            .then(function (response) {
+                render(response.data.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+                document.getElementById('displayItem').innerHTML = '<div class="other">无法获取商品信息，请检查网络连接。</div>';
+            });
+
+            function render(items){
+                const itemlist = document.getElementById('displayItem');
+                for(var i=0;i<items.length;i++){
+                    var item = document.createElement("div")
+                    item.className="grid-item";
+                    item.innerHTML = `
+                    <div class="itempic"></div>
+                    <div class="itemtext">
+                        <div class="itemname" onclick="openDetailPopup('${items[i].id}','${items[i].inventory}','${items[i].name}', '${items[i].description}','${items[i].price}')">${items[i].name}</div>
+                        <div class="itemdiscrip">${items[i].description}</div>
+                        <div class="itembottom">
+                            <div id='inventory'>剩余${items[i].inventory}件</div>
+                            <div id='price'>${items[i].price}</div>
+                        </div>
+                    </div>
+                    `;
+                    itemlist.appendChild(item);
+                }
+            }
+
+            //弹窗机制
+            function openLoginPopup(){
+                document.getElementById("login").style.display = "block";
+            }
+            function openDetailPopup(id,inventory,title,description,price) {
+                document.getElementById("modal-id").innerHTML = "商品序列号："+id;
+                document.getElementById("modal-inventory").innerHTML = "库存量："+inventory;                
+                document.getElementById("modal-title").innerHTML = title;
+                document.getElementById("modal-description").innerHTML = description;
+                document.getElementById("modal-detail").innerHTML = `
+                    <div class="itembottom">
+                        <div>
+                        <button onclick="minus(${price})">-</button>
+                        <span id="count">0</span>
+                        <button onclick="add(${price},${inventory})">+</button>
+                        </div>
+                        <div>￥<span id="modal-totalprice">0</span></div>
+                    </div>
+                    <div><button onclick="buy(${id})" class="btn">确认购买</button></div>
+                `;
+                document.getElementById("itemdetail").style.display = "block";
+            }
+            function openAboutPopup(){
+                document.getElementById("about").style.display = "block";
+            }
+            function openUploadPopup(){
+                document.getElementById("upload").style.display = "block";
+            }
+            function hidePopup() {
+                document.getElementById("itemdetail").style.display = "none";
+                document.getElementById("login").style.display = "none";
+                document.getElementById("about").style.display = "none";
+                document.getElementById("upload").style.display = "none";
+            }
+
+            // 登录机制
+            var user = null;
+            function login(){
+                user = document.getElementById('username').value;
+                var str = `me.html?param=${user}`;
+                document.getElementById('area2').innerHTML = 
+                `<div>当前登录:<a id="link" title="个人中心" target="_blank">${user}</a></div>
+                <div class="functiontext" onclick="exit()">注销</div>
+                `;
+                document.getElementsByClassName("sider")[0].style.display = "block";
+                link.href = str;
+                hidePopup();
+            }
+            function exit(){
+                user = null;
+                document.getElementById('area2').innerHTML =
+                `<div id="userinfo">请重新登录</div>
+                <div onclick="openLoginPopup()" class="functiontext" id="statement">登录</div>
+                `;
+                document.getElementById('area3').style.display = "none";
+            }
+            //排序机制
+            
+            //搜索机制
+
+            //购买机制
+            function buy(id){
+                count = parseInt(document.getElementById("count").innerText);
+                if(user == null){
+                    alert("请先登录");
+                }else if(count == 0){
+                    alert("请先指定想要的数量");
+                }else{
+                    axios.post('http://zyhcc.top:8088/goods/buy',{
+                        "num": user,
+                        "id": id,
+                        "count": count
+                    }).then(function (response) {
+                        alert(response.data.msg);
+                    }).catch(function (error) {
+                        console.log(error);
+                        alert("出了一些问题呢");
+                    });
+                }
+                hidePopup();
+            }
+
+            function add(price,inventory){
+                var count0 = document.getElementById("count");
+                var cost0 = document.getElementById("modal-totalprice");
+                var count = parseInt(count0.innerText);
+                if(count == inventory){
+                    alert("已达数量上限");
+                }else{
+                    count++;
+                    count0.innerText = count.toString();
+                    cost0.innerText = (count * price).toString();
+                }
+            }
+
+            function minus(price){
+                var count0 = document.getElementById("count");
+                var cost0 = document.getElementById("modal-totalprice");
+                var count = parseInt(count0.innerText);
+                if(count > 0){
+                    count--;
+                    count0.innerText = count.toString();
+                    cost0.innerText = (count * price).toString();
+                }
+            }
+
+            //上传机制
+            function upload(){
+                axios.post('http://zyhcc.top:8088/goods/addGoods',{
+                    "num":user.toString(),
+                    "name":document.getElementById("1").value,
+                    "description":document.getElementById("2").value,
+                    "inventory":parseInt(document.getElementById("3").value),
+                    "price":parseFloat(document.getElementById("4").value).toFixed(2),
+                }).then(function(){
+                    alert("上传成功！你可以前往个人中心>我的小铺查看、修改你上传的商品。");
+                    hidePopup();
+                }).catch(alert("上传失败"));
+            }
+            
+            //其它
+            function love(){
+                alert('感谢你的肯定。我的头发还是掉得有价值的：）')
+            }
+
+        </script>
+    </body>

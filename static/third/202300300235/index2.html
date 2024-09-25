@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取自己上传的商品列表</title>
+    <style>
+        .button21:hover{
+            background-color: aqua;
+            cursor:pointer;
+        }
+        
+        .button21:active{
+            background-color: hotpink;
+        }
+</style>
+</head>
+<body background="./跳蚤市场背景.png" style="background-repeat: no-repeat;background-attachment: fixed;background-size: 100% 100%;">
+    <p style="color:red;font-size: 40px;text-align: center;">-----|··~··~··~··~··~··~··~··查看自己上架的商品··~··~··~··~··~··~··~··|-----</p>
+    <div style="text-align:center;vertical-align:middel;"><input type="text" placeholder="输入您的学号" id="input21" style="background-color: aquamarine;"><br></div>
+    <br>
+    <div style="text-align:center;vertical-align:middel;"><button class="button21" onclick="func21()">确定</button></div>
+    <div class="list"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function func21(){
+        
+        let num =  document.getElementById('input21').value
+        
+        if(num == ""){alert("请输入学号！")}
+        else{
+        
+        let goodsList = []
+
+        axios.post('http://zyhcc.top:8088/goods/getMyGoods',{
+            num
+        }).then(function(res){
+            goodsList = res.data.data
+            console.log(goodsList);
+            
+            const box = document.querySelector('.list')
+            for(let i = 0; i < goodsList.length; i++){
+                let el = document.createElement('div')
+                let e2 = document.createElement('div')
+                let e3 = document.createElement('div')
+                let e4 = document.createElement('div')
+                let e5 = document.createElement('div')
+                let e6 = "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+                
+                el.innerHTML = `<div style="text-align:center;vertical-align:middel;"><b style="font-size:30px;color:red">----- 商品id:${goodsList[i].id} -----</b></div>`
+                e2.innerHTML = `<div style="text-align:center;vertical-align:middel;"><span style="color:black;font-size:23px">商品名称：${goodsList[i].name}</span></div>`
+                e3.innerHTML = `<div style="text-align:center;vertical-align:middel;"><span style="color:purple;font-size:20px">价格:${goodsList[i].price}</span> </div>`
+                e4.innerHTML = `<div style="text-align:center;vertical-align:middel;"><span style="color:blue;font-size:20px">库存:${goodsList[i].inventory}</span> </div>`
+                e5.innerHTML = `<div style="text-align:center;vertical-align:middel;"><span style="color:brown;font-size:15px">描述:${goodsList[i].description}</span></div>`
+                box.append(e6,el,e2,e3,e4,e5,)
+                
+
+            }
+        })}
+    }
+    </script>
+
+</body>
+</html>
